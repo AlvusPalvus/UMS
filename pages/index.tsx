@@ -1,8 +1,26 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { createClient } from 'contentful'
 
-export default function Home() {
+export async function getStaticProps() {
+
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID as string,
+    accessToken: process.env.CONTENTFUL_ACCESS_KEY as string,
+  })
+
+  const res = await client.getEntries({content_type: "nyhet"})
+
+  return {
+    props: {
+      nyheter:res.items,
+    }
+  }
+}
+
+export default function Home({ nyheter }) {
+  console.log(nyheter)
   return (
     <div className={styles.container}>
       <Head>
@@ -17,8 +35,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
+          
         </p>
 
         <div className={styles.grid}>

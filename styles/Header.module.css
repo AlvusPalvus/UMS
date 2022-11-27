@@ -1,0 +1,11 @@
+.header {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    max-width: --var(--xxlarge);
+}
+
+.header li {
+    text-decoration: none;
+}
+

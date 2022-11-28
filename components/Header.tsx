@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Layout from "./Layout";
 import styles from "../styles/Header.module.css";
+import { isTemplateSpan } from "typescript";
 
 type Props = {};
 
@@ -18,40 +19,68 @@ type MenuItem = {
 const links: MenuItem[] = [
   {
     link: "/membership",
-    title: "Medlemskap",
-    children: [{ link: "/", title: "Bli Medlem" }],
+    title: "Medlemskap", // TODO: läs in från contentful
+    children: [{ link: "/#becomeMember", title: "Bli Medlem" }],
+  },
+  {
+    link: "/educationalmatters",
+    title: "Utbildningsfrågor",
+    children: [
+      {
+        link: "/studentcase",
+        title: "Anmäl studentfall",
+      },
+    ],
   },
   {
     link: "/studentlife",
     title: "Studentliv",
     children: [
       {
-        link: "/",
-        title: "",
+        link: "/events",
+        title: "Evenemang",
       },
     ],
+  },
+  {
+    link: "/villan",
+    title: "Kårhuset Villan",
+    children: [
+      {
+        link: "/#bookings",
+        title: "Kontakt och bokningar",
+      },
+    ],
+  },
+  {
+    link: "/about",
+    title: "Om kåren",
+  },
+  {
+    link: "/contact",
+    title: "Kontakt",
   },
 ];
 
 function Header({}: Props) {
   return (
-    <header>
+    <header className={styles.header}>
       <Link href={"/"}>
         <Image
           src="/UMS_logo_white.png"
-          width={150}
-          height={140}
+          width={140}
+          height={130}
           alt={"Logga"}
         ></Image>
       </Link>
-      <nav style={{ color: "white" }}>
+      <nav className={styles.nav}>
         <ul>
-          <li>
-            <Link href={"/membership"}> Medlemskap </Link>
-          </li>
-          <li>
-            <Link href={"/contact"}> Kontakt </Link>
-          </li>
+          {links.map((link) => (
+            <li>
+              <Link href={link.link}> {link.title} </Link>
+              {/* TODO: Hur dropdown? Children*/}
+            </li>
+          ))}
         </ul>
       </nav>
     </header>

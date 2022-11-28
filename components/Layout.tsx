@@ -8,7 +8,10 @@ const Layout = ({ children }: Props) => {
     <>
       <Header />
       <main>{children}</main>
-      <footer> Footer here yey! :) </footer>
+      <footer>
+        {" "}
+        <p>Footer here yey! :)</p>{" "}
+      </footer>
     </>
   );
 };

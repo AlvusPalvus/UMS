@@ -11,22 +11,30 @@ export async function getStaticProps() {
   });
 
   //const res = await client.getEntries({ content_type: "nyhet" });
-  const hero_img = await client.getEntry("4hiqPvQpvgfuZmOFgPcrtl");
 
-  console.log(hero_img);
-  /*
-  const asset = client
-    .getAsset("4hiqPvQpvgfuZmOFgPcrtl")
-    .then((asset) => console.log(asset.fields.file.url));
-    */
+  // const hero_img = await client.getEntry("4hiqPvQpvgfuZmOFgPcrtl");
+  // const res = await client.getEntries()
+  // console.log(res)
+
+  // const hero_img = await client.getAsset("4hiqPvQpvgfuZmOFgPcrtl")
+
+  //Hämta alla assets med taggen header
+  const headerAssets = await client.getAssets({ 'metadata.tags.sys.id[in]': 'header' })
+  const hero_src = headerAssets.items[0].fields.file.url
+
+  console.log(hero_src)
+
   return {
     props: {
-      hero_src: hero_img,
+      // res: res,
+      hero_src
     },
   };
 }
 
-export default function Home({ nyheter, hero_src }) {
+export default function Home({ nyheter, res, hero_src }) {
+  console.log(res)
+  console.log(hero_src)
   return (
     <>
       <div className={styles.heroWrapper}>

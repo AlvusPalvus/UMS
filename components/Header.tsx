@@ -5,7 +5,7 @@ import Layout from "./Layout";
 import styles from "../styles/Header.module.css";
 import { isTemplateSpan } from "typescript";
 
-type Props = {};
+type Props = { heroSrc; heroContent };
 
 type NavLink = {
   title: string;
@@ -62,27 +62,40 @@ const links: MenuItem[] = [
   },
 ];
 
-function Header({}: Props) {
+function Header({ heroSrc, heroContent }: Props) {
   return (
-    <header className={styles.header}>
-      <Link href={"/"}>
+    <header className={styles.heroWrapper}>
+      <div className={styles.imageWrapper}>
         <Image
-          src="/UMS_logo_white.png"
-          width={140}
-          height={130}
-          alt={"Logga"}
+          src={"https:" + heroSrc}
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
+          alt="hero image example"
         ></Image>
-      </Link>
-      <nav className={styles.nav}>
-        <ul>
-          {links.map((link) => (
-            <li>
-              <Link href={link.link}> {link.title} </Link>
-              {/* TODO: Hur dropdown? Children*/}
-            </li>
-          ))}
-        </ul>
-      </nav>
+      </div>
+
+      <div className={styles.header}>
+        <Link href={"/"}>
+          <Image
+            src="/UMS_logo_white.png"
+            width={140}
+            height={130}
+            alt={"Logga"}
+          ></Image>
+        </Link>
+        <nav className={styles.nav}>
+          <ul>
+            {links.map((link) => (
+              <li>
+                <Link href={link.link}> {link.title} </Link>
+                {/* TODO: Hur dropdown? Children*/}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <div className={styles.heroContent}>{heroContent}</div>
     </header>
   );
 }

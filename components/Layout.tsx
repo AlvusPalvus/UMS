@@ -6,7 +6,6 @@ type Props = { children: ReactElement };
 const Layout = ({ children }: Props) => {
   return (
     <>
-      <Header />
       <main>{children}</main>
       <footer>
         {" "}

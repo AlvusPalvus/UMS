@@ -3,6 +3,8 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { createClient } from "contentful";
 import heroStyles from "../styles/Header.module.css";
+import Link from "next/link";
+import Header from "../components/Header";
 
 export async function getStaticProps() {
   const client = createClient({
@@ -19,35 +21,35 @@ export async function getStaticProps() {
   // const hero_img = await client.getAsset("4hiqPvQpvgfuZmOFgPcrtl")
 
   //Hämta alla assets med taggen header
-  const headerAssets = await client.getAssets({ 'metadata.tags.sys.id[in]': 'header' })
-  const hero_src = headerAssets.items[0].fields.file.url
+  const headerAssets = await client.getAssets({
+    "metadata.tags.sys.id[in]": "header",
+  });
+  const hero_src = headerAssets.items[1].fields.file.url;
 
-  console.log(hero_src)
+  console.log(hero_src);
 
   return {
     props: {
-      // res: res,
-      hero_src
+      hero_src,
     },
   };
 }
 
 export default function Home({ nyheter, res, hero_src }) {
-  console.log(res)
-  console.log(hero_src)
+  console.log(res);
+  console.log(hero_src);
   return (
     <>
-      <div className={styles.heroWrapper}>
-        <div className={styles.imageWrapper}>
-          <Image
-            src={"https:" + hero_src}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-            alt="hero image example"
-          ></Image>
-        </div>
-      </div>
+      <Header
+        heroSrc={hero_src}
+        heroContent={
+          <div>
+            <h1>Gå med i UMS</h1>
+            <p>Umeå Medicinska studentkår .....</p>
+            <button> Bli medlem! </button>
+          </div>
+        }
+      />
       <div>
         {" "}
         <h1> UMS hemsida kommer här! </h1>

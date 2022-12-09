@@ -1,4 +1,4 @@
-.header {
+.navbar {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -7,11 +7,11 @@
     max-width: --var(--xxlarge);
 }
 
-.header img {
+.navbar img {
     padding: 8px;
 }
 
-.header a {
+.navbar a {
     margin: 8px;
 }
 

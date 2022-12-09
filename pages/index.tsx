@@ -14,34 +14,46 @@ export async function getStaticProps() {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY as string,
   });
 
-  const res = await client.getEntry("HDZTWw3xASIbiFDQOeh2W", { include: 4 });
-  console.log(res);
+  const res = await client.getEntry("74QQgki1QHDyN9rhvmZb81", { include: 4 });
 
-  const hero_src = res.fields.hero.fields.file.url;
-  const page_title = res.fields.pageTitle;
   const sections = res.fields.sections;
+  const footer = res.fields.footer;
+  const header_content = res.fields.header.fields;
+  const hero_src = res.fields.heroImage.fields.file.url;
+  console.log(hero_src);
+  const hero_text = res.fields.heroText.split("\n");
 
+  console.log(hero_text);
   return {
     props: {
-      hero_src,
-      page_title,
+      headerData: {
+        header_content,
+        hero_src,
+        hero_text,
+      },
       sections,
+      footer,
     },
   };
 }
 
-export default function Home({ hero_src, page_title, sections }) {
+export default function Home({
+  headerData: { header_content, hero_src, hero_text },
+  sections,
+  footer,
+}) {
   return (
     <>
       <Header
+        headerContent={header_content}
         heroSrc={hero_src}
         heroContent={
           <div>
-            <h1>{page_title}</h1>
+            <h1>{hero_text}</h1>
           </div>
         }
       />
-      <div>
+      <div className="p5">
         {" "}
         <h1> UMS hemsida kommer här! </h1>
       </div>

@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "./Layout";
 import styles from "../styles/Header.module.css";
 import { isTemplateSpan } from "typescript";
 
-type Props = { heroSrc; heroContent };
+type Props = {
+  headerContent: any;
+  heroSrc: string;
+  heroContent: ReactElement;
+};
 
 type NavLink = {
   title: string;
@@ -62,23 +66,22 @@ const links: MenuItem[] = [
   },
 ];
 
-function Header({ heroSrc, heroContent }: Props) {
-  return (
-    <header className={styles.heroWrapper}>
-      <div className={styles.imageWrapper}>
-        <Image
-          src={"https:" + heroSrc}
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
-          alt="hero image example"
-        ></Image>
-      </div>
+function Header({ headerContent, heroSrc, heroContent }: Props) {
+  const logo_src = headerContent.logo.fields.file.url;
 
-      <div className={styles.header}>
+  return (
+    <header className="w-full min-h-fit relative border">
+      <Image
+        className="w-full -z-10"
+        src={"https:" + heroSrc}
+        width={1000}
+        height={1000}
+        alt="hero image example"
+      ></Image>
+      <div className={styles.navbar}>
         <Link href={"/"}>
           <Image
-            src="/UMS_logo_white.png"
+            src={"https://" + logo_src}
             width={140}
             height={130}
             alt={"Logga"}
@@ -95,9 +98,46 @@ function Header({ heroSrc, heroContent }: Props) {
           </ul>
         </nav>
       </div>
-      <div className={styles.heroContent}>{heroContent}</div>
     </header>
   );
+
+  //   <header className={styles.heroWrapper}>
+  //     <div className={styles.imageWrapper}>
+  //       {/* <div className="relative"> */}
+  //       <Image
+  //         src={"https:" + heroSrc}
+  //         layout="fill"
+  //         objectFit="cover"
+  //         objectPosition="center"
+  //         //width={1000}
+  //         // height={1000}
+  //         alt="hero image example"
+  //       ></Image>
+  //     </div>
+
+  //     <div className={styles.navbar}>
+  //       <Link href={"/"}>
+  //         <Image
+  //           src={"https://" + logo_src}
+  //           width={140}
+  //           height={130}
+  //           alt={"Logga"}
+  //         ></Image>
+  //       </Link>
+  //       <nav className={styles.nav}>
+  //         <ul>
+  //           {links.map((link) => (
+  //             <li>
+  //               <Link href={link.link}> {link.title} </Link>
+  //               {/* TODO: Hur dropdown? Children*/}
+  //             </li>
+  //           ))}
+  //         </ul>
+  //       </nav>
+  //     </div>
+  //     <div className={styles.heroContent}>{heroContent}</div>
+  //   </header>
+  // );
 }
 
 export default Header;

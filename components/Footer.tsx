@@ -99,7 +99,7 @@ function Footer({
 
           <table>
             <tr>
-              <th colSpan={"2"}>{contact.subHeading}</th>
+              <th colSpan={2}>{contact.subHeading}</th>
             </tr>
             <tr>
               <td>{contactItems[0].icon}</td> <td>{contactItems[0].text}</td>

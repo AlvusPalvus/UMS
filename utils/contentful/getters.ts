@@ -18,7 +18,7 @@ import { getContentfulClient } from "./client";
 
 const client = getContentfulClient();
 
-// Fetching a main page by entry ID from the contentful client
+/**  Fetching a main page by entry ID from the contentful client */
 export const getMainPage = async (id: string) => {
   const res = await client.getEntry(id, { include: 4 });
   const sections = res.fields.sections;

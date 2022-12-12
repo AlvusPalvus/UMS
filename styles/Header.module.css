@@ -1,10 +1,23 @@
-.navbar {
+.header {
     position: relative;
+    width: 100vw;
+    min-height: 40vh; 
+    display: flex;
+    flex-direction: column;
+    padding: 6rem 8rem;
+    justify-content: center;
+    flex-wrap: wrap; 
+    background-size: cover;
+    background-position: center;
+  }
+
+.navbar {
+    /* position: relative; */
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
     justify-content: space-between;
-    max-width: --var(--xxlarge);
+    width: 100%;
+    /* max-width: 1500px; */
 }
 
 .navbar img {
@@ -40,30 +53,33 @@
     margin:0px;
 }
 
-.heroWrapper {
-    position: relative;
-    width: 100vw;
-    height:auto; 
-    display: table;
-  }
-  
+.imageWrapper {
+z-index: -1;
+}
 
-  .imageWrapper {
-    z-index: -1;
-  }
-  
-  .heroContent {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.heroContent {
+display: flex;
+flex-direction: column;
+align-self: flex-start;
+width: 50%;
 
-    top: 20%;
-    left: 30%;
+height: fit-content;
+border: 3px solid black;
+color: white;
+}
 
-    transform: translate(-50%, -50%);
-    color: white;
-  }
+.heroContent2 {
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: center;
+
+top: 20%;
+left: 30%;
+
+transform: translate(-50%, -50%);
+color: white;
+}
 
 
 

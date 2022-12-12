@@ -1,6 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 :root {
   --small: '640px';
   --medium: '768px';
@@ -8,6 +5,9 @@
   --xlarge: '1280px';
   --xxlarge: '1536px';
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html,
 body {

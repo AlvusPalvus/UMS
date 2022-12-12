@@ -7,21 +7,19 @@ import Link from "next/link";
 import Header from "../components/Header";
 import { BLOCKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { getContentfulClient } from "../utils/contentful/client";
+import { getPage } from "../utils/contentful/getters";
 
 export async function getStaticProps() {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID as string,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY as string,
-  });
+  const id = "74QQgki1QHDyN9rhvmZb81";
+  const page = getMainPage(id);
 
-  const res = await client.getEntry("74QQgki1QHDyN9rhvmZb81", { include: 4 });
-
-  const sections = res.fields.sections;
-  const footer = res.fields.footer;
-  const header_content = res.fields.header.fields;
-  const hero_src = res.fields.heroImage.fields.file.url;
+  const sections = page.fields.sections;
+  const footer = page.fields.footer;
+  const header_content = page.fields.header.fields;
+  const hero_src = page.fields.heroImage.fields.file.url;
   console.log(hero_src);
-  const hero_text = res.fields.heroText.split("\n");
+  const hero_text = page.fields.heroText.split("\n");
 
   console.log(hero_text);
   return {
@@ -48,13 +46,17 @@ export default function Home({
         headerContent={header_content}
         heroSrc={hero_src}
         heroContent={
-          <div>
-            <h1>{hero_text}</h1>
+          <div className={heroStyles.heroContent}>
+            <h1>{hero_text.at(0)}</h1>
+            <p>{hero_text.at(1)}</p>
+
+            <Link href={"https://localhost:3000"}>
+              {hero_text.at(2).split("]{").at(0)}
+            </Link>
           </div>
         }
       />
-      <div className="p5">
-        {" "}
+      <div className="">
         <h1> UMS hemsida kommer här! </h1>
       </div>
     </>

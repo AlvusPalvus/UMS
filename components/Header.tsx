@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import Layout from "./Layout";
 import styles from "../styles/Header.module.css";
@@ -70,14 +70,18 @@ function Header({ headerContent, heroSrc, heroContent }: Props) {
   const logo_src = headerContent.logo.fields.file.url;
 
   return (
-    <header className="w-full min-h-fit relative border">
-      <Image
+    <header
+      style={{ backgroundImage: "url(https:" + heroSrc + ")" }}
+      className={styles.header}
+    >
+      {/* <Image
         className="w-full -z-10"
         src={"https:" + heroSrc}
-        width={1000}
-        height={1000}
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
         alt="hero image example"
-      ></Image>
+      ></Image> */}
       <div className={styles.navbar}>
         <Link href={"/"}>
           <Image
@@ -98,6 +102,7 @@ function Header({ headerContent, heroSrc, heroContent }: Props) {
           </ul>
         </nav>
       </div>
+      {heroContent}
     </header>
   );
 

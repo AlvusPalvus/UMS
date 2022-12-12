@@ -1,10 +1,14 @@
 import { createClient } from "contentful";
 import React from "react";
 import Header from "../../components/Header";
+import { getContentfulClient } from "../../utils/contentful/client";
+import { getPage } from "../../utils/contentful/getters";
 
 type Props = { hero_src };
 
 export async function getStaticProps() {
+  const id = "5HUEuYQiInetG7p51V3ol4";
+  const page = getPage(id);
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID as string,
     accessToken: process.env.CONTENTFUL_ACCESS_KEY as string,

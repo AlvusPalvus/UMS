@@ -5,7 +5,7 @@ import { getMainPage } from "../../utils/contentful/getters";
 import heroStyles from "../../styles/Header.module.css";
 
 export async function getStaticProps() {
-  const id = "5HUEuYQiInetG7p51V3ol4";
+  const id = "6yJtNDlA7150jsOpkQW1Fk";
   const page = await getMainPage(id);
   //console.log(page)
 

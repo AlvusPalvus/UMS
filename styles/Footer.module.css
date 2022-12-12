@@ -23,7 +23,7 @@
     margin-bottom: 100px;
     display: grid;
     column-gap: 50px;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 5fr 3fr 5fr;
     padding: 10px;
     width: 1200px;
     align-self: center;

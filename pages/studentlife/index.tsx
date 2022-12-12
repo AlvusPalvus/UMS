@@ -1,46 +1,50 @@
-import { createClient } from "contentful";
 import React from "react";
+import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-
-type Props = { hero_src };
+import { getMainPage } from "../../utils/contentful/getters";
+import heroStyles from "../../styles/Header.module.css";
 
 export async function getStaticProps() {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID as string,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY as string,
-  });
-
-  const headerAssets = await client.getAssets({
-    "metadata.tags.sys.id[in]": "header",
-  });
-  headerAssets.items.entries.name;
-  const hero_src = headerAssets.items[0].fields.file.url;
-
-  console.log(hero_src);
+  const id = "5HUEuYQiInetG7p51V3ol4";
+  const page = await getMainPage(id);
+  //console.log(page)
 
   return {
     props: {
-      hero_src,
+      header: page.header,
+      sections: page.sections,
+      footer: page.footer,
     },
   };
 }
 
-const index = ({ hero_src }: Props) => {
+export default function Index({
+  header: { navbar, heroSrc, heroText },
+  sections,
+  footer,
+}) {
   return (
     <>
       <Header
-        heroSrc={hero_src}
+        logoSrc={navbar.logoSrc}
+        navigationItems={navbar.navigationItems}
+        heroSrc={heroSrc}
         heroContent={
-          <div>
-            <h1>Kårhuset Villan</h1>
+          <div className={heroStyles.heroContent}>
+            <h1>{heroText}</h1>
           </div>
         }
       />
-      <div>
-        <h1>Här är villansidan</h1>
-      </div>
+      <main className="">
+        <h1> UMS hemsida kommer här! </h1>
+      </main>
+      <Footer
+        logoSrc={footer.logoSrc}
+        footerImageSrc={footer.footerImageSrc}
+        sponsors={footer.sponsors}
+        contact={footer.contact}
+        socials={footer.socials}
+      />
     </>
   );
-};
-
-export default index;
+}

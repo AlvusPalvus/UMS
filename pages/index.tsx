@@ -8,57 +8,56 @@ import Header from "../components/Header";
 import { BLOCKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { getContentfulClient } from "../utils/contentful/client";
-import { getPage } from "../utils/contentful/getters";
+import { getMainPage } from "../utils/contentful/getters";
+import { CLIENT_RENEG_LIMIT } from "tls";
+import Footer from "../components/Footer";
 
 export async function getStaticProps() {
   const id = "74QQgki1QHDyN9rhvmZb81";
-  const page = getMainPage(id);
+  const page = await getMainPage(id);
+  //console.log(page)
 
-  const sections = page.fields.sections;
-  const footer = page.fields.footer;
-  const header_content = page.fields.header.fields;
-  const hero_src = page.fields.heroImage.fields.file.url;
-  console.log(hero_src);
-  const hero_text = page.fields.heroText.split("\n");
-
-  console.log(hero_text);
   return {
     props: {
-      headerData: {
-        header_content,
-        hero_src,
-        hero_text,
-      },
-      sections,
-      footer,
+      header: page.header,
+      sections: page.sections,
+      footer: page.footer,
     },
   };
 }
 
 export default function Home({
-  headerData: { header_content, hero_src, hero_text },
+  header: { navbar, heroSrc, heroText },
   sections,
   footer,
 }) {
   return (
     <>
       <Header
-        headerContent={header_content}
-        heroSrc={hero_src}
+        logoSrc={navbar.logoSrc}
+        navigationItems={navbar.navigationItems}
+        heroSrc={heroSrc}
         heroContent={
           <div className={heroStyles.heroContent}>
-            <h1>{hero_text.at(0)}</h1>
-            <p>{hero_text.at(1)}</p>
+            <h1>{heroText.at(0)}</h1>
+            <p>{heroText.at(1)}</p>
 
             <Link href={"https://localhost:3000"}>
-              {hero_text.at(2).split("]{").at(0)}
+              {heroText.at(2).split("]{").at(0)}
             </Link>
           </div>
         }
       />
-      <div className="">
+      <main className="">
         <h1> UMS hemsida kommer här! </h1>
-      </div>
+      </main>
+      <Footer
+        logoSrc={footer.logoSrc}
+        footerImageSrc={footer.footerImageSrc}
+        sponsors={footer.sponsors}
+        contact={footer.contact}
+        socials={footer.socials}
+      />
     </>
   );
 }

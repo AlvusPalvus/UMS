@@ -4,9 +4,5 @@ import Layout from "../components/Layout";
 import { createClient } from "contentful";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  );
+  return <Component {...pageProps} />;
 }

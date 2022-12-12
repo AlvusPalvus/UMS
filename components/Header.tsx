@@ -6,7 +6,8 @@ import styles from "../styles/Header.module.css";
 import { isTemplateSpan } from "typescript";
 
 type Props = {
-  headerContent: any;
+  logoSrc: string;
+  navigationItems: any;
   heroSrc: string;
   heroContent: ReactElement;
 };
@@ -20,72 +21,36 @@ type MenuItem = {
   children?: NavLink[];
 } & NavLink;
 
-const links: MenuItem[] = [
-  {
-    link: "/membership",
-    title: "Medlemskap", // TODO: läs in från contentful
-    children: [{ link: "/#becomeMember", title: "Bli Medlem" }],
-  },
-  {
-    link: "/educationalmatters",
-    title: "Utbildningsfrågor",
-    children: [
-      {
-        link: "/studentcase",
-        title: "Anmäl studentfall",
-      },
-    ],
-  },
-  {
-    link: "/studentlife",
-    title: "Studentliv",
-    children: [
-      {
-        link: "/events",
-        title: "Evenemang",
-      },
-    ],
-  },
-  {
-    link: "/villan",
-    title: "Kårhuset Villan",
-    children: [
-      {
-        link: "/#bookings",
-        title: "Kontakt och bokningar",
-      },
-    ],
-  },
-  {
-    link: "/about",
-    title: "Om kåren",
-  },
-  {
-    link: "/contact",
-    title: "Kontakt",
-  },
-];
+const parseNavItem = (navItem) => {
+  let subPages = [];
+  if (navItem.fields.subpages !== undefined) {
+    subPages = navItem.fields.subpages.map((item) => parseNavItem(item));
+  }
+  return {
+    link: navItem.fields.link,
+    title: navItem.fields.pageTitle,
+    subPages,
+  };
+};
 
-function Header({ headerContent, heroSrc, heroContent }: Props) {
-  const logo_src = headerContent.logo.fields.file.url;
+const getLinks = (navigationItems) => {
+  let links = [];
+  links = navigationItems.map((navItem) => parseNavItem(navItem));
+  return links;
+};
+
+function Header({ logoSrc, navigationItems, heroSrc, heroContent }: Props) {
+  const links = getLinks(navigationItems);
 
   return (
     <header
       style={{ backgroundImage: "url(https:" + heroSrc + ")" }}
       className={styles.header}
     >
-      {/* <Image
-        className="w-full -z-10"
-        src={"https:" + heroSrc}
-        layout="fill"
-        objectFit="cover"
-        objectPosition="center"
-        alt="hero image example"
-      ></Image> */}
       <div className={styles.navbar}>
         <Link href={"/"}>
           <Image
-            src={"https://" + logo_src}
+            src={"https://" + logoSrc}
             width={140}
             height={130}
             alt={"Logga"}
@@ -96,7 +61,7 @@ function Header({ headerContent, heroSrc, heroContent }: Props) {
             {links.map((link) => (
               <li>
                 <Link href={link.link}> {link.title} </Link>
-                {/* TODO: Hur dropdown? Children*/}
+                {/* if(link.subPages.length>0) */}
               </li>
             ))}
           </ul>
@@ -105,44 +70,6 @@ function Header({ headerContent, heroSrc, heroContent }: Props) {
       {heroContent}
     </header>
   );
-
-  //   <header className={styles.heroWrapper}>
-  //     <div className={styles.imageWrapper}>
-  //       {/* <div className="relative"> */}
-  //       <Image
-  //         src={"https:" + heroSrc}
-  //         layout="fill"
-  //         objectFit="cover"
-  //         objectPosition="center"
-  //         //width={1000}
-  //         // height={1000}
-  //         alt="hero image example"
-  //       ></Image>
-  //     </div>
-
-  //     <div className={styles.navbar}>
-  //       <Link href={"/"}>
-  //         <Image
-  //           src={"https://" + logo_src}
-  //           width={140}
-  //           height={130}
-  //           alt={"Logga"}
-  //         ></Image>
-  //       </Link>
-  //       <nav className={styles.nav}>
-  //         <ul>
-  //           {links.map((link) => (
-  //             <li>
-  //               <Link href={link.link}> {link.title} </Link>
-  //               {/* TODO: Hur dropdown? Children*/}
-  //             </li>
-  //           ))}
-  //         </ul>
-  //       </nav>
-  //     </div>
-  //     <div className={styles.heroContent}>{heroContent}</div>
-  //   </header>
-  // );
 }
 
 export default Header;

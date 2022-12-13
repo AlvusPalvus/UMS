@@ -20,7 +20,6 @@ type Props = {
 };
 
 const parseContactInfo = (contactItems) => {
-  console.log(contactItems);
   const contactInfo = [
     {
       icon: <FiMail />,

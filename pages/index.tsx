@@ -5,17 +5,13 @@ import { createClient } from "contentful";
 import heroStyles from "../styles/Header.module.css";
 import Link from "next/link";
 import Header from "../components/Header";
-import { BLOCKS } from "@contentful/rich-text-types";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { getContentfulClient } from "../utils/contentful/client";
 import { getMainPage } from "../utils/contentful/getters";
-import { CLIENT_RENEG_LIMIT } from "tls";
 import Footer from "../components/Footer";
+import Card from "../components/Card";
 
 export async function getStaticProps() {
   const id = "74QQgki1QHDyN9rhvmZb81";
   const page = await getMainPage(id);
-  //console.log(page)
 
   return {
     props: {
@@ -31,6 +27,7 @@ export default function Home({
   sections,
   footer,
 }) {
+  console.log(sections[0].cards[0]);
   return (
     <>
       <Header
@@ -39,17 +36,30 @@ export default function Home({
         heroSrc={heroSrc}
         heroContent={
           <div className={heroStyles.heroContent}>
-            <h1>{heroText.at(0)}</h1>
-            <p>{heroText.at(1)}</p>
-
-            <Link href={"https://localhost:3000"}>
-              {heroText.at(2).split("]{").at(0)}
-            </Link>
+            <h1>{heroText}</h1>
           </div>
         }
       />
       <main className="">
+        <Card
+          heading={sections[0].cards[0].heading}
+          body={sections[0].cards[0].body}
+          buttons={sections[0].cards[0].buttons}
+        />
         <h1> UMS hemsida kommer här! </h1>
+        <div>
+          {/*sections.map((section) => {
+            if (section.cards !== null) {
+              section.cards.map((card) => {
+                <Card
+                  heading={card.heading}
+                  body={card.body}
+                  buttons={card.buttons}
+                ></Card>;
+              });
+            }
+          })*/}
+        </div>
       </main>
       <Footer
         logoSrc={footer.logoSrc}

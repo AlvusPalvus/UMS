@@ -1,20 +1,4 @@
-import { ContentfulClientApi } from "contentful";
-import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 import { getContentfulClient } from "./client";
-
-// export type NavigationItem = {
-//     parentPage: string,
-//     children: string[]
-// }
-// export type Header = {
-//     logoUrl: string,
-//     navigationItems: []
-// }
-
-// export type MainPage = {
-//     header: Header
-//     sections:
-// }
 
 const client = getContentfulClient();
 
@@ -23,13 +7,18 @@ export const getMainPage = async (id: string) => {
   const res = await client.getEntry(id, { include: 4 });
   let sections_unparsed = res.fields.sections;
   let sections = [];
-  sections = sections_unparsed.map((section) => parseSection(section));
+  sections_unparsed.map((section) => {
+    if (section.sys.contentType.sys.id == "section") {
+      sections.push(parseSection(section));
+    }
+  });
   const footer = parseFooter(res);
   const header = parseHeader(res);
 
+  console.log(sections);
   return {
-    sections,
     header,
+    sections,
     footer,
   };
 };
@@ -55,6 +44,7 @@ const parseFooter = (res) => {
     res.fields.footer.fields;
   const logoSrc = logo.fields.file.url;
   const footerImageSrc = footerImage.fields.file.url;
+
   const sponsorLogosSrc = sponsors.fields.images.map(
     (image) => image.fields.file.url
   );
@@ -79,34 +69,61 @@ const parseFooter = (res) => {
 };
 
 const parseSection = (section) => {
-  let { featuredImage, featuredContent, cards } = section.fields;
-  let featuredImageUrl = null;
-  let tableCard = null;
-  let galleryComponent = null;
-  let contactInformation = null;
+  let { heading, columns, backgroundColor } = section.fields;
 
-  if (featuredImage !== undefined) {
-    featuredImageUrl = featuredImage.fields.file.url;
+  if (columns !== undefined) {
+    columns = columns.map((column) => parseColumn(column));
+  } else columns = null;
+
+  if (heading == undefined) {
+    heading = null;
   }
-  if (cards !== undefined) {
-    cards = cards.map((card) => parseCard(card));
-  } else cards = null;
-  if (featuredContent !== undefined) {
-    const { heading, bodyText, buttons, files } = featuredContent.fields;
-    featuredContent = { heading, bodyText, buttons, files };
-  } else featuredContent = null;
+  if (backgroundColor == undefined) {
+    backgroundColor = null;
+  }
 
   return {
-    featuredImageUrl,
-    featuredContent,
-    cards,
-    tableCards: tableCard,
-    galleries: galleryComponent,
-    contact: contactInformation,
+    type: "section",
+    heading,
+    columns,
+    backgroundColor,
   };
 };
+
+const parseColumn = (column) => {
+  let { heading, components, backgroundColor } = column.fields;
+  components = components.map((component) => parseComponent(component));
+
+  if (heading == undefined) {
+    heading = null;
+  }
+
+  if (backgroundColor == undefined) {
+    backgroundColor = null;
+  }
+
+  return {
+    heading,
+    components,
+    backgroundColor,
+  };
+};
+
+const parseComponent = (component) => {
+  const type = component.sys.contentType.sys.id;
+  let parsedComponent;
+  if (type == "card") {
+    parsedComponent = parseCard(component);
+  } else parsedComponent = null; // Do this for all the differnet kinds of components
+
+  return {
+    type,
+    parsedComponent,
+  };
+};
+
 const parseCard = (card) => {
-  let { heading, body, buttons } = card.fields;
+  let { heading, bodyText, buttons } = card.fields;
   if (buttons !== undefined) {
     buttons = buttons.map((button) => {
       const text = button.fields.buttonText;
@@ -114,9 +131,13 @@ const parseCard = (card) => {
       return { text, link };
     });
   } else buttons == null;
+
+  if (heading == undefined) {
+    heading = null;
+  }
   return {
     heading,
-    body,
+    bodyText,
     buttons,
   };
 };

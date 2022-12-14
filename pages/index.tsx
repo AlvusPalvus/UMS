@@ -8,11 +8,12 @@ import Header from "../components/Header";
 import { getMainPage } from "../utils/contentful/getters";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
+import Section from "../components/Section";
 
 export async function getStaticProps() {
   const id = "74QQgki1QHDyN9rhvmZb81";
   const page = await getMainPage(id);
-
+  console.log(page);
   return {
     props: {
       header: page.header,
@@ -27,7 +28,7 @@ export default function Home({
   sections,
   footer,
 }) {
-  console.log(sections[0].cards[0]);
+  console.log(sections);
   return (
     <>
       <Header
@@ -41,25 +42,14 @@ export default function Home({
         }
       />
       <main className="">
-        <Card
-          heading={sections[0].cards[0].heading}
-          body={sections[0].cards[0].body}
-          buttons={sections[0].cards[0].buttons}
-        />
         <h1> UMS hemsida kommer här! </h1>
-        <div>
-          {/*sections.map((section) => {
-            if (section.cards !== null) {
-              section.cards.map((card) => {
-                <Card
-                  heading={card.heading}
-                  body={card.body}
-                  buttons={card.buttons}
-                ></Card>;
-              });
-            }
-          })*/}
-        </div>
+        {sections.map((section) => (
+          <Section
+            heading={section.heading}
+            columns={section.columns}
+            backgroundColor={""}
+          />
+        ))}
       </main>
       <Footer
         logoSrc={footer.logoSrc}

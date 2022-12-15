@@ -1,14 +1,15 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import styles from "../styles/Header.module.css";
 import { isTemplateSpan } from "typescript";
+import ReactMarkdown from "react-markdown";
 
 type Props = {
   logoSrc: string;
   navigationItems: any;
   heroSrc: string;
-  heroContent: ReactElement;
+  heroContent: string;
 };
 
 type NavLink = {
@@ -48,7 +49,7 @@ function Header({ logoSrc, navigationItems, heroSrc, heroContent }: Props) {
       <div className={styles.navbar}>
         <Link href={"/"}>
           <Image
-            src={"https://" + logoSrc}
+            src={"https:" + logoSrc}
             width={140}
             height={130}
             alt={"Logga"}
@@ -65,7 +66,9 @@ function Header({ logoSrc, navigationItems, heroSrc, heroContent }: Props) {
           </ul>
         </nav>
       </div>
-      {heroContent}
+      <ReactMarkdown className={styles.heroContent}>
+        {heroContent}
+      </ReactMarkdown>
     </header>
   );
 }

@@ -29,11 +29,7 @@ export default function Index({
         logoSrc={navbar.logoSrc}
         navigationItems={navbar.navigationItems}
         heroSrc={heroSrc}
-        heroContent={
-          <div className={heroStyles.heroContent}>
-            <h1>{heroText}</h1>
-          </div>
-        }
+        heroContent={heroText}
       />
       <main className="">
         <h1> UMS hemsida kommer här! </h1>

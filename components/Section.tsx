@@ -2,25 +2,10 @@ import { ReactElement } from "react";
 import Card from "./Card";
 import styles from "../styles/Components.module.css";
 import Column from "./Column";
-type ColumnContent = {
-  heading: string;
-  components: [
-    {
-      type: string;
-      parsedComponent: any;
-    }
-  ];
-  backgroundColor: string;
-};
-
-type Props = {
-  heading: string;
-  columns: [ColumnContent]; // array of column components
-  backgroundColor: string;
-};
-
+import { Column as ColumnType } from "../types/Card";
+import { Section } from "../types/Card";
 // A section can have 1-3 columns.
-const setUpColumns = (columns: [ColumnContent]) => {
+const setUpColumns = (columns: ColumnType[]) => {
   // for each column create a column component
   // with grid style depending on number of columns
 
@@ -37,7 +22,7 @@ const setUpColumns = (columns: [ColumnContent]) => {
   );
 };
 
-const Section = ({ heading, columns, backgroundColor }: Props) => {
+const Section = ({ heading, columns, backgroundColor }: Section) => {
   return (
     <div>
       <h2>{heading}</h2>

@@ -1,4 +1,10 @@
 import { getContentfulClient } from "./client";
+import {
+  Section as SectionType,
+  Column as ColumnType,
+  Component as ComponentType,
+  Card as CardType,
+} from "../../types/Card";
 
 const client = getContentfulClient();
 
@@ -15,7 +21,7 @@ export const getMainPage = async (id: string) => {
   const footer = parseFooter(res);
   const header = parseHeader(res);
 
-  console.log(sections);
+  //console.log(sections);
   return {
     header,
     sections,
@@ -45,14 +51,15 @@ const parseFooter = (res) => {
   const logoSrc = logo.fields.file.url;
   const footerImageSrc = footerImage.fields.file.url;
 
-  const sponsorLogosSrc = sponsors.fields.images.map(
-    (image) => image.fields.file.url
-  );
+  const sponsorLogos = sponsors.fields.images.map((image) => {
+    console.log(image.fields.file);
+    return image.fields.file;
+  });
 
   return {
     sponsors: {
       heading: sponsors.fields.heading,
-      sponsorLogosSrc,
+      sponsorLogos,
     },
     logoSrc,
     footerImageSrc,
@@ -82,12 +89,8 @@ const parseSection = (section) => {
     backgroundColor = null;
   }
 
-  return {
-    type: "section",
-    heading,
-    columns,
-    backgroundColor,
-  };
+  const parsedSection: SectionType = { heading, columns, backgroundColor };
+  return parsedSection;
 };
 
 const parseColumn = (column) => {

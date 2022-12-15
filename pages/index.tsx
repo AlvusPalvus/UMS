@@ -13,7 +13,7 @@ import Section from "../components/Section";
 export async function getStaticProps() {
   const id = "74QQgki1QHDyN9rhvmZb81";
   const page = await getMainPage(id);
-  console.log(page);
+  //console.log(page);
   return {
     props: {
       header: page.header,
@@ -28,7 +28,7 @@ export default function Home({
   sections,
   footer,
 }) {
-  console.log(sections);
+  //console.log(sections);
   return (
     <>
       <Header
@@ -45,12 +45,14 @@ export default function Home({
         <h1> UMS hemsida kommer här! </h1>
         {sections.map((section) => (
           <Section
+            key={section.toString()}
             heading={section.heading}
             columns={section.columns}
             backgroundColor={""}
           />
         ))}
       </main>
+
       <Footer
         logoSrc={footer.logoSrc}
         footerImageSrc={footer.footerImageSrc}
@@ -71,6 +73,20 @@ const options = {
     }
   }
 };
+
+<Header
+        logoSrc={navbar.logoSrc}
+        navigationItems={navbar.navigationItems}
+        heroSrc={heroSrc}
+        heroContent={
+          <div className={heroStyles.heroContent}>
+            <h1>{heroText}</h1>
+          </div>
+        }
+      />
+    
+
+
 */
 
 // documentToReactComponents(document, options); // Används för rich text

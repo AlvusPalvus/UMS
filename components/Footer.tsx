@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import Image from "next/legacy/image";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
 import styles from "../styles/Footer.module.css";
 import { isTemplateSpan } from "typescript";
@@ -14,7 +15,7 @@ import {
 type Props = {
   logoSrc: string;
   footerImageSrc: string;
-  sponsors: any;
+  sponsors: { heading: string; sponsorLogos: any };
   contact: any;
   socials: any;
 };
@@ -53,6 +54,14 @@ const parseSocialsInfo = (socialsItems) => {
   return socialsInfo;
 };
 
+const tableRow = (item: any) => {
+  return (
+    <tr>
+      <td>{item.icon}</td> <td>{item.text}</td>
+    </tr>
+  );
+};
+
 function Footer({
   logoSrc,
   footerImageSrc,
@@ -62,7 +71,7 @@ function Footer({
 }: Props) {
   const contactItems = parseContactInfo(contact.items);
   const socialsItems = parseSocialsInfo(socials.items);
-
+  console.log(sponsors.sponsorLogos);
   return (
     <footer
       style={{ backgroundImage: "url(https:" + footerImageSrc + ")" }}
@@ -71,64 +80,41 @@ function Footer({
       <div className={styles.sponsors}>
         <h2>{sponsors.heading}</h2> <hr />
         <div className={styles.gallery}>
-          {/*TODO:  Läs in med en for each/map!!!*/}
-          <Image
-            src={"https://" + logoSrc}
-            width={140}
-            height={130}
-            alt={"Logga"}
-          ></Image>
-          <Image
-            src={"https://" + logoSrc}
-            width={140}
-            height={130}
-            alt={"Logga"}
-          ></Image>
-          <Image
-            src={"https://" + logoSrc}
-            width={140}
-            height={130}
-            alt={"Logga"}
-          ></Image>
+          {sponsors.sponsorLogos.map((logo) => (
+            <Image
+              src={"https:" + logo.url}
+              width={logo.details.image.width}
+              height={logo.details.image.height}
+              alt={logo.filename}
+            ></Image>
+          ))}
         </div>
       </div>
       <div className={styles.bottomSection}>
         <div className={styles.gridColumn}>
           <h2>{contact.heading}</h2>
-
           <table>
-            <tr>
-              <th colSpan={2}>{contact.subHeading}</th>
-            </tr>
-            <tr>
-              <td>{contactItems[0].icon}</td> <td>{contactItems[0].text}</td>
-            </tr>
-            <tr>
-              <td>{contactItems[1].icon}</td> <td>{contactItems[1].text}</td>
-            </tr>
-            <tr>
-              {" "}
-              <td>{contactItems[2].icon}</td> <td>{contactItems[2].text}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <th colSpan={2}>{contact.subHeading}</th>
+              </tr>
+              {contactItems.map((item) => tableRow(item))}
+            </tbody>
           </table>
         </div>
         <div className={styles.gridColumn}>
           <Image
-            src={"https://" + logoSrc}
+            src={"https:" + logoSrc}
             width={140}
             height={130}
             alt={"Logga"}
           ></Image>
+          <p>Copyright 2022</p>
         </div>
         <div className={styles.gridColumn}>
           <h2>{socials.heading}</h2>
           <table>
-            <tr>
-              <td>{socialsItems[0].icon}</td> <td>{socialsItems[0].text}</td>
-            </tr>
-            <tr>
-              <td>{socialsItems[1].icon}</td> <td>{socialsItems[1].text}</td>
-            </tr>
+            <tbody>{socialsItems.map((item) => tableRow(item))}</tbody>
           </table>
         </div>
       </div>
@@ -136,5 +122,14 @@ function Footer({
     </footer>
   );
 }
+
+/*
+<table>
+            <tr>
+              <th colSpan={2}>{contact.subHeading}</th>
+            </tr>
+            {contactItems.map((item) => tableRow(item))}
+          </table>
+<table>{socialsItems.map((item) => tableRow(item))}</table>*/
 
 export default Footer;

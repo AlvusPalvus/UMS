@@ -1,7 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import Layout from "./Layout";
 import styles from "../styles/Header.module.css";
 import { isTemplateSpan } from "typescript";
 

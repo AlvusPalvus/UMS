@@ -1,42 +1,8 @@
 import { ReactElement } from "react";
+import { Card as CardType, Column } from "../types/Card";
 import Card from "./Card";
-import { Document } from "@contentful/rich-text-types";
 
-type Component = {
-  type: string;
-  parsedComponent: CardComponent | any; // Cards, posts, gallery, contact
-};
-
-type CardComponent = {
-  heading: string;
-  body: Document;
-  buttons: [
-    {
-      text: string;
-      link: string;
-    }
-  ];
-  backgroundColor: string;
-};
-
-type Post = {
-  heading: string;
-  body: Document;
-  buttons: [
-    {
-      text: string;
-      link: string;
-    }
-  ];
-};
-
-type Props = {
-  heading: string;
-  components: [Component];
-  backgroundColor: string;
-};
-
-const getCard = (component: CardComponent) => {
+const getCard = (component: CardType) => {
   return (
     <Card
       heading={component.heading}
@@ -47,13 +13,12 @@ const getCard = (component: CardComponent) => {
   );
 };
 
-const Column = ({ components }: Props) => {
+const Column = ({ heading, components, backgroundColor }: Column) => {
   return (
     <div>
       {components.map((component) => {
         if (component.type == "card") {
-          console.log(component);
-          return getCard(component.parsedComponent as CardComponent); //TODO fixa types
+          return getCard(component.parsedComponent as CardType); //TODO fixa types
         }
       })}
     </div>

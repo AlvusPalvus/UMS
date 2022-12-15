@@ -1,24 +1,12 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document, Block } from "@contentful/rich-text-types";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
+import { Card } from "../types/Card";
 
-type Props = {
-  heading: string;
-  body: Document;
-  buttons: [
-    {
-      text: string;
-      link: string;
-    }
-  ];
-  backgroundColor: string;
-};
-
-const Card = ({ heading, body, buttons, backgroundColor }: Props) => {
-  console.log(heading);
-  console.log(body);
-  console.log(buttons);
+const Card = ({ heading, body, buttons, backgroundColor }: Card) => {
+  // console.log(heading);
+  //console.log(body);
+  //console.log(buttons);
   return (
     <div className={styles.container}>
       <h3>{heading}</h3>

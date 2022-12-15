@@ -7,7 +7,6 @@ import heroStyles from "../../styles/Header.module.css";
 export async function getStaticProps() {
   const id = "1y1aMRbBn7nHGk68knlDG0";
   const page = await getMainPage(id);
-  //console.log(page)
 
   return {
     props: {

@@ -13,11 +13,13 @@ export const getMainPage = async (id: string) => {
   const res = await client.getEntry(id, { include: 4 });
   let sections_unparsed = res.fields.sections;
   let sections = [];
-  sections_unparsed.map((section) => {
-    if (section.sys.contentType.sys.id == "section") {
-      sections.push(parseSection(section));
-    }
-  });
+  if (sections_unparsed != undefined) {
+    sections_unparsed.map((section) => {
+      if (section.sys.contentType.sys.id == "section") {
+        sections.push(parseSection(section));
+      }
+    });
+  } else sections = null;
   const footer = parseFooter(res);
   const header = parseHeader(res);
 
@@ -52,7 +54,6 @@ const parseFooter = (res) => {
   const footerImageSrc = footerImage.fields.file.url;
 
   const sponsorLogos = sponsors.fields.images.map((image) => {
-    console.log(image.fields.file);
     return image.fields.file;
   });
 
@@ -95,7 +96,9 @@ const parseSection = (section) => {
 
 const parseColumn = (column) => {
   let { heading, components, backgroundColor } = column.fields;
-  components = components.map((component) => parseComponent(component));
+  if (components !== undefined) {
+    components = components.map((component) => parseComponent(component));
+  } else components = null;
 
   if (heading == undefined) {
     heading = null;

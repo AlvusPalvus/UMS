@@ -71,7 +71,6 @@ function Footer({
 }: Props) {
   const contactItems = parseContactInfo(contact.items);
   const socialsItems = parseSocialsInfo(socials.items);
-  console.log(sponsors.sponsorLogos);
   return (
     <footer
       style={{ backgroundImage: "url(https:" + footerImageSrc + ")" }}

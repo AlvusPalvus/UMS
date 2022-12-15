@@ -8,7 +8,6 @@ export async function getStaticProps() {
   const id = "5loTBfNSntKIlJ7DWeXbD0";
   const page = await getMainPage(id);
   //console.log(page)
-
   return {
     props: {
       header: page.header,
@@ -23,6 +22,7 @@ export default function Index({
   sections,
   footer,
 }) {
+  console.log(sections);
   return (
     <>
       <Header

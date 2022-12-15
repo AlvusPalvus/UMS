@@ -33,8 +33,7 @@ const parseNavItem = (navItem) => {
 };
 
 const getLinks = (navigationItems) => {
-  let links = [];
-  links = navigationItems.map((navItem) => parseNavItem(navItem));
+  const links = navigationItems.map((navItem) => parseNavItem(navItem));
   return links;
 };
 

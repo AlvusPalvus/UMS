@@ -50,11 +50,13 @@ const Column = ({ heading, components, backgroundColor }: ColumnType) => {
     return (
         <div>
             {heading ? <h3>{heading}</h3> : null}
-            {components.map((component) => {
-                if (component.type === "Field") {
-                    return getField(component.parsedComponent as Field); //TODO fixa types
-                }
-            })}
+            {components
+                ? components.map((component) => {
+                      if (component.type === "Field") {
+                          return getField(component.parsedComponent as Field); //TODO fixa types
+                      }
+                  })
+                : null}
         </div>
     );
 };

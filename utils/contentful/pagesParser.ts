@@ -15,7 +15,6 @@ export const getMainPage = async (id: string) => {
     let sections = [];
     if (sectionsUnparsed != undefined) {
         sectionsUnparsed.map((section) => {
-            console.log(section);
             if (section.sys.contentType.sys.id == "section") {
                 sections.push(parseSection(section));
             }

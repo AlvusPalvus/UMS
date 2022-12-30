@@ -6,7 +6,6 @@ import { Footer } from "../types/Pages";
 import Gallery from "./Gallery";
 
 function Footer({ sponsors, contact, logo, socials, backgroundImage }: Footer) {
-    console.log("hello");
     return (
         <footer
             style={{

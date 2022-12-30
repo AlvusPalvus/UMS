@@ -9,17 +9,20 @@ const setUpColumns = (columns: ColumnType[]) => {
     // for each column create a column component
     // with grid style depending on number of columns
 
-    return (
-        <div>
-            {columns.map((column) => (
-                <Column
-                    heading={column.heading}
-                    components={column.components}
-                    backgroundColor={column.backgroundColor}
-                />
-            ))}
-        </div>
-    );
+    if (columns == null) {
+        return null;
+    } else
+        return (
+            <div>
+                {columns.map((column) => (
+                    <Column
+                        heading={column.heading}
+                        components={column.components}
+                        backgroundColor={column.backgroundColor}
+                    />
+                ))}
+            </div>
+        );
 };
 
 const Section = ({ heading, columns, backgroundColor }: SectionType) => {

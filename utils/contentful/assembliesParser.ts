@@ -9,7 +9,6 @@ export const parseSection = (section): Section => {
         columns = columns.map((column) => parseColumn(column));
     } else columns = null;
 
-    console.log(columns);
     return {
         heading: heading || null,
         columns,

@@ -10,7 +10,6 @@ import styles from "../styles/Components.module.css";
 
 const renderContactInfo = (contactItem: ContactItem) => {
     let contactInfo: ContactRow[] = [];
-    console.log(contactItem);
 
     if (contactItem.email != null) {
         contactInfo.push({
@@ -68,7 +67,6 @@ type Props = {
 };
 
 const ContactTable = ({ contactInfo }: Props) => {
-    console.log(contactInfo);
     let contactItems = renderContactInfo(contactInfo) as ContactRow[];
     return (
         <div className={styles.gridColumn}>

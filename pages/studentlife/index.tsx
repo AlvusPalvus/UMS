@@ -1,46 +1,47 @@
 import React from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { getMainPage } from "../../utils/contentful/getters";
-import heroStyles from "../../styles/Header.module.css";
+import { getMainPage } from "../../utils/contentful/pagesParser";
+import Section from "../../components/Section";
 
 export async function getStaticProps() {
-  const id = "6yJtNDlA7150jsOpkQW1Fk";
-  const page = await getMainPage(id);
-  //console.log(page)
-
-  return {
-    props: {
-      header: page.header,
-      sections: page.sections,
-      footer: page.footer,
-    },
-  };
+    const id = "6yJtNDlA7150jsOpkQW1Fk";
+    const page = await getMainPage(id);
+    return {
+        props: {
+            header: page.header,
+            sections: page.sections,
+            footer: page.footer,
+        },
+    };
 }
 
-export default function Index({
-  header: { navbar, heroSrc, heroText },
-  sections,
-  footer,
-}) {
-  return (
-    <>
-      <Header
-        logoSrc={navbar.logoSrc}
-        navigationItems={navbar.navigationItems}
-        heroSrc={heroSrc}
-        heroContent={heroText}
-      />
-      <main className="">
-        <h1> UMS hemsida kommer här! </h1>
-      </main>
-      <Footer
-        logoSrc={footer.logoSrc}
-        footerImageSrc={footer.footerImageSrc}
-        sponsors={footer.sponsors}
-        contact={footer.contact}
-        socials={footer.socials}
-      />
-    </>
-  );
+export default function Home({ header, sections, footer }) {
+    console.log(sections);
+    return (
+        <>
+            <Header
+                navbar={header.navbar}
+                heroImage={header.heroImage}
+                heroContent={header.heroContent}
+            />
+            <main className="">
+                <h1> UMS hemsida kommer här! </h1>
+                {sections.map((section) => (
+                    <Section
+                        heading={section.heading}
+                        columns={section.columns}
+                    />
+                ))}
+            </main>
+
+            <Footer
+                logo={footer.logo}
+                backgroundImage={footer.backgroundImage}
+                sponsors={footer.sponsors}
+                contact={footer.contact}
+                socials={footer.socials}
+            />
+        </>
+    );
 }

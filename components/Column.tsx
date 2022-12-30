@@ -47,12 +47,10 @@ const getField = (component: Field) => {
 };
 
 const Column = ({ heading, components, backgroundColor }: ColumnType) => {
-    console.log(components);
     return (
         <div>
             {heading ? <h3>{heading}</h3> : null}
             {components.map((component) => {
-                console.log(component);
                 if (component.type === "Field") {
                     return getField(component.parsedComponent as Field); //TODO fixa types
                 }

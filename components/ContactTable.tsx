@@ -12,35 +12,35 @@ const renderContactInfo = (contactItem: ContactItem) => {
     let contactInfo: ContactRow[] = [];
     console.log(contactItem);
 
-    if (contactItem.email) {
+    if (contactItem.email != null) {
         contactInfo.push({
             icon: <FiMail />,
             text: contactItem.email,
         });
     }
 
-    if (contactItem.phone) {
+    if (contactItem.phone != null) {
         contactInfo.push({
             icon: <FiPhone />,
             text: contactItem.phone,
         });
     }
 
-    if (contactItem.adress) {
+    if (contactItem.adress != null) {
         contactInfo.push({
             icon: <FiMapPin />,
             text: contactItem.adress,
         });
     }
 
-    if (contactItem.facebook) {
+    if (contactItem.facebook != null) {
         contactInfo.push({
             icon: <FiFacebook />,
             text: contactItem.facebook,
         });
     }
 
-    if (contactItem.instagram) {
+    if (contactItem.instagram != null) {
         contactInfo.push({
             icon: <FiInstagram />,
             text: contactItem.instagram,

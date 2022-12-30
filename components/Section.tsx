@@ -2,8 +2,8 @@ import { ReactElement } from "react";
 import Card from "./Card";
 import styles from "../styles/Components.module.css";
 import Column from "./Column";
-import { Column as ColumnType } from "../types/Topics";
-import { Section } from "../types/Topics";
+import { Column as ColumnType } from "../types/Assemblies";
+import { Section as SectionType } from "../types/Assemblies";
 // A section can have 1-3 columns.
 const setUpColumns = (columns: ColumnType[]) => {
     // for each column create a column component
@@ -22,10 +22,10 @@ const setUpColumns = (columns: ColumnType[]) => {
     );
 };
 
-const Section = ({ heading, columns, backgroundColor }: Section) => {
+const Section = ({ heading, columns, backgroundColor }: SectionType) => {
     return (
         <div>
-            <h2>{heading}</h2>
+            {heading ? <h2>{heading}</h2> : null}
             {setUpColumns(columns)}
         </div>
     );

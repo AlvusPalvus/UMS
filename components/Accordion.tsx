@@ -3,8 +3,8 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { Field } from "../types/Topics";
 
-//Style this component as a card
-const Card = ({ heading, body, buttons, backgroundColor }: Field) => {
+//Style this component as an accordion
+const Accordion = ({ heading, body, buttons, backgroundColor }: Field) => {
     // console.log(heading);
     //console.log(body);
     //console.log(buttons);
@@ -22,4 +22,4 @@ const Card = ({ heading, body, buttons, backgroundColor }: Field) => {
     );
 };
 
-export default Card;
+export default Accordion;

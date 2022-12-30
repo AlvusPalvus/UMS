@@ -1,5 +1,5 @@
 import { Section } from "../../types/Assemblies";
-import { parseField } from "./topicsParser";
+import { parseComponent } from "./topicsParser";
 
 // TODO: Implement correct sections parser
 export const parseSection = (section): Section => {
@@ -9,39 +9,23 @@ export const parseSection = (section): Section => {
         columns = columns.map((column) => parseColumn(column));
     } else columns = null;
 
-    if (heading == undefined) {
-        heading = null;
-    }
-    if (backgroundColor == undefined) {
-        backgroundColor = null;
-    }
-
-    const parsedSection = { heading, columns, backgroundColor };
+    console.log(columns);
     return {
-        type: "",
-        heading,
+        heading: heading || null,
         columns,
-        backgroundColor,
+        backgroundColor: backgroundColor || null,
     };
 };
 
 const parseColumn = (column) => {
     let { heading, components, backgroundColor } = column.fields;
     if (components !== undefined) {
-        components = components.map((component) => parseField(component));
+        components = components.map((component) => parseComponent(component));
     } else components = null;
 
-    if (heading == undefined) {
-        heading = null;
-    }
-
-    if (backgroundColor == undefined) {
-        backgroundColor = null;
-    }
-
     return {
-        heading,
+        heading: heading || null,
         components,
-        backgroundColor,
+        backgroundColor: backgroundColor || null,
     };
 };

@@ -14,9 +14,9 @@ export type Gallery = {
     images: CfImage[];
 };
 
-export type Card = "card";
-export type PlainText = "plain text";
-export type Accordion = "accordion";
+export type Card = "Card";
+export type PlainText = "Plain Text";
+export type Accordion = "Accordion";
 
 export type Contact = {
     heading?: string;

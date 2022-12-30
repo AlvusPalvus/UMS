@@ -1,20 +1,29 @@
+import { Component } from "../../types/Assemblies";
 import { Card, Contact, ContactItem, Field, Gallery } from "../../types/Topics";
 import { parseImage } from "./elementsParser";
 
-export const parseField = (component) => {
+export const parseComponent = (component): Component => {
     const type = component.sys.contentType.sys.id;
-    let parsedComponent;
+    // console.log(type);
+    let parsedComponent = null;
+    let componentType;
     if (type == "card") {
-        parsedComponent = parseCard(component);
-    } else parsedComponent = null; // Do this for all the differnet kinds of components
+        parsedComponent = parseField(component);
+        componentType = "Field";
+    } else if (type == "galleryComponent") {
+        parsedComponent = parseGallery(component);
+        componentType = "Gallery";
+    } // Do this for all the differnet kinds of components
 
     return {
-        parsedComponent,
+        type: componentType || null,
+        parsedComponent: parsedComponent || null,
     };
 };
 
-const parseCard = (card): Card => {
-    let { heading, bodyText, buttons } = card.fields;
+const parseField = (field): Field => {
+    let { heading, bodyText, buttons, backgroundColor, displayAs } =
+        field.fields;
     if (buttons !== undefined) {
         buttons = buttons.map((button) => {
             const text = button.fields.buttonText;
@@ -23,20 +32,23 @@ const parseCard = (card): Card => {
         });
     } else buttons == null;
 
-    if (heading == undefined) {
-        heading = null;
-    }
-    return;
+    // console.log(displayAs);
+    return {
+        displayType: displayAs,
+        heading: heading || null,
+        body: bodyText,
+        buttons,
+        backgroundColor: backgroundColor || null,
+    };
 };
 
 export const parseGallery = (gallery): Gallery => {
-    const array = gallery.fields.images.map((image) => {
+    const images = gallery.fields.images.map((image) => {
         return parseImage(image);
     });
-    console.log(array[0]);
     return {
-        heading: gallery.fields.heading,
-        images: array,
+        heading: gallery.fields.heading || null,
+        images,
     };
 };
 
@@ -49,26 +61,12 @@ export const parseContact = (contact): Contact => {
 };
 
 const parseContactItem = (contactFields): ContactItem => {
-    let email,
-        phone,
-        adress,
-        facebook,
-        instagram = null;
-    if (contactFields.eMail !== undefined) {
-        email = contactFields.eMail;
-    }
-    if (contactFields.phone !== undefined) {
-        phone = contactFields.phone;
-    }
-    if (contactFields.adress !== undefined) {
-        adress = contactFields.adress;
-    }
-    if (contactFields.facebook !== undefined) {
-        facebook = contactFields.facebook;
-    }
-    if (contactFields.instagram !== undefined) {
-        instagram = contactFields.instagram;
-    }
+    const email = contactFields.eMail || null;
+    const phone = contactFields.phone || null;
+    const adress = contactFields.adress || null;
+
+    const facebook = contactFields.facebook || null;
+    const instagram = contactFields.instagram || null;
 
     return {
         email,

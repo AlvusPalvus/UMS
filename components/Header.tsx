@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "../styles/Header.module.css";
 import { isTemplateSpan } from "typescript";
 import ReactMarkdown from "react-markdown";
+import { Header } from "../types/Pages";
 
 type Props = {
     logoSrc: string;
@@ -38,21 +39,25 @@ const getLinks = (navigationItems) => {
     return links;
 };
 
-function Header({ logoSrc, navigationItems, heroSrc, heroContent }: Props) {
+function Header({
+    navbar: { logo, navigationItems },
+    heroImage,
+    heroContent,
+}: Header) {
     const links = getLinks(navigationItems);
 
     return (
         <header
-            style={{ backgroundImage: "url(https:" + heroSrc + ")" }}
+            style={{ backgroundImage: "url(https:" + heroImage.url + ")" }}
             className={styles.header}
         >
             <div className={styles.navbar}>
                 <Link href={"/"}>
                     <Image
-                        src={"https:" + logoSrc}
-                        width={140}
-                        height={130}
-                        alt={"Logga"}
+                        src={"https:" + logo.url}
+                        width={logo.width}
+                        height={logo.height}
+                        alt={logo.filename}
                     ></Image>
                 </Link>
                 <nav className={styles.nav}>

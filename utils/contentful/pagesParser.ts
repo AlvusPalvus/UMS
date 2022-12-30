@@ -1,5 +1,5 @@
 import { Section } from "../../types/Assemblies";
-import { Footer } from "../../types/Pages";
+import { Footer, Header } from "../../types/Pages";
 import { parseSection } from "./assembliesParser";
 import { getContentfulClient } from "./client";
 import { parseImage } from "./elementsParser";
@@ -15,34 +15,32 @@ export const getMainPage = async (id: string) => {
     let sections = [];
     if (sectionsUnparsed != undefined) {
         sectionsUnparsed.map((section) => {
+            console.log(section);
             if (section.sys.contentType.sys.id == "section") {
                 sections.push(parseSection(section));
             }
         });
     } else sections = null;
 
-    const f = parseFooter(res);
-    console.log(f);
     return {
-        header: {}, //parseHeader(res),
-        sections: {},
-        footer: f,
+        header: parseHeader(res),
+        sections,
+        footer: parseFooter(res),
     };
 };
 
-const parseHeader = (res) => {
+const parseHeader = (res): Header => {
     const { logo, navigationItems } = res.fields.header.fields;
-    const logoSrc = logo.fields.file.url;
-    const heroSrc = res.fields.heroImage.fields.file.url;
-    const heroText = res.fields.heroText;
+    const heroImage = res.fields.heroImage;
+    const heroContent = res.fields.heroText;
 
     return {
         navbar: {
-            logoSrc,
+            logo: parseImage(logo),
             navigationItems,
         },
-        heroSrc,
-        heroText,
+        heroImage: parseImage(heroImage),
+        heroContent,
     };
 };
 

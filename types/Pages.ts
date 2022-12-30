@@ -18,8 +18,7 @@ export type DepartmentPage = {
 };
 
 export type Header = {
-    logo: CfImage;
-    navigationItems: NavLink;
+    navbar: { logo: CfImage; navigationItems: NavLink };
     heroImage: CfImage;
     heroContent: string;
 };

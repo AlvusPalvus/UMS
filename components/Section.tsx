@@ -4,6 +4,7 @@ import styles from "../styles/Components.module.css";
 import Column from "./Column";
 import { Column as ColumnType } from "../types/Assemblies";
 import { Section as SectionType } from "../types/Assemblies";
+import Link from "next/link";
 // A section can have 1-3 columns.
 const setUpColumns = (columns: ColumnType[]) => {
     // for each column create a column component
@@ -13,7 +14,7 @@ const setUpColumns = (columns: ColumnType[]) => {
         return null;
     } else
         return (
-            <div>
+            <div className="even-columns">
                 {columns.map((column) => (
                     <Column
                         heading={column.heading}
@@ -27,10 +28,15 @@ const setUpColumns = (columns: ColumnType[]) => {
 
 const Section = ({ heading, columns, backgroundColor }: SectionType) => {
     return (
-        <div>
-            {heading ? <h2>{heading}</h2> : null}
-            {setUpColumns(columns)}
-        </div>
+        <section
+            style={{ backgroundColor: "#" + backgroundColor }}
+            className="container "
+        >
+            {heading ? (
+                <h2 className="fs-secondary-heading ">{heading}</h2>
+            ) : null}
+            <div className="container">{setUpColumns(columns)}</div>
+        </section>
     );
 };
 

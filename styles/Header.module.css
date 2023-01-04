@@ -4,7 +4,7 @@
     min-height: 40vh; 
     display: flex;
     flex-direction: column;
-    padding: 6rem 8rem;
+    /* padding: 6rem 8rem; */
     justify-content: center;
     flex-wrap: wrap; 
     background-size: cover;
@@ -27,14 +27,14 @@
     margin: 8px;
 }
 
-.nav {
+.primaryNavigation {
     color: white;
     display: flex;
     padding:0px 24px;
     margin:0px;
 }
 
-.nav a {
+.primaryNavigation a {
     display: block;
     color: white;
     text-align: center;
@@ -43,14 +43,14 @@
     font-family: Verdana, Geneva, sans-serif; font-size: 16px; font-style: bold; font-variant: bold; font-weight: 400; line-height: 23px;
 }
 
-.nav li {
+/* .primaryNavigation li {
     list-style-type: none;
     float: left;
 }
 
-.nav ul {
+.primaryNavigation ul {
     margin:0px;
-}
+} */
 
 .imageWrapper {
 z-index: -1;

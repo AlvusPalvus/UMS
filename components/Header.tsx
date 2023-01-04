@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import styles from "../styles/Header.module.css";
+import headerStyles from "../styles/Header.module.css";
 import { isTemplateSpan } from "typescript";
 import ReactMarkdown from "react-markdown";
 import { Header } from "../types/Pages";
@@ -49,9 +49,9 @@ function Header({
     return (
         <header
             style={{ backgroundImage: "url(https:" + heroImage.url + ")" }}
-            className={styles.header}
+            className={headerStyles.header}
         >
-            <div className={styles.navbar}>
+            <div className="container ">
                 <Link href={"/"}>
                     <Image
                         src={"https:" + logo.url}
@@ -60,8 +60,8 @@ function Header({
                         alt={logo.filename}
                     ></Image>
                 </Link>
-                <nav className={styles.nav}>
-                    <ul>
+                <nav className={headerStyles.primaryNavigation}>
+                    <ul role="list">
                         {links.map((link) => (
                             <li>
                                 <Link href={link.link}> {link.title} </Link>
@@ -71,7 +71,7 @@ function Header({
                     </ul>
                 </nav>
             </div>
-            <ReactMarkdown className={styles.heroContent}>
+            <ReactMarkdown className={headerStyles.heroContent}>
                 {heroContent}
             </ReactMarkdown>
         </header>

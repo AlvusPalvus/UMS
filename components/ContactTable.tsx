@@ -14,6 +14,7 @@ const renderContactInfo = (contactItem: ContactItem) => {
     if (contactItem.email != null) {
         contactInfo.push({
             icon: <FiMail />,
+            //ariaLabel: "mail",
             text: contactItem.email,
         });
     }

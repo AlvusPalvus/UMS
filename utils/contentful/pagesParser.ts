@@ -13,7 +13,7 @@ export const getMainPage = async (id: string) => {
 
     let sectionsUnparsed = res.fields.sections;
     let sections = [];
-    if (sectionsUnparsed != undefined) {
+    if (sectionsUnparsed !== undefined) {
         sectionsUnparsed.map((section) => {
             if (section.sys.contentType.sys.id == "section") {
                 sections.push(parseSection(section));

@@ -30,7 +30,7 @@ const Section = ({ heading, columns, backgroundColor }: SectionType) => {
     return (
         <section
             style={{ backgroundColor: "#" + backgroundColor }}
-            className="container "
+            className="container max-w-[1240px]"
         >
             {heading ? (
                 <h2 className="fs-secondary-heading ">{heading}</h2>

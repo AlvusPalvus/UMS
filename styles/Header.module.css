@@ -1,47 +1,76 @@
-.header {
+/* .primaryHeader {
     position: relative;
     width: 100vw;
     min-height: 40vh; 
-    display: flex;
-    flex-direction: column;
-    /* padding: 6rem 8rem; */
-    justify-content: center;
-    flex-wrap: wrap; 
     background-size: cover;
     background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-.navbar {
+.navWrapper {
+    background-color: aqua;
+    margin-top: 3rem;
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
-    width: 100%;
-    /* max-width: 1500px; */
 }
 
-.navbar img {
+/* .navWrapper img {
     padding: 8px;
 }
 
-.navbar a {
+.navWrapper a {
     margin: 8px;
+} */
+/* 
+.mobileNavToggle {
+    display: none;
 }
 
-.primaryNavigation {
-    color: white;
-    display: flex;
-    padding:0px 24px;
-    margin:0px;
+@media (max-width: 50em) {
+    .primaryNavigation {
+        display: none;
+    }
+    .mobileNavToggle {
+    }
 }
+
+.primaryNavigation[data-visible] {
+    display: block;
+    position: flex;
+    
+    /* display: flex;
+    padding:0px 24px;
+    margin:0px; */
+/*}
 
 .primaryNavigation a {
-    display: block;
-    color: white;
+    /* display: block;
     text-align: center;
     padding: 8px 16px;
-    text-decoration: none;
-    font-family: Verdana, Geneva, sans-serif; font-size: 16px; font-style: bold; font-variant: bold; font-weight: 400; line-height: 23px;
+    text-decoration: none ; */
+    /* text-decoration: none;
+    font-family: Verdana, Geneva, sans-serif; font-size: 16px; font-style: bold; font-variant: bold; font-weight: 400; line-height: 23px; */
+/*}
+
+.navList {
+
 }
+
+.mobileNavToggle {
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    padding: 0.5rem;
+    color:  #FFFFFF; /*Background white*/
+/*}
+
+.mobileNavToggle .iconClose {
+    display: none;
+
+} */
 
 /* .primaryNavigation li {
     list-style-type: none;
@@ -52,6 +81,7 @@
     margin:0px;
 } */
 
+/*
 .imageWrapper {
 z-index: -1;
 }
@@ -63,9 +93,9 @@ align-self: flex-start;
 width: 50%;
 
 height: fit-content;
-border: 3px solid black;
 color: white;
 }
+
 
 .heroContentOld {
 position: relative;
@@ -79,6 +109,4 @@ left: 30%;
 transform: translate(-50%, -50%);
 color: white;
 }
-
-
-
+ */

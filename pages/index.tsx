@@ -1,13 +1,15 @@
 import Head from "next/head";
-import Header from "../components/Header";
 import { getMainPage } from "../utils/contentful/pagesParser";
-import Footer from "../components/Footer";
+import Footer from "../components/Footer/Footer";
 import Section from "../components/Section";
 import Link from "next/link";
+import Hero from "../components/Header/Hero";
+import Navbar from "../components/Header/Navbar";
 
 export async function getStaticProps() {
     const id = "74QQgki1QHDyN9rhvmZb81";
     const page = await getMainPage(id);
+
     return {
         props: {
             header: page.header,
@@ -24,26 +26,25 @@ export default function Home({ header, sections, footer }) {
                 <title>Umeå medicinska studentkår - home</title>
                 <meta
                     property="og:title"
-                    content="Umeå medicinska studentkår - home"
+                    content="Umeå medicinska studentkår - start"
                     key="title"
                 />
             </Head>
-            <Header
-                navbar={header.navbar}
-                heroImage={header.heroImage}
-                heroContent={header.heroContent}
+            <Navbar
+                logo={header.navbar.logo}
+                navigationItems={header.navbar.navigationItems}
+            />
+            <Hero
+                heroImage={header.hero.heroImage}
+                heroContent={header.hero.heroContent}
             />
             <main className="">
-                <h1 className="fs-primary-heading">UMS hemsida kommer här!</h1>
                 {sections.map((section) => (
                     <Section
                         heading={section.heading}
                         columns={section.columns}
                     />
                 ))}
-                <Link href={"/membership"} className="button">
-                    Press me!
-                </Link>
             </main>
 
             <Footer

@@ -8,13 +8,15 @@
 }
 
 .sponsors {
+  margin: 3rem;
     text-align: left;
     width: 1200px;
 }
 
 .gallery {
     display: flex;
-    margin: 80px;
+    flex-direction: row;
+   
     justify-content: space-around;
 }
 

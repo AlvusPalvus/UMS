@@ -1,5 +1,5 @@
 import { Section } from "../../types/Assemblies";
-import { Footer, Header } from "../../types/Pages";
+import { Footer, Header, NavLink } from "../../types/Pages";
 import { parseSection } from "./assembliesParser";
 import { getContentfulClient } from "./client";
 import { parseImage } from "./elementsParser";
@@ -32,17 +32,37 @@ const parseHeader = (res): Header => {
     const { logo, navigationItems } = res.fields.header.fields;
     const heroImage = res.fields.heroImage;
     const heroContent = res.fields.heroText;
+    const navLinks = getLinks(navigationItems);
 
     return {
         navbar: {
             logo: parseImage(logo),
-            navigationItems,
+            navigationItems: navLinks,
         },
-        heroImage: parseImage(heroImage),
-        heroContent,
+        hero: {
+            heroImage: parseImage(heroImage),
+            heroContent,
+        },
+    };
+};
+const parseNavItem = (navItem): NavLink => {
+    let subPages;
+    if (navItem.fields.subpages !== undefined) {
+        subPages = navItem.fields.subpages.map((item) => parseNavItem(item));
+    } else {
+        subPages = null;
+    }
+    return {
+        link: navItem.fields.link,
+        title: navItem.fields.pageTitle,
+        sublinks: subPages,
     };
 };
 
+const getLinks = (navigationItems): NavLink[] => {
+    const links = navigationItems.map((navItem) => parseNavItem(navItem));
+    return links;
+};
 const parseFooter = (res): Footer => {
     const { sponsors, contact, logo, socials, backgroundImage } =
         res.fields.footer.fields;

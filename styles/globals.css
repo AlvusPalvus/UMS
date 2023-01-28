@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --clr-primary-400: #337A5A; /*Button green*/
   --clr-primary-300: #52B688 ; /*Primary green*/
@@ -107,12 +111,13 @@ h1, h2, h3 {
 
 h1 {
   font-size: var(--fs-primary-heading);
+
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
-   scroll-behavior: auto;
+   scroll-behavior: smooth;
   }
   
   *,
@@ -173,9 +178,11 @@ h1 {
 
 .fs-primary-heading {
   font-size: var(--fs-primary-heading);
+  line-height: 1.1;
 }
 .fs-secondary-heading {
   font-size: var(--fs-secondary-heading);
+  line-height: 1.1;
 }
 
 .fs-body { font-size: var(--fs-body);}
@@ -218,6 +225,16 @@ body {
   background-color: var(--clr-neutral-100);
 }
 
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: 50%;
+  
+  height: fit-content;
+  color: white;
+  }
+
 /*Button*/
 
 .button {
@@ -240,9 +257,10 @@ body {
 
 .button:hover,
 .button:focus-visible {
-  background-color: var(--clr-primary-300);
-  color: var(--clr-neutral-100);
+  color: var(--clr-primary-300);
+  /* color: var(--clr-neutral-100); */
   box-shadow: var(--clr-neutral-100);
+  border: 2px solid var(--clr-primary-300);
 }
 
 .button[data-type="filled"] {
@@ -250,12 +268,23 @@ body {
   color: var(--clr-neutral-100);
 }
 
+.visually-hidden {
+  position: absolute;
+position: absolute !important;
+width: 1px !important;
+height: 1px !important;
+padding: 0 !important;
+margin: -1px !important;
+overflow: hidden !important;
+clip: rect(0,0,0,0) !important;
+white-space: nowrap !important;
+border: 0 !important;
+}
+
 
 
 /*
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 
 /* Auto layout 
 display: flex;

@@ -1,6 +1,7 @@
 import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Footer from "../../components/Footer/Footer";
+import Hero from "../../components/Header/Hero";
+import Navbar from "../../components/Header/Navbar";
 import Section from "../../components/Section";
 import { getMainPage } from "../../utils/contentful/pagesParser";
 
@@ -20,10 +21,13 @@ export async function getStaticProps() {
 export default function Home({ header, sections, footer }) {
     return (
         <>
-            <Header
-                navbar={header.navbar}
-                heroImage={header.heroImage}
-                heroContent={header.heroContent}
+            <Navbar
+                logo={header.navbar.logo}
+                navigationItems={header.navbar.navigationItems}
+            />
+            <Hero
+                heroImage={header.hero.heroImage}
+                heroContent={header.hero.heroContent}
             />
             <main className="">
                 <h1> UMS hemsida kommer här! </h1>

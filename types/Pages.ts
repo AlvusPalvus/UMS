@@ -18,7 +18,15 @@ export type DepartmentPage = {
 };
 
 export type Header = {
-    navbar: { logo: CfImage; navigationItems: NavLink };
+    navbar: Navbar;
+    hero: Hero;
+};
+
+export type Navbar = {
+    logo: CfImage;
+    navigationItems: NavLink[];
+};
+export type Hero = {
     heroImage: CfImage;
     heroContent: string;
 };
@@ -26,6 +34,7 @@ export type Header = {
 export type NavLink = {
     title: string;
     link: string;
+    sublinks?: NavLink[];
 };
 
 export type Footer = {

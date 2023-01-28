@@ -3,8 +3,6 @@ import Image from "next/legacy/image";
 import styles from "../../styles/Footer.module.css";
 import ContactTable from "../ContactTable";
 import { Footer } from "../../types/Pages";
-import Gallery from "../Gallery";
-import Background from "./Background";
 
 function Footer({ sponsors, contact, logo, socials, backgroundImage }: Footer) {
     return (

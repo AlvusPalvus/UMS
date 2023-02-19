@@ -6,45 +6,42 @@ import Hero from "../../components/Header/Hero";
 import Navbar from "../../components/Header/Navbar";
 
 export async function getStaticProps() {
-    const id = "5loTBfNSntKIlJ7DWeXbD0";
-    const page = await getMainPage(id);
-    return {
-        props: {
-            header: page.header,
-            sections: page.sections,
-            footer: page.footer,
-        },
-    };
+  const id = "5loTBfNSntKIlJ7DWeXbD0";
+  const page = await getMainPage(id);
+  return {
+    props: {
+      header: page.header,
+      sections: page.sections,
+      footer: page.footer,
+    },
+  };
 }
 
 export default function Home({ header, sections, footer }) {
-    return (
-        <>
-            <Navbar
-                logo={header.navbar.logo}
-                navigationItems={header.navbar.navigationItems}
-            />
-            <Hero
-                heroImage={header.hero.heroImage}
-                heroContent={header.hero.heroContent}
-            />
-            <main className="">
-                <h1> UMS hemsida kommer här! </h1>
-                {sections.map((section) => (
-                    <Section
-                        heading={section.heading}
-                        columns={section.columns}
-                    />
-                ))}
-            </main>
+  return (
+    <>
+      <Navbar
+        logo={header.navbar.logo}
+        navigationItems={header.navbar.navigationItems}
+      />
+      <Hero
+        heroImage={header.hero.heroImage}
+        heroContent={header.hero.heroContent}
+      />
+      <main className="">
+        <h1> UMS hemsida kommer här! </h1>
+        {sections.map((section) => (
+          <Section section={section} />
+        ))}
+      </main>
 
-            <Footer
-                logo={footer.logo}
-                backgroundImage={footer.backgroundImage}
-                sponsors={footer.sponsors}
-                contact={footer.contact}
-                socials={footer.socials}
-            />
-        </>
-    );
+      <Footer
+        logo={footer.logo}
+        backgroundImage={footer.backgroundImage}
+        sponsors={footer.sponsors}
+        contact={footer.contact}
+        socials={footer.socials}
+      />
+    </>
+  );
 }

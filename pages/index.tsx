@@ -7,55 +7,52 @@ import Hero from "../components/Header/Hero";
 import Navbar from "../components/Header/Navbar";
 
 export async function getStaticProps() {
-    const id = "74QQgki1QHDyN9rhvmZb81";
-    const page = await getMainPage(id);
+  const id = "74QQgki1QHDyN9rhvmZb81";
+  const page = await getMainPage(id);
 
-    return {
-        props: {
-            header: page.header,
-            sections: page.sections,
-            footer: page.footer,
-        },
-    };
+  return {
+    props: {
+      header: page.header,
+      sections: page.sections,
+      footer: page.footer,
+    },
+  };
 }
 
 export default function Home({ header, sections, footer }) {
-    return (
-        <>
-            <Head>
-                <title>Umeå medicinska studentkår - home</title>
-                <meta
-                    property="og:title"
-                    content="Umeå medicinska studentkår - start"
-                    key="title"
-                />
-            </Head>
-            <Navbar
-                logo={header.navbar.logo}
-                navigationItems={header.navbar.navigationItems}
-            />
-            <Hero
-                heroImage={header.hero.heroImage}
-                heroContent={header.hero.heroContent}
-            />
-            <main className="">
-                {sections.map((section) => (
-                    <Section
-                        heading={section.heading}
-                        columns={section.columns}
-                    />
-                ))}
-            </main>
+  return (
+    <>
+      <Head>
+        <title>Umeå medicinska studentkår - home</title>
+        <meta
+          property="og:title"
+          content="Umeå medicinska studentkår - start"
+          key="title"
+        />
+      </Head>
+      <Navbar
+        logo={header.navbar.logo}
+        navigationItems={header.navbar.navigationItems}
+      />
+      <Hero
+        heroImage={header.hero.heroImage}
+        heroContent={header.hero.heroContent}
+      />
+      <main className="">
+        {sections.map((section) => (
+          <Section section={section} />
+        ))}
+      </main>
 
-            <Footer
-                logo={footer.logo}
-                backgroundImage={footer.backgroundImage}
-                sponsors={footer.sponsors}
-                contact={footer.contact}
-                socials={footer.socials}
-            />
-        </>
-    );
+      <Footer
+        logo={footer.logo}
+        backgroundImage={footer.backgroundImage}
+        sponsors={footer.sponsors}
+        contact={footer.contact}
+        socials={footer.socials}
+      />
+    </>
+  );
 }
 
 /*

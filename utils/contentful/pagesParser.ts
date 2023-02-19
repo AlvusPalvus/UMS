@@ -31,10 +31,7 @@ export const getMainPage = async (id: string) => {
 };
 
 export const parseNavbar = (navbar_res): Navbar => {
-  console.log(navbar_res.fields.entryTitle);
-
   const { logo, navigationItems } = navbar_res.fields;
-  console.log(navigationItems);
   const navLinks = getLinks(navigationItems);
   return {
     logo: parseImage(logo),
@@ -56,7 +53,6 @@ const parseHeader = (page): Header => {
 };
 
 const parseNavItem = (navItem): NavLink => {
-  console.log(navItem);
   let subPages;
   if (navItem.fields.subpages !== undefined) {
     subPages = navItem.fields.subpages.map((item) => parseNavItem(item));

@@ -39,7 +39,6 @@ const parseColumn = (column): Column => {
 
 export const parseNewsSection = (section): NewsSection => {
   let { title, newsCards, featuredImage } = section.fields;
-  console.log(newsCards);
   if (newsCards !== undefined) {
     newsCards = newsCards.map((card) => parseNewsCard(card));
   } else newsCards = null;

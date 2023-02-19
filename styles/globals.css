@@ -236,6 +236,23 @@ body {
   }
 
 /*Button*/
+.buttonHome a {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: .75rem 1.5rem;
+  gap: 8px;
+
+  border: 2px solid var(--clr-neutral-100);
+  color: var(--clr-neutral-100);
+  box-shadow: var(--normal-drop);
+  font-size: var(--fs-500);
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+
+}
 
 .button {
   width: fit-content;

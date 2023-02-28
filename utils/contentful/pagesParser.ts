@@ -1,6 +1,6 @@
 import { Section } from "../../types/Assemblies";
 import { Footer, Header, NavLink } from "../../types/Pages";
-import { parseSection } from "./assembliesParser";
+import { parseSection, parseNewsSection } from "./assembliesParser";
 import { getContentfulClient } from "./client";
 import { parseImage } from "./elementsParser";
 import { parseContact, parseGallery } from "./topicsParser";
@@ -17,6 +17,9 @@ export const getMainPage = async (id: string) => {
         sectionsUnparsed.map((section) => {
             if (section.sys.contentType.sys.id == "section") {
                 sections.push(parseSection(section));
+            }
+            if (section.sys.contentType.sys.id == "newsSection") {
+                sections.push(parseNewsSection(section));
             }
         });
     } else sections = null;

@@ -16,7 +16,6 @@ const getField = (component: Field) => {
                     buttons={component.buttons}
                     backgroundColor={component.backgroundColor}
                     displayType={component.displayType}
-                    key={Math.random()}
                 />
             );
 
@@ -28,7 +27,6 @@ const getField = (component: Field) => {
                     buttons={component.buttons}
                     backgroundColor={component.backgroundColor}
                     displayType={component.displayType}
-                    key={Math.random()}
                 />
             );
 
@@ -40,7 +38,6 @@ const getField = (component: Field) => {
                     buttons={component.buttons}
                     backgroundColor={component.backgroundColor}
                     displayType={component.displayType}
-                    key={Math.random()}
                 />
             );
 

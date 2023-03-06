@@ -7,11 +7,10 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { Navbar as NavbarType } from "../../types/Pages";
 
 type Props = {
-    logo: CfImage;
-    navigationItems: NavLink[];
+    navbar: NavbarType;
 };
 
-const Navbar = ({ logo, navigationItems }: NavbarType) => {
+const Navbar = ({ navbar }: Props) => {
     const [nav, setNav] = useState(false);
     const [color, setcolor] = useState("transparent");
     const [textColor, settextColor] = useState("white");
@@ -38,13 +37,13 @@ const Navbar = ({ logo, navigationItems }: NavbarType) => {
             style={{ backgroundColor: `${color}` }}
             className="fixed left-0 top-0 w-full z-10 ease-in duration-300"
         >
-            <nav className="max-w-[1240px] m-auto flex justify-between items-center p-4 text-white">
+            <nav className="container m-auto flex justify-between items-center p-4 text-white">
                 <Link href={"/"}>
                     <Image
-                        src={"https:" + logo.url}
-                        width={logo.width}
-                        height={logo.height}
-                        alt={logo.filename}
+                        src={"https:" + navbar.logo.url}
+                        width={navbar.logo.width}
+                        height={navbar.logo.height}
+                        alt={navbar.logo.filename}
                     ></Image>
                 </Link>
 
@@ -55,8 +54,11 @@ const Navbar = ({ logo, navigationItems }: NavbarType) => {
                     role="list"
                     aria-label="Primary"
                 >
-                    {navigationItems.map((link) => (
-                        <li className="p-4 hover:text-cyan" key={link.title}>
+                    {navbar.navigationItems.map((link) => (
+                        <li
+                            className="navbar p-4 hover:bg-blend-color-dodge"
+                            key={link.title}
+                        >
                             <Link href={link.link}>{link.title}</Link>
                             {/* if(link.subPages.length>0) */}
                         </li>
@@ -91,7 +93,7 @@ const Navbar = ({ logo, navigationItems }: NavbarType) => {
                     }
                 >
                     <ul role="list" aria-label="Primary">
-                        {navigationItems.map((link) => (
+                        {navbar.navigationItems.map((link) => (
                             <li
                                 className="p-2 m-1 text-1xl hover:text-gray-500 cursor-pointer"
                                 onClick={() => handleNav()}

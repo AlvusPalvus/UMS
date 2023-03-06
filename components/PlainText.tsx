@@ -14,7 +14,6 @@ const options = {
 
 const PlainText = ({ heading, body, buttons, backgroundColor }: Field) => {
     // console.log(heading);
-    //console.log(body);
     //console.log(buttons);
     return (
         <div className={styles.container}>

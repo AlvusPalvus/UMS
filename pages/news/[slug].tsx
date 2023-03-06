@@ -46,21 +46,18 @@ type Props = {
 };
 
 function Nyhet({ news, navbar }: Props) {
+    const hero = {
+        heroImage: {
+            url: "https://images.ctfassets.net/bd3towj90lhq/2bN6DNrhWTFpX4NIMXPzOA/b0788bf27bd64980586414857b11771f/homepage-hero.png",
+            width: 1400,
+            height: 600,
+            filename: "",
+        },
+        heroContent: "",
+    };
     return (
         <div>
-            <Navbar
-                logo={navbar.logo}
-                navigationItems={navbar.navigationItems}
-            />
-            <Hero
-                heroImage={{
-                    url: "https://images.ctfassets.net/bd3towj90lhq/2bN6DNrhWTFpX4NIMXPzOA/b0788bf27bd64980586414857b11771f/homepage-hero.png",
-                    width: 1400,
-                    height: 600,
-                    filename: "",
-                }}
-                heroContent={""}
-            />
+            <Hero hero={hero} navbar={navbar} />
             Nyhet detaljer
             <h1>{news.heading}</h1>
             <p>{news.date}</p>

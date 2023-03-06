@@ -30,14 +30,8 @@ export default function Home({ header, sections, footer }) {
                     key="title"
                 />
             </Head>
-            <Navbar
-                logo={header.navbar.logo}
-                navigationItems={header.navbar.navigationItems}
-            />
-            <Hero
-                heroImage={header.hero.heroImage}
-                heroContent={header.hero.heroContent}
-            />
+
+            <Hero hero={header.hero} navbar={header.navbar} />
             <main className="">
                 {sections.map((section, i) => (
                     <Section section={section} key={i} />

@@ -42,7 +42,9 @@ const Section = ({ section }: Props) => {
                 className="container "
             >
                 {section.heading ? (
-                    <h2 className="fs-secondary-heading ">{section.heading}</h2>
+                    <h2 className="container fs-secondary-heading ">
+                        {section.heading}
+                    </h2>
                 ) : null}
                 <div className="">{setUpColumns(section.columns)}</div>
             </section>

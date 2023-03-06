@@ -48,6 +48,23 @@ const parseHeader = (res): Header => {
         },
     };
 };
+
+export const parseNavbar = async () => {
+    const res = await client.getEntries(
+        { content_type: "header" },
+        { include: 4 }
+    );
+
+    const nav_res = await client.getEntry(res.items[0].sys.id, { include: 4 });
+    console.log(nav_res);
+    const { logo, navigationItems } = nav_res.fields;
+    const navLinks = getLinks(navigationItems);
+
+    return {
+        logo: parseImage(logo),
+        navigationItems: navLinks,
+    };
+};
 const parseNavItem = (navItem): NavLink => {
     let subPages;
     if (navItem.fields.subpages !== undefined) {

@@ -2,14 +2,14 @@ import {
     Column,
     NewsSection,
     Section,
-    standardSection,
+    StandardSection,
 } from "../../types/Assemblies";
 import { NewsCard } from "../../types/Topics";
 import { parseImage } from "./elementsParser";
 import { parseComponent } from "./topicsParser";
 
 // TODO: Implement correct sections parser
-export const parseSection = (section): standardSection => {
+export const parseSection = (section): StandardSection => {
     console.log(section);
     let { heading, columns, backgroundColor } = section.fields;
 
@@ -65,20 +65,5 @@ export const parseNewsCard = (card): NewsCard => {
         date: date,
         body: bodyText,
         image: featuredImage || null,
-    };
-};
-
-export const parseNewsSection = (section): Section => {
-    console.log(section);
-    let { heading, columns, backgroundColor } = section.fields;
-
-    if (columns !== undefined) {
-        columns = columns.map((column) => parseColumn(column));
-    } else columns = null;
-
-    return {
-        heading: heading || null,
-        columns,
-        backgroundColor: backgroundColor || null,
     };
 };

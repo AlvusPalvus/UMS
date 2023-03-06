@@ -30,9 +30,8 @@ const parseField = (field): Field => {
             const link = button.fields.link;
             return { text, link };
         });
-    } else buttons == null;
+    } else buttons = null;
 
-    // console.log(displayAs);
     return {
         displayType: displayAs,
         heading: heading || null,

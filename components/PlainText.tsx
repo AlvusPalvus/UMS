@@ -23,7 +23,11 @@ const PlainText = ({ heading, body, buttons, backgroundColor }: Field) => {
             <div>
                 {buttons &&
                     buttons.map((button) => (
-                        <Link href={button.link} className="button">
+                        <Link
+                            href={button.link}
+                            className="button"
+                            key={button.link}
+                        >
                             {button.text}
                         </Link>
                     ))}

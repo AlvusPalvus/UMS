@@ -10,17 +10,19 @@ import Slider from "./News/Slider";
 const setUpColumns = (columns: ColumnType[]) => {
     // for each column create a column component
     // with grid style depending on number of columns
+    console.log(columns);
 
     if (columns == null) {
         return null;
     } else
         return (
             <div className="even-columns">
-                {columns.map((column) => (
+                {columns.map((column, i) => (
                     <Column
                         heading={column.heading}
                         components={column.components}
                         backgroundColor={column.backgroundColor}
+                        key={i}
                     />
                 ))}
             </div>

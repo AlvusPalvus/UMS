@@ -10,7 +10,6 @@ import { parseComponent } from "./topicsParser";
 
 // TODO: Implement correct sections parser
 export const parseSection = (section): StandardSection => {
-    console.log(section);
     let { heading, columns, backgroundColor } = section.fields;
 
     if (columns !== undefined) {

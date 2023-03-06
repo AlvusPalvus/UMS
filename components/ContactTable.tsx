@@ -52,7 +52,7 @@ const renderContactInfo = (contactItem: ContactItem) => {
 
 const tableRow = (item: ContactRow) => {
     return (
-        <tr>
+        <tr key={item.text}>
             <td>{item.icon}</td> <td>{item.text}</td>
         </tr>
     );

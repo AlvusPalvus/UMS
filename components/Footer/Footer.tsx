@@ -24,6 +24,7 @@ function Footer({ sponsors, contact, logo, socials, backgroundImage }: Footer) {
                                 width={logo.width}
                                 height={logo.height}
                                 alt={logo.filename}
+                                key={logo.url}
                             ></Image>
                         ))}
                     </div>

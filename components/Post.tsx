@@ -1,5 +1,4 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document, Block } from "@contentful/rich-text-types";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { Field } from "../types/Topics";

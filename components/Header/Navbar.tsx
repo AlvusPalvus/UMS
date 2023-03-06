@@ -56,7 +56,7 @@ const Navbar = ({ logo, navigationItems }: NavbarType) => {
                     aria-label="Primary"
                 >
                     {navigationItems.map((link) => (
-                        <li className="p-4 hover:text-cyan">
+                        <li className="p-4 hover:text-cyan" key={link.title}>
                             <Link href={link.link}>{link.title}</Link>
                             {/* if(link.subPages.length>0) */}
                         </li>
@@ -95,6 +95,7 @@ const Navbar = ({ logo, navigationItems }: NavbarType) => {
                             <li
                                 className="p-2 m-1 text-1xl hover:text-gray-500 cursor-pointer"
                                 onClick={() => handleNav()}
+                                key={link.link}
                             >
                                 <Link href={link.link}>{link.title}</Link>
                                 {/* if(link.subPages.length>0) */}

@@ -16,6 +16,7 @@ const getField = (component: Field) => {
                     buttons={component.buttons}
                     backgroundColor={component.backgroundColor}
                     displayType={component.displayType}
+                    key={Math.random()}
                 />
             );
 
@@ -27,6 +28,7 @@ const getField = (component: Field) => {
                     buttons={component.buttons}
                     backgroundColor={component.backgroundColor}
                     displayType={component.displayType}
+                    key={Math.random()}
                 />
             );
 
@@ -38,6 +40,7 @@ const getField = (component: Field) => {
                     buttons={component.buttons}
                     backgroundColor={component.backgroundColor}
                     displayType={component.displayType}
+                    key={Math.random()}
                 />
             );
 
@@ -49,12 +52,14 @@ const getField = (component: Field) => {
 const Column = ({ heading, components, backgroundColor }: ColumnType) => {
     return (
         <div className="container" style={{ backgroundColor: backgroundColor }}>
-            {heading ? <h3>{heading}</h3> : null}
+            {heading ? <h3 className="h3">{heading}</h3> : null}
             {components
                 ? components.map((component) => {
+                      let field;
                       if (component.type === "Field") {
-                          return getField(component.parsedComponent as Field); //TODO fixa types
+                          field = getField(component.parsedComponent as Field); //TODO fixa types
                       }
+                      return field || null;
                   })
                 : null}
         </div>

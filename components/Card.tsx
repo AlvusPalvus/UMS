@@ -5,13 +5,10 @@ import { Field } from "../types/Topics";
 
 //Style this component as a card
 const Card = ({ heading, body, buttons, backgroundColor }: Field) => {
-    // console.log(heading);
-    //console.log(body);
-    console.log(buttons);
     return (
-        <div className="container padding-block-500">
+        <div className="container padding-block-500 card">
             <h3 className="fs-secondary-heading">{heading}</h3>
-            <div>{documentToReactComponents(body)}</div>
+            <div className="a">{documentToReactComponents(body)}</div>
             <div>
                 {buttons &&
                     buttons.map((button) => (
@@ -20,9 +17,6 @@ const Card = ({ heading, body, buttons, backgroundColor }: Field) => {
                         </Link>
                     ))}
             </div>
-            <Link href={"/membership"} className="button">
-                Press me!
-            </Link>
         </div>
     );
 };

@@ -313,6 +313,18 @@ body {
 .card {
     border-radius: 8px;
     box-shadow: var(--normal-drop);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    gap: 12px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
 /*

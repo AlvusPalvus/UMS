@@ -51,7 +51,7 @@ const getField = (component: Field) => {
 
 const Column = ({ heading, components, backgroundColor }: ColumnType) => {
     return (
-        <div className="container" style={{ backgroundColor: backgroundColor }}>
+        <div className="column" style={{ backgroundColor: backgroundColor }}>
             {heading ? <h3 className="h3">{heading}</h3> : null}
             {components
                 ? components.map((component) => {

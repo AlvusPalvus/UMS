@@ -24,10 +24,11 @@ const Hero = ({ hero, navbar }: Props) => {
       <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/60 z-[2] h-full" />
 
       <Navbar navbar={navbar} />
-
-      <ReactMarkdown className={" z-[3] heroContent"}>
-        {hero.heroContent}
-      </ReactMarkdown>
+      <div className="container z-[3] flex justify-center">
+        <ReactMarkdown className={" z-[3] heroContent"}>
+          {hero.heroContent}
+        </ReactMarkdown>
+      </div>
     </header>
   );
 };

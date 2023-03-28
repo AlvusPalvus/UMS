@@ -32,7 +32,8 @@ const Navbar = ({ navbar }: Props) => {
   }, []);
 
   let color = ["transparent", "white"];
-  let textColor = ["white", "black"];
+  let textColor = scrolled ? "text-black" : "text-white";
+  console.log(textColor);
   let inverted = ["invert(0)", "invert(1)"];
 
   return (
@@ -77,18 +78,41 @@ const Navbar = ({ navbar }: Props) => {
         </Link>
 
         {/** Desktop */}
-        <ul className="hidden lg:flex mt-8" role="list" aria-label="Primary">
-          {navbar.navigationItems.map((link) => (
-            <li className="navbar" key={link.title}>
-              <Link
-                style={{
-                  color: scrolled ? `${textColor[1]}` : `${textColor[0]}`,
-                }}
-                href={link.link}
-              >
-                {link.title}
-              </Link>
-              {/* if(link.subPages.length>0) */}
+        <ul
+          className=" navbar hidden lg:flex gap-6 mt-8"
+          role="list"
+          aria-label="Primary"
+        >
+          {navbar.navigationItems.map((link, i) => (
+            <li
+              className={textColor + " navItem group w-full relative px-4 py-1"}
+              key={i}
+            >
+              <Link href={link.link}>{link.title}</Link>
+              {link.sublinks && (
+                <ul
+                  className={
+                    textColor +
+                    " hidden absolute left-0 mt-1 group-hover:flex flex-col bg-black bg-opacity-100"
+                  }
+                  role="list"
+                >
+                  {link.sublinks.map((link, i) => (
+                    <li className="navItem fw-regular px-4 py-2 z-[4]" key={i}>
+                      <Link
+                        style={{
+                          color: scrolled
+                            ? `${textColor[1]}`
+                            : `${textColor[0]}`,
+                        }}
+                        href={link.link}
+                      >
+                        {link.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>
@@ -101,17 +125,12 @@ const Navbar = ({ navbar }: Props) => {
         >
           {showMobileNav ? (
             <>
-              <FiX className="text-4xl" />
+              <FiX className="text-4xl m-3" />
               <span className="visually-hidden">Menu</span>
             </>
           ) : (
             <>
-              <FiMenu
-                style={{
-                  color: scrolled ? `${textColor[1]}` : `${textColor[0]}`,
-                }}
-                className="text-4xl m-3"
-              />
+              <FiMenu className={textColor + " text-4xl m-3"} />
               <span className="visually-hidden">Menu</span>
             </>
           )}
@@ -127,12 +146,29 @@ const Navbar = ({ navbar }: Props) => {
           <ul role="list" aria-label="Primary">
             {navbar.navigationItems.map((link) => (
               <li
-                className="navbar"
+                className="navbar group"
                 onClick={() => handleNav()}
                 key={link.link}
               >
                 <Link href={link.link}>{link.title}</Link>
-                {/* if(link.subPages.length>0) */}
+                {link.sublinks && (
+                  <ul className="hidden group-hover:flex flex-col" role="list">
+                    {link.sublinks.map((link, i) => (
+                      <li className="navItem" key={i}>
+                        <Link
+                          style={{
+                            color: scrolled
+                              ? `${textColor[1]}`
+                              : `${textColor[0]}`,
+                          }}
+                          href={link.link}
+                        >
+                          {link.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

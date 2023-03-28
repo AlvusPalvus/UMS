@@ -118,7 +118,7 @@ h1 {
   font-size: var(--fs-primary-heading);
 }
 
-a {
+.a {
   color: var(--clr-secondary-400);
   padding-top: var(--size-400);
   font-weight: var(--fw-bold);
@@ -256,23 +256,27 @@ body {
   min-height: fit-content;
 }
 
-.navbar a {
-  color: var(--clr-neutral-100);
-  padding: 1rem;
+.navItem > a {
+  white-space: nowrap;
+}
+
+.navItem:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 @media (min-width: 1024px) {
-  .navbar a {
-    padding: 1.5rem;
+  .navItem a {
     font-size: var(--fs-400);
+  }
+  .navItem:hover {
+    background-color: rgba(0, 0, 0, 0.3);
   }
 }
 
 .heroContent {
-  max-width: 640px;
+  max-width: 530px;
   display: flex;
   flex-direction: column;
-  align-self: center;
 
   height: fit-content;
   min-height: 30vh;
@@ -337,6 +341,11 @@ body {
   .heroContent a {
     font-size: var(--fs-500);
     padding: 0.75rem 1.5rem;
+  }
+
+  .heroContent {
+    margin-right: 30%;
+    max-width: 640px;
   }
 }
 

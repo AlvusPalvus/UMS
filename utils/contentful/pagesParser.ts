@@ -66,16 +66,16 @@ export const parseNavbar = async () => {
   };
 };
 const parseNavItem = (navItem): NavLink => {
-  let subPages;
+  let subLinks;
   if (navItem.fields.subpages !== undefined) {
-    subPages = navItem.fields.subpages.map((item) => parseNavItem(item));
+    subLinks = navItem.fields.subpages.map((item) => parseNavItem(item));
   } else {
-    subPages = null;
+    subLinks = null;
   }
   return {
     link: navItem.fields.link,
     title: navItem.fields.pageTitle,
-    sublinks: subPages,
+    sublinks: subLinks,
   };
 };
 

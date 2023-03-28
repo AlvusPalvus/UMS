@@ -30,6 +30,9 @@ export type ContactItem = {
   adress?: string;
   facebook?: string;
   instagram?: string;
+  adressLink?: string;
+  facebookLink?: string;
+  instagramLink?: string;
 };
 
 export type NewsCard = {

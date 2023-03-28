@@ -31,7 +31,7 @@ function Footer({ sponsors, contact, logo, socials, backgroundImage }: Footer) {
         </div>
 
         <div className={styles.bottomSection}>
-          <div style={{ order: 1 }} className={styles.gridColumn}>
+          <div style={{ order: 1 }} className={styles.contactChild}>
             <h2>{contact.heading}</h2>
             <ContactTable contactInfo={contact.contactItem} />
           </div>
@@ -50,7 +50,7 @@ function Footer({ sponsors, contact, logo, socials, backgroundImage }: Footer) {
           </div>
         </div>
       </div>
-      <div className={styles.image}></div>
+      <div className="h-20"></div>
     </footer>
   );
 }

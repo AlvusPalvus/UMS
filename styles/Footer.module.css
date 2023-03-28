@@ -1,19 +1,22 @@
+.footer {
+  min-height: 40vh;
+  padding: 30px;
+}
+
 .bottomSection {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
 
-  align-items: center;
   justify-content: space-around;
+  align-items: center;
 }
 
-.gridColumn,
+.contactChild,
 .logoChild,
 .socialsChild {
   background-color: rgba(255, 255, 255, 0.65);
   padding: 1rem;
-  max-width: 360px;
+  width: 360px;
   font-size: 18px;
   text-align: left;
 
@@ -26,7 +29,8 @@
 .logoChild {
   order: 3;
   flex-grow: 1;
-  min-width: 100%;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .socialsChild {
@@ -38,22 +42,34 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: start;
-    justify-content: space-between;
+    align-items: stretch;
+    justify-content: space-around;
+  }
+
+  .socialsChild .contactChild {
+    max-width: 65%;
   }
 }
 
-@media (min-width: 1027px) {
+@media (min-width: 1024px) {
   .bottomSection {
     flex-direction: row;
     align-items: start;
-    justify-content: space-between;
+    justify-content: space-around;
+    flex-wrap: nowrap;
   }
   .logoChild {
     order: 2;
-    min-width: 1%;
+    flex-grow: unset;
+    width: fit-content;
   }
 
   .socialsChild {
     order: 3;
+
+    width: 360px;
+  }
+  .contactChild {
+    width: 360px;
   }
 }

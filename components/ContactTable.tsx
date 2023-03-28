@@ -87,31 +87,33 @@ const renderContactInfo = (contactItem: ContactItem) => {
   return contactInfo;
 };
 
-const tableRow = (item: ContactRow) => {
+const tableRow = (item: ContactRow, i: number) => {
   return item.link != undefined ? (
-    <tr className="p-2 mb-3" key={item.text[0]}>
-      <a className="text-neutral-900" href={item.link} target="_blank">
-        <td style={{ verticalAlign: "baseline" }} className="p-2 ">
+    <div className="grid grid-cols-7 gap-2 p-3">
+      <div className="col-span-1">
+        <a
+          className="text-neutral-900 fs-iconsFooter"
+          href={item.link}
+          target="_blank"
+        >
           {item.icon}
-        </td>
-      </a>
-      <td style={{ verticalAlign: "baseline" }} className="p-2 ">
+        </a>
+      </div>
+      <div className="col-span-6">
         {item.text.map((textRow, i) => {
           return <p className="">{textRow}</p>;
         })}
-      </td>
-    </tr>
+      </div>
+    </div>
   ) : (
-    <tr className="p-2" key={item.text[0]}>
-      <td style={{ verticalAlign: "baseline" }} className="p-2 ">
-        {item.icon}
-      </td>
-      <td style={{ verticalAlign: "baseline" }} className="p-2 ">
+    <div className="grid grid-cols-7 gap-2 p-3">
+      <div className="col-span-1 fs-iconsFooter">{item.icon}</div>
+      <div className="col-span-6">
         {item.text.map((textRow, i) => {
           return <p className="">{textRow}</p>;
         })}
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 };
 
@@ -122,10 +124,8 @@ type Props = {
 const ContactTable = ({ contactInfo }: Props) => {
   let contactItems = renderContactInfo(contactInfo) as ContactRow[];
   return (
-    <div className={"p-1"}>
-      <table>
-        <tbody>{contactItems.map((item) => tableRow(item))}</tbody>
-      </table>
+    <div className={"flex flex-col align-baseline justify-between"}>
+      {contactItems.map((item, i) => tableRow(item, i))}
     </div>
   );
 };

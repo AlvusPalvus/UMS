@@ -18,16 +18,16 @@ const Hero = ({ hero, navbar }: Props) => {
         backgroundRepeat: "no-repeat",
         zIndex: 1,
       }}
-      className="shadow-regular relative flex items-center justify-center sm:h-3/5 "
+      className="header relative flex flex-col items-center justify-center sm:h-full "
     >
       {/* Overlay */}
       <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/60 z-[2] h-full" />
+
       <Navbar navbar={navbar} />
-      <div className="max-w-[1240px] p-5 text-white z-[2] mt-[10rem] mb-[10rem]">
-        <ReactMarkdown className={"max-w-[620px] heroContent buttonHome"}>
-          {hero.heroContent}
-        </ReactMarkdown>
-      </div>
+
+      <ReactMarkdown className={" z-[3] heroContent"}>
+        {hero.heroContent}
+      </ReactMarkdown>
     </header>
   );
 };

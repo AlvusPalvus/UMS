@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { relative } from "path";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { NewsCard } from "../../types/Topics";
@@ -17,22 +18,19 @@ const NewsCard = ({ card, width }: Props) => {
   };
 
   return (
-    <div className="card border cursor-pointer w-4/6" onClick={handleClick}>
-      <div
-        style={{ width: "200px", minHeight: "100px", position: "relative" }}
-        className="grid-span-1"
-      >
-        <Image
-          style={{ objectFit: "cover" }}
-          src={"https:" + card.image.url}
-          alt={card.image.filename}
-          fill
-        />
-      </div>
-      <div className="flex flex-col space-between grid-span-4">
+    <div className=" card cursor-pointer h-fit w-[33%]" onClick={handleClick}>
+      <div className=" p-2">
         <p className="text-gray-500 text-sm ">{card.date}</p>
         <h3 className="h3">{card.heading}</h3>
-        <div className="">
+
+        <Image
+          style={{ objectFit: "cover", position: "relative" }}
+          src={"https:" + card.image.url}
+          alt={card.image.filename}
+          width={card.image.width}
+          height={card.image.height}
+        />
+        <div className="link">
           <ReactMarkdown className={"fw-regular  "}>{card.body}</ReactMarkdown>
         </div>
       </div>

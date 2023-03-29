@@ -41,9 +41,7 @@ const Section = ({ section }: Props) => {
         //style={{ backgroundColor: "#" + section.backgroundColor }}
         className="container "
       >
-        {section.heading ? (
-          <h2 className="fs-secondary-heading ">{section.heading}</h2>
-        ) : null}
+        {section.heading ? <h2 className="h2">{section.heading}</h2> : null}
         <div className="">{setUpColumns(section.columns)}</div>
       </section>
     );

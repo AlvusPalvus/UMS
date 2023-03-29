@@ -17,8 +17,8 @@ const PlainText = ({ heading, body, buttons, backgroundColor }: Field) => {
   //console.log(buttons);
   return (
     <div className={styles.container}>
-      <h3>{heading}</h3>
-      <div>{documentToReactComponents(body, options)}</div>
+      <h3 className="h3">{heading}</h3>
+      <div className="link">{documentToReactComponents(body, options)}</div>
       <div>
         {buttons &&
           buttons.map((button, i) => (

@@ -101,7 +101,7 @@ const tableRow = (item: ContactRow, i: number) => {
       </div>
       <div className="col-span-6">
         {item.text.map((textRow, i) => {
-          return <p className="">{textRow}</p>;
+          return <p>{textRow}</p>;
         })}
       </div>
     </div>
@@ -110,7 +110,7 @@ const tableRow = (item: ContactRow, i: number) => {
       <div className="col-span-1 fs-iconsFooter">{item.icon}</div>
       <div className="col-span-6">
         {item.text.map((textRow, i) => {
-          return <p className="">{textRow}</p>;
+          return <p>{textRow}</p>;
         })}
       </div>
     </div>

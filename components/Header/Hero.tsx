@@ -3,17 +3,21 @@ import ReactMarkdown from "react-markdown";
 import { FiChevronDown } from "react-icons/fi";
 import { Hero as HeroType, Navbar as NavbarType } from "../../types/Pages";
 import Navbar from "./Navbar";
+import { useRouter } from "next/router";
 
 type Props = {
   hero: HeroType;
   navbar: NavbarType;
+  idFirstSection: string;
 };
 
-const handleClick = () => {
-  console.log("Implement chevron scroll function here");
-};
+const Hero = ({ hero, navbar, idFirstSection }: Props) => {
+  const router = useRouter();
+  const handleClick = () => {
+    let path = router.pathname + "/#" + idFirstSection;
+    router.push(path, path, { scroll: false });
+  };
 
-const Hero = ({ hero, navbar }: Props) => {
   return (
     <header
       style={{

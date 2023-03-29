@@ -7,46 +7,50 @@ import Hero from "../components/Header/Hero";
 import Navbar from "../components/Header/Navbar";
 
 export async function getStaticProps() {
-    const id = "74QQgki1QHDyN9rhvmZb81";
-    const page = await getMainPage(id);
+  const id = "74QQgki1QHDyN9rhvmZb81";
+  const page = await getMainPage(id);
 
-    return {
-        props: {
-            header: page.header,
-            sections: page.sections,
-            footer: page.footer,
-        },
-    };
+  return {
+    props: {
+      header: page.header,
+      sections: page.sections,
+      footer: page.footer,
+    },
+  };
 }
 
 export default function Home({ header, sections, footer }) {
-    return (
-        <>
-            <Head>
-                <title>Umeå medicinska studentkår - home</title>
-                <meta
-                    property="og:title"
-                    content="Umeå medicinska studentkår - start"
-                    key="title"
-                />
-            </Head>
+  return (
+    <>
+      <Head>
+        <title>Umeå medicinska studentkår - home</title>
+        <meta
+          property="og:title"
+          content="Umeå medicinska studentkår - start"
+          key="title"
+        />
+      </Head>
 
-            <Hero hero={header.hero} navbar={header.navbar} />
-            <main className="">
-                {sections.map((section, i) => (
-                    <Section section={section} key={i} />
-                ))}
-            </main>
+      <Hero
+        hero={header.hero}
+        navbar={header.navbar}
+        idFirstSection={sections[0].slug}
+      />
+      <main className="">
+        {sections.map((section, i) => (
+          <Section section={section} key={i} />
+        ))}
+      </main>
 
-            <Footer
-                logo={footer.logo}
-                backgroundImage={footer.backgroundImage}
-                sponsors={footer.sponsors}
-                contact={footer.contact}
-                socials={footer.socials}
-            />
-        </>
-    );
+      <Footer
+        logo={footer.logo}
+        backgroundImage={footer.backgroundImage}
+        sponsors={footer.sponsors}
+        contact={footer.contact}
+        socials={footer.socials}
+      />
+    </>
+  );
 }
 
 /*

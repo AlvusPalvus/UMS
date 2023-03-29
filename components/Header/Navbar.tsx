@@ -103,13 +103,13 @@ const Navbar = ({ navbar }: Props) => {
                   }
                   role="list"
                 >
-                  {link.sublinks.map((link, i) => (
+                  {link.sublinks.map((sublink, i) => (
                     <li className="navItem fw-regular z-[4]" key={i}>
                       <Link
                         className={"text-white block px-4 py-2"}
-                        href={link.link}
+                        href={link.link + "/#" + sublink.link}
                       >
-                        {link.title}
+                        {sublink.title}
                       </Link>
                     </li>
                   ))}
@@ -174,13 +174,13 @@ const Navbar = ({ navbar }: Props) => {
                     className="hidden group-hover:flex flex-col ml-1"
                     role="list"
                   >
-                    {link.sublinks.map((link, i) => (
+                    {link.sublinks.map((sublink, i) => (
                       <li className="text-sm flex" key={i}>
                         <Link
-                          className="m-1 p-1 flex-grow hover:text-orange-300"
-                          href={link.link}
+                          className={"m-1 p-1 flex-grow hover:text-orange-300"}
+                          href={link.link + "/#" + sublink.link}
                         >
-                          {link.title}
+                          {sublink.title}
                         </Link>
                       </li>
                     ))}

@@ -118,6 +118,10 @@ h3 {
   font-weight: bold;
 }
 
+.h2 {
+  font-size: var(--fs-secondary-heading);
+}
+
 .h3 {
   font-size: var(--fs-third-heading);
 }
@@ -388,6 +392,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+.section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 /*

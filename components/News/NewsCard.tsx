@@ -18,7 +18,10 @@ const NewsCard = ({ card, width }: Props) => {
   };
 
   return (
-    <div className=" card cursor-pointer h-fit w-[33%]" onClick={handleClick}>
+    <div
+      className="card cursor-pointer h-fit md:max-w-[25%] my-12 m-8"
+      onClick={handleClick}
+    >
       <div className=" p-2">
         <p className="text-gray-500 text-sm ">{card.date}</p>
         <h3 className="h3">{card.heading}</h3>

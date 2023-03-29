@@ -5,26 +5,28 @@ import { Field, Gallery, Events, NewsCard, Contact } from "./Topics";
 export type Section = StandardSection | NewsSection;
 
 export type StandardSection = {
-    type: "section";
-    heading?: string;
-    columns: Column[];
-    backgroundColor?: string;
+  type: "section";
+  slug: string;
+  heading?: string;
+  columns: Column[];
+  backgroundColor?: string;
 };
 
 export type NewsSection = {
-    type: "newsSection";
-    heading?: string;
-    news: NewsCard[];
-    image: CfImage;
+  type: "newsSection";
+  heading?: string;
+  news: NewsCard[];
+  image: CfImage;
 };
 
 export type Column = {
-    heading?: string;
-    components: Component[];
-    backgroundColor?: string;
+  heading?: string;
+  slug: string;
+  components: Component[];
+  backgroundColor?: string;
 };
 
 export type Component = {
-    type: "Field" | "Gallery" | "Events" | "Contact";
-    parsedComponent: Field | Gallery | Events | Contact;
+  type: "Field" | "Gallery" | "Events" | "Contact";
+  parsedComponent: Field | Gallery | Events | Contact;
 };

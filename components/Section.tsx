@@ -1,6 +1,3 @@
-import { ReactElement } from "react";
-import Card from "./Card";
-import styles from "../styles/Components.module.css";
 import Column from "./Column";
 import { Column as ColumnType } from "../types/Assemblies";
 import { Section as SectionType } from "../types/Assemblies";
@@ -17,12 +14,7 @@ const setUpColumns = (columns: ColumnType[]) => {
     return (
       <div className=" even-columns">
         {columns.map((column, i) => (
-          <Column
-            heading={column.heading}
-            components={column.components}
-            backgroundColor={column.backgroundColor}
-            key={i}
-          />
+          <Column column={column} key={i} />
         ))}
       </div>
     );
@@ -39,8 +31,8 @@ const Section = ({ section }: Props) => {
     return (
       <section
         //style={{ backgroundColor: "#" + section.backgroundColor }}
-        className="container "
-        id={section.heading}
+        className="container section"
+        id={section.slug}
       >
         {section.heading ? <h2 className="h2">{section.heading}</h2> : null}
         <div className="">{setUpColumns(section.columns)}</div>

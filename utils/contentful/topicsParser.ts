@@ -7,12 +7,16 @@ export const parseComponent = (component): Component => {
   // console.log(type);
   let parsedComponent = null;
   let componentType;
+  console.log(type);
   if (type == "card") {
     parsedComponent = parseField(component);
     componentType = "Field";
   } else if (type == "galleryComponent") {
     parsedComponent = parseGallery(component);
     componentType = "Gallery";
+  } else if (type == "contactInformation") {
+    parsedComponent = parseContact(component);
+    componentType = "Contact";
   } // Do this for all the differnet kinds of components
 
   return {
@@ -34,7 +38,7 @@ const parseField = (field): Field => {
   return {
     displayType: displayAs,
     heading: heading || null,
-    body: bodyText,
+    body: bodyText || null,
     buttons,
     backgroundColor: backgroundColor || null,
   };

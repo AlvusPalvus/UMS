@@ -3,23 +3,32 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { Field } from "../types/Topics";
 
-//Style this component as an accordion
+const options = {
+  renderNode: {
+    paragraph: (node, children) => <p className="fs-body">{children}</p>,
+    "heading-1": (node, children) => (
+      <h1 className="fs-primary-heading">{children}</h1>
+    ),
+  },
+};
+
 const Accordion = ({ heading, body, buttons, backgroundColor }: Field) => {
-    // console.log(heading);
-    //console.log(body);
-    //console.log(buttons);
-    return (
-        <div className={styles.container}>
-            <h3>{heading}</h3>
-            <div>{documentToReactComponents(body)}</div>
-            <div>
-                {buttons &&
-                    buttons.map((button) => (
-                        <Link href={button.link}>{button.text}</Link>
-                    ))}
-            </div>
-        </div>
-    );
+  // console.log(heading);
+  //console.log(buttons);
+  return (
+    <div className={styles.container}>
+      <h3 className="h3">{heading}</h3>
+      <div className="link">{documentToReactComponents(body, options)}</div>
+      <div>
+        {buttons &&
+          buttons.map((button, i) => (
+            <Link href={button.link} className="button" key={i}>
+              {button.text}
+            </Link>
+          ))}
+      </div>
+    </div>
+  );
 };
 
 export default Accordion;

@@ -88,7 +88,7 @@ const parseFooter = (res): Footer => {
     res.fields.footer.fields;
 
   return {
-    sponsors: parseGallery(sponsors),
+    sponsors: sponsors === undefined ? parseGallery(sponsors) : null,
     contact: parseContact(contact),
     logo: parseImage(logo),
     socials: parseContact(socials),

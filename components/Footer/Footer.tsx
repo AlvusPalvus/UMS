@@ -12,24 +12,26 @@ function Footer({ sponsors, contact, logo, socials, backgroundImage }: Footer) {
         backgroundSize: "cover",
         backgroundPosition: "bottom right",
       }}
-      className=" "
+      className=""
     >
-      <div className="container space-y-12 bg-white/70">
-        <div className={"flex flex-col "}>
-          <h2 className="fs-secondary-heading">{sponsors.heading}</h2>{" "}
-          <div className={"flex justify-around grow"}>
-            {sponsors.images.map((logo) => (
-              <Image
-                src={"https:" + logo.url}
-                width={logo.width}
-                height={logo.height}
-                alt={logo.filename}
-                key={logo.url}
-              ></Image>
-            ))}
+      <hr />
+      <div className="container space-y-12 bg-white/70 mt-12 ">
+        {sponsors && (
+          <div className={"flex flex-col "}>
+            <h2 className="fs-secondary-heading">{sponsors.heading}</h2>{" "}
+            <div className={"flex justify-around grow"}>
+              {sponsors.images.map((logo) => (
+                <Image
+                  src={"https:" + logo.url}
+                  width={logo.width}
+                  height={logo.height}
+                  alt={logo.filename}
+                  key={logo.url}
+                ></Image>
+              ))}
+            </div>
           </div>
-        </div>
-
+        )}
         <div className={styles.bottomSection}>
           <div style={{ order: 1 }} className={styles.contactChild}>
             <h2>{contact.heading}</h2>

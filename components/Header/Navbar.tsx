@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { CfImage } from "../../types/Elements";
 import { NavLink } from "../../types/Pages";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Navbar as NavbarType } from "../../types/Pages";
 
 type Props = {
@@ -82,10 +82,19 @@ const Navbar = ({ navbar }: Props) => {
           aria-label="Primary"
         >
           {navbar.navigationItems.map((link, i) => (
-            <li className={textColor + " navItem group relative "} key={i}>
-              <Link className="w-full px-4 py-2 block" href={link.link}>
-                {link.title}
-              </Link>
+            <li className={textColor + " navItem group relative pr-2 "} key={i}>
+              <div className="flex items-center group">
+                <Link className="w-full pl-4 pr-1 py-2 block" href={link.link}>
+                  {link.title}
+                </Link>
+                {link.sublinks && (
+                  <>
+                    <FiChevronDown className="group-hover:hidden cursor-pointer" />
+                    <FiChevronUp className="hidden group-hover:block cursor-pointer" />
+                  </>
+                )}
+              </div>
+
               {link.sublinks && (
                 <ul
                   className={
@@ -144,13 +153,22 @@ const Navbar = ({ navbar }: Props) => {
           >
             {navbar.navigationItems.map((link) => (
               <li
-                className=" flex flex-col group hover:bg-opacity-20 hover:bg-white"
+                className="flex flex-col group hover:bg-opacity-20 hover:bg-white"
                 onClick={() => handleNav()}
                 key={link.link}
               >
-                <Link className="p-2 hover:font-bold" href={link.link}>
-                  {link.title}
-                </Link>
+                <div className="flex items-center group">
+                  <Link className="p-2 hover:font-bold" href={link.link}>
+                    {link.title}
+                  </Link>
+                  {link.sublinks && (
+                    <>
+                      <FiChevronDown className="group-hover:hidden cursor-pointer" />
+                      <FiChevronUp className="hidden group-hover:block cursor-pointer" />
+                    </>
+                  )}
+                </div>
+
                 {link.sublinks && (
                   <ul
                     className="hidden group-hover:flex flex-col ml-1"

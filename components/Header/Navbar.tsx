@@ -12,8 +12,6 @@ type Props = {
 
 const Navbar = ({ navbar }: Props) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
-  //   const [color, setcolor] = useState("transparent");
-  //   const [textColor, settextColor] = useState("white");
   const [scrolled, setScrolled] = useState(false);
 
   const handleNav = () => {
@@ -31,21 +29,27 @@ const Navbar = ({ navbar }: Props) => {
     window.addEventListener("scroll", colorChange);
   }, []);
 
-  let color = ["transparent", "white"];
+  // Scrollbased styling
+  let backgroundColor = scrolled ? "bg-white" : "bg-transparent";
   let textColor = scrolled ? "text-black" : "text-white";
-  console.log(textColor);
-  let inverted = ["invert(0)", "invert(1)"];
+  let margin = scrolled ? "" : "m-4";
 
   return (
     <div
-      style={{ backgroundColor: scrolled ? `${color[1]}` : `${color[0]}` }}
-      className=" fixed left-0 top-0 w-full max-h-fit z-10 ease-in duration-300"
+      className={
+        backgroundColor +
+        " fixed left-0 top-0 w-full max-h-fit z-10 ease-in duration-300"
+      }
     >
-      <nav className="container flex justify-between items-start m-4 text-white">
+      <nav
+        className={
+          margin + " container flex justify-between items-center  text-white"
+        }
+      >
         <Link href={"/"}>
           {scrolled ? (
             <Image
-              style={{ filter: scrolled ? `${inverted[1]}` : `${inverted[0]}` }}
+              className="invert py-2"
               src={"https:" + navbar.logo.url}
               width={46}
               height={46}
@@ -54,20 +58,14 @@ const Navbar = ({ navbar }: Props) => {
           ) : (
             <>
               <Image
-                style={{
-                  filter: scrolled ? `${inverted[1]}` : `${inverted[0]}`,
-                }}
-                className="hidden lg:flex"
+                className="invert-0 hidden lg:flex"
                 src={"https:" + navbar.logo.url}
                 width={120}
                 height={120}
                 alt={navbar.logo.filename}
               ></Image>
               <Image
-                style={{
-                  filter: scrolled ? `${inverted[1]}` : `${inverted[0]}`,
-                }}
-                className="flex lg:hidden"
+                className="invert-0 flex lg:hidden mt-4"
                 src={"https:" + navbar.logo.url}
                 width={64}
                 height={64}
@@ -79,32 +77,27 @@ const Navbar = ({ navbar }: Props) => {
 
         {/** Desktop */}
         <ul
-          className=" navbar hidden lg:flex gap-6 mt-8"
+          className=" navbar hidden lg:flex gap-2 mt-8"
           role="list"
           aria-label="Primary"
         >
           {navbar.navigationItems.map((link, i) => (
-            <li
-              className={textColor + " navItem group w-full relative px-4 py-1"}
-              key={i}
-            >
-              <Link href={link.link}>{link.title}</Link>
+            <li className={textColor + " navItem group relative "} key={i}>
+              <Link className="w-full px-4 py-2 block" href={link.link}>
+                {link.title}
+              </Link>
               {link.sublinks && (
                 <ul
                   className={
                     textColor +
-                    " hidden absolute left-0 mt-1 group-hover:flex flex-col bg-black bg-opacity-100"
+                    " hidden absolute left-0 group-hover:flex flex-col bg-black bg-opacity-30"
                   }
                   role="list"
                 >
                   {link.sublinks.map((link, i) => (
-                    <li className="navItem fw-regular px-4 py-2 z-[4]" key={i}>
+                    <li className="navItem fw-regular z-[4]" key={i}>
                       <Link
-                        style={{
-                          color: scrolled
-                            ? `${textColor[1]}`
-                            : `${textColor[0]}`,
-                        }}
+                        className={"text-white block px-4 py-2"}
                         href={link.link}
                       >
                         {link.title}
@@ -119,48 +112,54 @@ const Navbar = ({ navbar }: Props) => {
 
         {/* Mobile button */}
         <button
-          className="block lg:hidden z-10"
+          className="block lg:hidden z-10 mt-4 mr-4 sm:mr-8  fixed right-0"
           aria-controls="primary-navigation"
           onClick={() => handleNav()}
         >
           {showMobileNav ? (
             <>
-              <FiX className="text-4xl m-3" />
+              <FiX className="text-5xl p-2" />
               <span className="visually-hidden">Menu</span>
             </>
           ) : (
             <>
-              <FiMenu className={textColor + " text-4xl m-3"} />
+              <FiMenu className={textColor + " text-5xl p-2 "} />
               <span className="visually-hidden">Menu</span>
             </>
           )}
         </button>
 
+        {/* Mobile Nav */}
         <div
           className={
             showMobileNav
-              ? "lg:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-black text-center ease-in duration-300"
-              : "lg:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center w-full h-screen bg-black text-center ease-in duration-300"
+              ? "lg:hidden fixed top-0 left-0 right-0 bottom-0 w-full h-screen bg-black opacity-90 text-left ease-in duration-300"
+              : "lg:hidden fixed top-0 left-[-100%] right-0 bottom-0 w-full h-screen bg-black text-left ease-in duration-300"
           }
         >
-          <ul role="list" aria-label="Primary">
+          <ul
+            className="flex flex-col m-6 w-2/6"
+            role="list"
+            aria-label="Primary"
+          >
             {navbar.navigationItems.map((link) => (
               <li
-                className="navbar group"
+                className=" flex flex-col group hover:bg-opacity-20 hover:bg-white"
                 onClick={() => handleNav()}
                 key={link.link}
               >
-                <Link href={link.link}>{link.title}</Link>
+                <Link className="p-2 hover:font-bold" href={link.link}>
+                  {link.title}
+                </Link>
                 {link.sublinks && (
-                  <ul className="hidden group-hover:flex flex-col" role="list">
+                  <ul
+                    className="hidden group-hover:flex flex-col ml-1"
+                    role="list"
+                  >
                     {link.sublinks.map((link, i) => (
-                      <li className="navItem" key={i}>
+                      <li className="text-sm flex" key={i}>
                         <Link
-                          style={{
-                            color: scrolled
-                              ? `${textColor[1]}`
-                              : `${textColor[0]}`,
-                          }}
+                          className="m-1 p-1 flex-grow hover:text-orange-300"
                           href={link.link}
                         >
                           {link.title}

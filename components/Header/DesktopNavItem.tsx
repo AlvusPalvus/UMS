@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import React from 'react'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 import { NavLink } from '../../types/Pages'
 import { useCurrentNav, useNavScrollStyling } from '../../hooks/nav'
@@ -8,9 +7,8 @@ type Props = {
     link: NavLink,
 }
 
-const DesktopNavItem = (props: Props) => {
+const DesktopNavItem = ({ link }: Props) => {
     const { textColor, dropDownBgColor, hoverColor } = useNavScrollStyling()
-    const { link } = props
     const { currentLink, currentSubLink } = useCurrentNav()
     const linkTextColor = currentLink === link.link ? "text-primaryGreen" : textColor
 

@@ -5,6 +5,7 @@ import { CfImage } from "../../types/Elements";
 import { NavLink } from "../../types/Pages";
 import { FiMenu, FiX, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Navbar as NavbarType } from "../../types/Pages";
+import DropdownItem from "./DropdownItem";
 
 type Props = {
   navbar: NavbarType;
@@ -32,6 +33,10 @@ const Navbar = ({ navbar }: Props) => {
   // Scrollbased styling
   let backgroundColor = scrolled ? "bg-white" : "bg-transparent";
   let textColor = scrolled ? "text-black" : "text-white";
+  let dropDownBgColor = scrolled ? " bg-white" : " bg-black bg-opacity-30 ";
+  let hoverColor = scrolled
+    ? " hover:bg-primaryGreen hover:text-white "
+    : " hover:bg-black hover:bg-opacity-30 ";
   let margin = scrolled ? "" : "m-4";
 
   return (
@@ -75,48 +80,15 @@ const Navbar = ({ navbar }: Props) => {
           )}
         </Link>
 
-        {/** Desktop */}
+        {/** Desktop Nav*/}
         <ul
-          className=" navbar hidden lg:flex gap-2 mt-8"
+          className={" navbar hidden lg:flex gap-2 mt-8"}
           role="list"
           aria-label="Primary"
         >
-          {navbar.navigationItems.map((link, i) => (
-            <li className={textColor + " navItem group relative pr-2 "} key={i}>
-              <div className="flex items-center group">
-                <Link className="w-full pl-4 pr-1 py-2 block" href={link.link}>
-                  {link.title}
-                </Link>
-                {link.sublinks && (
-                  <>
-                    <FiChevronDown className="group-hover:hidden cursor-pointer" />
-                    <FiChevronUp className="hidden group-hover:block cursor-pointer" />
-                  </>
-                )}
-              </div>
-
-              {link.sublinks && (
-                <ul
-                  className={
-                    textColor +
-                    " hidden absolute left-0 group-hover:flex flex-col bg-black bg-opacity-30"
-                  }
-                  role="list"
-                >
-                  {link.sublinks.map((sublink, i) => (
-                    <li className="navItem fw-regular z-[4]" key={i}>
-                      <Link
-                        className={"text-white block px-4 py-2"}
-                        href={link.link + "/#" + sublink.link}
-                      >
-                        {sublink.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
+          {navbar.navigationItems.map((link, i) =>
+            getDesktopNavItems(link, i, textColor, dropDownBgColor, hoverColor)
+          )}
         </ul>
 
         {/* Mobile button */}
@@ -151,40 +123,25 @@ const Navbar = ({ navbar }: Props) => {
             role="list"
             aria-label="Primary"
           >
-            {navbar.navigationItems.map((link) => (
+            {navbar.navigationItems.map((link, i) => (
               <li
                 className="flex flex-col group hover:bg-opacity-20 hover:bg-white"
                 onClick={() => handleNav()}
-                key={link.link}
+                key={i}
               >
-                <div className="flex items-center group">
-                  <Link className="p-2 hover:font-bold" href={link.link}>
-                    {link.title}
-                  </Link>
-                  {link.sublinks && (
-                    <>
-                      <FiChevronDown className="group-hover:hidden cursor-pointer" />
-                      <FiChevronUp className="hidden group-hover:block cursor-pointer" />
-                    </>
-                  )}
-                </div>
-
-                {link.sublinks && (
-                  <ul
-                    className="hidden group-hover:flex flex-col ml-1"
-                    role="list"
-                  >
-                    {link.sublinks.map((sublink, i) => (
-                      <li className="text-sm flex" key={i}>
-                        <Link
-                          className={"m-1 p-1 flex-grow hover:text-orange-300"}
-                          href={link.link + "/#" + sublink.link}
-                        >
-                          {sublink.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                {link.sublinks ? (
+                  <DropdownItem
+                    link={link}
+                    textColor={textColor}
+                    dropDownBgColor={dropDownBgColor}
+                    hoverColor={hoverColor}
+                  />
+                ) : (
+                  <div className="flex items-center group">
+                    <Link className="p-2 hover:font-bold" href={link.link}>
+                      {link.title}
+                    </Link>
+                  </div>
                 )}
               </li>
             ))}
@@ -192,6 +149,51 @@ const Navbar = ({ navbar }: Props) => {
         </div>
       </nav>
     </div>
+  );
+};
+
+const getDesktopNavItems = (
+  link,
+  i,
+  textColor,
+  dropDownBgColor,
+  hoverColor
+) => {
+  return (
+    <li className={textColor + hoverColor + " group relative pr-2 "} key={i}>
+      <div className="flex items-center group">
+        <Link className="w-full pl-4 pr-1 py-2 block" href={link.link}>
+          {link.title}
+        </Link>
+        {link.sublinks && (
+          <>
+            <FiChevronDown className="group-hover:hidden cursor-pointer" />
+            <FiChevronUp className="hidden group-hover:block cursor-pointer" />
+          </>
+        )}
+      </div>
+
+      {link.sublinks && (
+        <ul
+          className={
+            dropDownBgColor +
+            " hidden absolute left-0 group-hover:flex flex-col"
+          }
+          role="list"
+        >
+          {link.sublinks.map((sublink, i) => (
+            <li className={hoverColor + " fw-regular z-[4]"} key={i}>
+              <Link
+                className={textColor + hoverColor + " block px-4 py-2"}
+                href={link.link + "/#" + sublink.link}
+              >
+                {sublink.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
   );
 };
 

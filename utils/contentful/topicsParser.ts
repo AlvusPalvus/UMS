@@ -1,5 +1,11 @@
 import { Component } from "../../types/Assemblies";
-import { Card, Contact, ContactItem, Field, Gallery } from "../../types/Topics";
+import {
+  Contact,
+  ContactItem,
+  Field,
+  Gallery,
+  Person,
+} from "../../types/Topics";
 import { parseImage } from "./elementsParser";
 
 export const parseComponent = (component): Component => {
@@ -7,7 +13,6 @@ export const parseComponent = (component): Component => {
   // console.log(type);
   let parsedComponent = null;
   let componentType;
-  console.log(type);
   if (type == "card") {
     parsedComponent = parseField(component);
     componentType = "Field";
@@ -17,7 +22,12 @@ export const parseComponent = (component): Component => {
   } else if (type == "contactInformation") {
     parsedComponent = parseContact(component);
     componentType = "Contact";
-  } // Do this for all the differnet kinds of components
+  } else if (type == "person") {
+    parsedComponent = parsePerson(component);
+    componentType = "Person";
+  } else {
+    console.log(type);
+  }
 
   return {
     type: componentType || null,
@@ -26,7 +36,8 @@ export const parseComponent = (component): Component => {
 };
 
 const parseField = (field): Field => {
-  let { heading, bodyText, buttons, backgroundColor, displayAs } = field.fields;
+  let { heading, bodyText, buttons, assets, backgroundColor, displayAs } =
+    field.fields;
   if (buttons !== undefined) {
     buttons = buttons.map((button) => {
       const text = button.fields.buttonText;
@@ -40,6 +51,7 @@ const parseField = (field): Field => {
     heading: heading || null,
     body: bodyText || null,
     buttons,
+    assets: assets || null,
     backgroundColor: backgroundColor || null,
   };
 };
@@ -51,6 +63,15 @@ export const parseGallery = (gallery): Gallery => {
   return {
     heading: gallery.fields.heading || null,
     images,
+  };
+};
+
+export const parsePerson = (person): Person => {
+  return {
+    name: person.fields.name || null,
+    role: person.fields.role || null,
+    profileImage: parseImage(person.fields.image) || null,
+    contact: parseContact(person.fields.contact) || null,
   };
 };
 

@@ -6,6 +6,7 @@ export type Field = {
   heading?: string;
   body: Document;
   buttons?: CfLink[];
+  assets: string[];
   backgroundColor?: string;
 };
 
@@ -22,6 +23,13 @@ export type Contact = {
   heading?: string;
   text?: string;
   contactItem: ContactItem;
+};
+
+export type Person = {
+  name: string;
+  role: string;
+  profileImage: CfImage;
+  contact: Contact;
 };
 
 export type ContactItem = {
@@ -42,5 +50,16 @@ export type NewsCard = {
   body: string;
   image: CfImage;
 };
-export type Events = {};
-export type Person = {};
+export type EventCard = {
+  slug: string;
+  heading: string;
+  date: string;
+  time: string;
+  body: string;
+  image: CfImage;
+  host?:
+    | "Kårstyrelsen"
+    | "Festmästeriet"
+    | "Sportmästeriet"
+    | "Kårhuset Villan";
+};

@@ -1,14 +1,13 @@
 import {
   Column,
+  EventsSection,
   NewsSection,
-  Section,
   StandardSection,
 } from "../../types/Assemblies";
-import { NewsCard } from "../../types/Topics";
+import { NewsCard, EventCard } from "../../types/Topics";
 import { parseImage } from "./elementsParser";
 import { parseComponent } from "./topicsParser";
 
-// TODO: Implement correct sections parser
 export const parseSection = (section): StandardSection => {
   let { slug, heading, columns, backgroundColor } = section.fields;
 
@@ -26,13 +25,12 @@ export const parseSection = (section): StandardSection => {
 };
 
 const parseColumn = (column): Column => {
-  let { heading, components, backgroundColor, slug } = column.fields;
+  let { components, backgroundColor, slug } = column.fields;
   if (components !== undefined) {
     components = components.map((component) => parseComponent(component));
   } else components = null;
 
   return {
-    heading: heading || null,
     components: components || null,
     backgroundColor: backgroundColor || null,
     slug: slug || null,
@@ -66,5 +64,37 @@ export const parseNewsCard = (card): NewsCard => {
     date: date,
     body: bodyText,
     image: featuredImage || null,
+  };
+};
+
+export const parseEventsSection = (section): EventsSection => {
+  let { title, eventCards, body, featuredImage } = section.fields;
+  if (eventCards !== undefined) {
+    eventCards = eventCards.map((card) => parseEventCard(card));
+  } else eventCards = null;
+  let image = parseImage(featuredImage);
+
+  return {
+    type: "eventsSection",
+    heading: title,
+    body: body || null,
+    events: eventCards,
+    image: image,
+  };
+};
+
+export const parseEventCard = (card): EventCard => {
+  let { heading, slug, dateAndTime, bodyText, featuredImage } = card.fields;
+  featuredImage !== "undefined"
+    ? (featuredImage = parseImage(featuredImage))
+    : (featuredImage = null);
+
+  return {
+    slug: slug,
+    heading: heading,
+    date: dateAndTime,
+    time: dateAndTime,
+    body: bodyText,
+    image: featuredImage,
   };
 };

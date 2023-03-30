@@ -1,6 +1,6 @@
 import { Document } from "@contentful/rich-text-types";
 import { CfImage } from "./Elements";
-import { Field, Gallery, Events, NewsCard, Contact } from "./Topics";
+import { Field, Gallery, Person, Contact, EventCard, NewsCard } from "./Topics";
 
 export type Section = StandardSection | NewsSection;
 
@@ -19,14 +19,21 @@ export type NewsSection = {
   image: CfImage;
 };
 
-export type Column = {
+export type EventsSection = {
+  type: "eventsSection";
   heading?: string;
+  body: string;
+  events: EventCard[];
+  image: CfImage;
+};
+
+export type Column = {
   slug: string;
   components: Component[];
   backgroundColor?: string;
 };
 
 export type Component = {
-  type: "Field" | "Gallery" | "Events" | "Contact";
-  parsedComponent: Field | Gallery | Events | Contact;
+  type: "Field" | "Gallery" | "Person" | "Contact";
+  parsedComponent: Field | Gallery | Person | Contact;
 };

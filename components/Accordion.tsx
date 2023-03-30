@@ -12,20 +12,27 @@ const options = {
   },
 };
 
-const Accordion = ({ heading, body, buttons, backgroundColor }: Field) => {
-  // console.log(heading);
-  //console.log(buttons);
+type Props = {
+  accordion: Field;
+};
+
+const Accordion = ({ accordion }: Props) => {
   return (
     <div className={styles.container}>
-      <h3 className="h3">{heading}</h3>
-      <div className="link">{documentToReactComponents(body, options)}</div>
+      <h3 className="h3">{accordion.heading}</h3>
+      <div className="link">
+        {documentToReactComponents(accordion.body, options)}
+      </div>
       <div>
-        {buttons &&
-          buttons.map((button, i) => (
+        {accordion.buttons &&
+          accordion.buttons.map((button, i) => (
             <Link href={button.link} className="button" key={i}>
               {button.text}
             </Link>
           ))}
+      </div>
+      <div>
+        {accordion.assets && accordion.assets.map((doc) => <p>{doc}</p>)}
       </div>
     </div>
   );

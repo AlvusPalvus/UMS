@@ -12,20 +12,27 @@ const options = {
   },
 };
 
-const PlainText = ({ heading, body, buttons, backgroundColor }: Field) => {
-  // console.log(heading);
-  //console.log(buttons);
+type Props = {
+  component: Field;
+};
+
+const PlainText = ({ component }: Props) => {
   return (
     <div className={styles.container}>
-      <h3 className="h3">{heading}</h3>
-      <div className="link">{documentToReactComponents(body, options)}</div>
+      <h3 className="h3">{component.heading}</h3>
+      <div className="link">
+        {documentToReactComponents(component.body, options)}
+      </div>
       <div>
-        {buttons &&
-          buttons.map((button, i) => (
+        {component.buttons &&
+          component.buttons.map((button, i) => (
             <Link href={button.link} className="button" key={i}>
               {button.text}
             </Link>
           ))}
+      </div>
+      <div>
+        {component.assets && component.assets.map((doc) => <p>{doc}</p>)}
       </div>
     </div>
   );

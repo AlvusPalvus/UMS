@@ -21,7 +21,6 @@ const DropdownItem = ({
   let active = "block";
   let inactive = "hidden";
 
-  console.log(link.sublinks);
   return (
     <>
       <div className="flex items-center group">

@@ -25,14 +25,14 @@ const NewsCard = ({ card, width }: Props) => {
       <div className=" p-2">
         <p className="text-gray-500 text-sm ">{card.date}</p>
         <h3 className="h3">{card.heading}</h3>
-
-        <Image
-          style={{ objectFit: "cover", position: "relative" }}
-          src={"https:" + card.image.url}
-          alt={card.image.filename}
-          width={card.image.width}
-          height={card.image.height}
-        />
+        <div className="relative">
+          <Image
+            className="object-cover self-center"
+            src={"https:" + card.image.url}
+            alt={card.image.filename}
+            fill
+          />
+        </div>
         <div className="link">
           <ReactMarkdown className={"fw-regular  "}>{card.body}</ReactMarkdown>
         </div>

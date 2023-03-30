@@ -11,9 +11,11 @@ const EventSection = ({ section }: Props) => {
     <section className="section">
       <div className="container">
         <h2>{section.heading}</h2>
-        {section.events.map((event) => (
-          <EventCard event={event} />
-        ))}
+        {section.events ? (
+          section.events.map((event) => <EventCard event={event} />)
+        ) : (
+          <p> Inga event att visa </p>
+        )}
       </div>
     </section>
   );

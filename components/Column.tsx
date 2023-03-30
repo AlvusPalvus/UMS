@@ -34,7 +34,7 @@ const getField = (component: FieldType) => {
 const Column = ({ column }: Props) => {
   return (
     <div
-      className=" "
+      className="flex gap-4 md:flex-col "
       style={{ backgroundColor: column.backgroundColor }}
       id={column.slug}
     >

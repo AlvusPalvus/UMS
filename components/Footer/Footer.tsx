@@ -15,7 +15,7 @@ function Footer({ sponsors, contact, logo, socials, backgroundImage }: Footer) {
       className=""
     >
       <hr />
-      <div className="container space-y-12 bg-white/70 mt-12 ">
+      <div className="container space-y-12 bg-white/75 mt-12 ">
         {sponsors && (
           <div className={"flex flex-col "}>
             <h2 className="fs-secondary-heading">{sponsors.heading}</h2>{" "}

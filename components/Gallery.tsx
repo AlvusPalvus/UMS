@@ -9,15 +9,17 @@ type Props = {
 const Gallery = ({ gallery }: Props) => {
   return (
     <>
-      <h2 className="fs-secondary-heading">{gallery.heading}</h2> <hr />
-      <div className="flex flex-col items-center">
+      {gallery.heading && (
+        <h2 className="fs-secondary-heading">{gallery.heading}</h2>
+      )}
+
+      <div className="field flex flex-row h-96 md:flex-col justify-center align-center items-center md:h-full ">
         {gallery.images.map((logo, i) => (
-          <div key={i} className="flex">
+          <div key={i} className=" relative flex-grow items-stretch min-h-[200px] w-full md:h-full ">
             <Image
-              className="cover p-1"
+              className="object-cover lg:p-2"
               src={"https:" + logo.url}
-              width={logo.width}
-              height={logo.height}
+              fill
               alt={logo.filename}
             ></Image>
           </div>

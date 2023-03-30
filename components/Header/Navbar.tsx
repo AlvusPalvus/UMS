@@ -27,6 +27,7 @@ const Navbar = ({ navbar }: Props) => {
         setScrolled(false);
       }
     };
+    colorChange();
     window.addEventListener("scroll", colorChange);
   }, []);
 

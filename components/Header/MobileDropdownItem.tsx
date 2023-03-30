@@ -10,16 +10,8 @@ type Props = {
   hoverColor: string;
 };
 
-const DropdownItem = ({
-  link,
-  textColor,
-  dropDownBgColor,
-  hoverColor,
-}: Props) => {
+const MobileDropdownItem = ({ link }: Props) => {
   const [isActive, setIsActive] = useState(false);
-  const onClick = () => setIsActive(!isActive);
-  let active = "block";
-  let inactive = "hidden";
 
   return (
     <>
@@ -29,21 +21,27 @@ const DropdownItem = ({
         </Link>
 
         <>
-          <FiChevronDown className="group-hover:hidden cursor-pointer" />
-          <FiChevronUp className="hidden group-hover:block cursor-pointer" />
+          {isActive ? (
+            <FiChevronUp
+              onClick={() => setIsActive(false)}
+              className="cursor-pointer text-4xl p-2"
+            />
+          ) : (
+            <FiChevronDown
+              onClick={() => setIsActive(true)}
+              className="cursor-pointer text-4xl p-2"
+            />
+          )}
         </>
       </div>
       <ul
-        className={
-          `menu ${isActive ? active : inactive}` +
-          " absolute left-0 group-hover:flex flex-col "
-        }
+        className={` ${isActive ? "flex" : "hidden"}` + "  left-0 flex-col "}
         role="list"
       >
         {link.sublinks.map((sublink, i) => (
-          <li className={hoverColor + "navItem fw-regular z-[4]"} key={i}>
+          <li className={"navItem fw-regular z-[4]"} key={i}>
             <Link
-              className={textColor + " block px-4 py-2"}
+              className={"text-white block px-4 py-2 ml-2 text-xs"}
               href={link.link + "/#" + sublink.link}
             >
               {sublink.title}
@@ -55,4 +53,4 @@ const DropdownItem = ({
   );
 };
 
-export default DropdownItem;
+export default MobileDropdownItem;

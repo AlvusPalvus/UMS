@@ -5,7 +5,7 @@ import { CfImage } from "../../types/Elements";
 import { NavLink } from "../../types/Pages";
 import { FiMenu, FiX, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Navbar as NavbarType } from "../../types/Pages";
-import DropdownItem from "./DropdownItem";
+import MobileDropdownItem from "./MobileDropdownItem";
 
 type Props = {
   navbar: NavbarType;
@@ -120,18 +120,17 @@ const Navbar = ({ navbar }: Props) => {
           }
         >
           <ul
-            className="flex flex-col m-6 w-2/6"
+            className="flex flex-col m-6 w-4/6"
             role="list"
             aria-label="Primary"
           >
             {navbar.navigationItems.map((link, i) => (
               <li
-                className="flex flex-col group hover:bg-opacity-20 hover:bg-white"
-                onClick={() => handleNav()}
+                className="flex flex-col group hover:bg-opacity-20 hover:bg-white border-b-2 border-white"
                 key={i}
               >
                 {link.sublinks ? (
-                  <DropdownItem
+                  <MobileDropdownItem
                     link={link}
                     textColor={textColor}
                     dropDownBgColor={dropDownBgColor}
@@ -139,7 +138,10 @@ const Navbar = ({ navbar }: Props) => {
                   />
                 ) : (
                   <div className="flex items-center group">
-                    <Link className="p-2 hover:font-bold" href={link.link}>
+                    <Link
+                      className="pl-4 py-2 hover:font-bold "
+                      href={link.link}
+                    >
                       {link.title}
                     </Link>
                   </div>

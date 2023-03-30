@@ -2,6 +2,7 @@ import Column from "./Column";
 import { Column as ColumnType } from "../types/Assemblies";
 import { Section as SectionType } from "../types/Assemblies";
 import Slider from "./News/Slider";
+import EventSection from "./Events/EventSection";
 
 // A section can have 1-3 columns.
 const setUpColumns = (columns: ColumnType[]) => {
@@ -25,19 +26,25 @@ type Props = {
 };
 
 const Section = ({ section }: Props) => {
-  if (section.type === "newsSection") {
-    return <Slider section={section} />;
-  } else if (section.type === "section") {
-    return (
-      <section
-        //style={{ backgroundColor: "#" + section.backgroundColor }}
-        className="container section"
-        id={section.slug}
-      >
-        {section.heading ? <h2 className="h2">{section.heading}</h2> : null}
-        <div className="">{setUpColumns(section.columns)}</div>
-      </section>
-    );
+  switch (section.type) {
+    case "newsSection":
+      return <Slider section={section} />;
+    case "section":
+      return (
+        <section
+          //style={{ backgroundColor: "#" + section.backgroundColor }}
+          className="container section"
+          id={section.slug}
+        >
+          {section.heading ? <h2 className="h2">{section.heading}</h2> : null}
+          <div className="">{setUpColumns(section.columns)}</div>
+        </section>
+      );
+    case "eventsSection":
+      return <EventSection section={section} />;
+
+    default:
+      break;
   }
 };
 

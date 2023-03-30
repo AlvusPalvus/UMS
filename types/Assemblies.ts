@@ -2,7 +2,7 @@ import { Document } from "@contentful/rich-text-types";
 import { CfImage } from "./Elements";
 import { Field, Gallery, Person, Contact, EventCard, NewsCard } from "./Topics";
 
-export type Section = StandardSection | NewsSection;
+export type Section = StandardSection | NewsSection | EventsSection;
 
 export type StandardSection = {
   type: "section";

@@ -43,14 +43,14 @@ const renderContactInfo = (contactItem: ContactItem) => {
 
     contactItem.adressLink != null
       ? contactInfo.push({
-          icon: <FiMapPin />,
-          text: adressArray,
-          link: contactItem.adressLink,
-        })
+        icon: <FiMapPin />,
+        text: adressArray,
+        link: contactItem.adressLink,
+      })
       : contactInfo.push({
-          icon: <FiMapPin />,
-          text: adressArray,
-        });
+        icon: <FiMapPin />,
+        text: adressArray,
+      });
   }
 
   if (contactItem.facebook != null) {
@@ -59,14 +59,14 @@ const renderContactInfo = (contactItem: ContactItem) => {
 
     contactItem.facebookLink != null
       ? contactInfo.push({
-          icon: <FiFacebook />,
-          text: text,
-          link: contactItem.facebookLink,
-        })
+        icon: <FiFacebook />,
+        text: text,
+        link: contactItem.facebookLink,
+      })
       : contactInfo.push({
-          icon: <FiFacebook />,
-          text: text,
-        });
+        icon: <FiFacebook />,
+        text: text,
+      });
   }
 
   if (contactItem.instagram != null) {
@@ -74,14 +74,14 @@ const renderContactInfo = (contactItem: ContactItem) => {
     text.push(contactItem.instagram);
     contactItem.instagramLink != null
       ? contactInfo.push({
-          icon: <FiInstagram />,
-          text: text,
-          link: contactItem.instagramLink,
-        })
+        icon: <FiInstagram />,
+        text: text,
+        link: contactItem.instagramLink,
+      })
       : contactInfo.push({
-          icon: <FiInstagram />,
-          text: text,
-        });
+        icon: <FiInstagram />,
+        text: text,
+      });
   }
 
   return contactInfo;
@@ -89,7 +89,7 @@ const renderContactInfo = (contactItem: ContactItem) => {
 
 const tableRow = (item: ContactRow, i: number) => {
   return item.link != undefined ? (
-    <div className="grid grid-cols-7 gap-2 p-3">
+    <div key={i} className="grid grid-cols-7 gap-2 p-3">
       <div className="col-span-1">
         <a
           className="text-neutral-900 fs-iconsFooter"
@@ -101,16 +101,16 @@ const tableRow = (item: ContactRow, i: number) => {
       </div>
       <div className="col-span-6">
         {item.text.map((textRow, i) => {
-          return <p>{textRow}</p>;
+          return <p key={i}>{textRow}</p>;
         })}
       </div>
     </div>
   ) : (
-    <div className="grid grid-cols-7 gap-2 p-3">
+    <div key={i} className="grid grid-cols-7 gap-2 p-3">
       <div className="col-span-1 fs-iconsFooter">{item.icon}</div>
       <div className="col-span-6">
         {item.text.map((textRow, i) => {
-          return <p>{textRow}</p>;
+          return <p key={i}>{textRow}</p>;
         })}
       </div>
     </div>

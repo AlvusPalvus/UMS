@@ -36,7 +36,7 @@ export const parseComponent = (component): Component => {
 };
 
 const parseField = (field): Field => {
-  let { heading, bodyText, buttons, assets, backgroundColor, displayAs } =
+  let { heading, bodyText, buttons, assets, backgroundColor, displayAs, slug } =
     field.fields;
   if (buttons !== undefined) {
     buttons = buttons.map((button) => {
@@ -53,6 +53,7 @@ const parseField = (field): Field => {
     buttons,
     assets: assets || null,
     backgroundColor: backgroundColor || null,
+    slug: slug || null,
   };
 };
 

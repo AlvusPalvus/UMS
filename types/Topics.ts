@@ -8,6 +8,7 @@ export type Field = {
   buttons?: CfLink[];
   assets: string[];
   backgroundColor?: string;
+  slug: string;
 };
 
 export type Gallery = {

@@ -14,6 +14,7 @@ export type StandardSection = {
 
 export type NewsSection = {
   type: "newsSection";
+  slug: string;
   heading?: string;
   news: NewsCard[];
   image: CfImage;
@@ -21,6 +22,7 @@ export type NewsSection = {
 
 export type EventsSection = {
   type: "eventsSection";
+  slug: string;
   heading?: string;
   body: string;
   events: EventCard[];

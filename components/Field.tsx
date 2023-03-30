@@ -18,7 +18,7 @@ type Props = {
 
 export const PlainText = ({ component }: Props) => {
   return (
-    <div className={styles.container}>
+    <div className={""}>
       <h3 className="h3">{component.heading}</h3>
       <div className="link">
         {documentToReactComponents(component.body, options)}
@@ -40,7 +40,7 @@ export const PlainText = ({ component }: Props) => {
 
 export const Accordion = ({ component }: Props) => {
   return (
-    <div className={styles.container}>
+    <div className={"accordion"}>
       <h3 className="h3">{component.heading}</h3>
       <div className="link">
         {documentToReactComponents(component.body, options)}

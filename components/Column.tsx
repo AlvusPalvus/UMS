@@ -34,7 +34,7 @@ const getField = (component: FieldType) => {
 const Column = ({ column }: Props) => {
   return (
     <div
-      className="column"
+      className=" "
       style={{ backgroundColor: column.backgroundColor }}
       id={column.slug}
     >

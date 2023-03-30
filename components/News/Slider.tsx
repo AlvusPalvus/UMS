@@ -9,9 +9,9 @@ type Props = {
 
 const Slider = ({ section }: Props) => {
   return (
-    <div className=" section  ">
+    <section className=" section ">
       {section.image ? (
-        <div className="relative w-full">
+        <div className="relative w-full 2xl:container m-auto">
           <Image
             style={{ objectFit: "cover", zIndex: -1 }}
             src={"https://" + section.image.url}
@@ -36,7 +36,7 @@ const Slider = ({ section }: Props) => {
           ))}
         </div>{" "}
       </div>
-    </div>
+    </section>
   );
 };
 

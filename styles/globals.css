@@ -213,7 +213,6 @@ h3 {
 
 .shadow-regular {
   box-shadow: var(--normal-drop);
-  border-radius: 5px;
 }
 
 .padding-block-500 {
@@ -233,10 +232,24 @@ h3 {
   gap: 1rem;
 }
 
+.flex-columns {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+.flex-column {
+  flex-grow: 1;
+}
+
 @media (min-width: 50em) {
   .even-columns {
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
+  }
+  .flex-columns {
+    flex-direction: row;
+    gap: 1rem;
   }
 }
 
@@ -247,6 +260,35 @@ body {
   font-family: var(--ff-regular);
   color: var(--clr-neutral-900);
   background-color: var(--clr-neutral-100);
+}
+
+.visually-hidden {
+  position: absolute;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: var(--normal-drop);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 /* Navbar styling */
@@ -261,10 +303,6 @@ body {
 }
 
 @media (min-width: 1024px) {
-  .navItem:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
   .navItem a:hover {
     text-shadow: 0px 0px 10px white;
   }
@@ -366,37 +404,6 @@ body {
     margin-top: 10rem;
     margin-bottom: 4rem;
   }
-}
-
-.visually-hidden {
-  position: absolute;
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
-}
-
-.card {
-  border-radius: 8px;
-  box-shadow: var(--normal-drop);
-  display: flex;
-  flex-direction: column;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.section {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
 }
 
 /*

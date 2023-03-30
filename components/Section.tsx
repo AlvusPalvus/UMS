@@ -13,11 +13,11 @@ const setUpColumns = (columns: ColumnType[]) => {
     return null;
   } else
     return (
-      <div className=" even-columns">
+      <>
         {columns.map((column, i) => (
           <Column column={column} key={i} />
         ))}
-      </div>
+      </>
     );
 };
 
@@ -36,8 +36,18 @@ const Section = ({ section }: Props) => {
           className="container section"
           id={section.slug}
         >
-          {section.heading ? <h2 className="h2">{section.heading}</h2> : null}
-          <div className="">{setUpColumns(section.columns)}</div>
+          {section.heading && <h2 className="h2">{section.heading}</h2>}
+
+          <div
+            className={
+              section.columns
+                ? "grid grid-flow-row-dense grid-cols-" +
+                  section.columns.length.toString()
+                : "even-columns"
+            }
+          >
+            {setUpColumns(section.columns)}
+          </div>
         </section>
       );
     case "eventsSection":

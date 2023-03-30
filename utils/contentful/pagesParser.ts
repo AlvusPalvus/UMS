@@ -1,6 +1,10 @@
 import { Section } from "../../types/Assemblies";
 import { Footer, Header, NavLink } from "../../types/Pages";
-import { parseSection, parseNewsSection } from "./assembliesParser";
+import {
+  parseSection,
+  parseNewsSection,
+  parseEventsSection,
+} from "./assembliesParser";
 import { getContentfulClient } from "../client";
 import { parseImage } from "./elementsParser";
 import { parseContact, parseGallery } from "./topicsParser";
@@ -20,6 +24,9 @@ export const getMainPage = async (id: string) => {
       }
       if (section.sys.contentType.sys.id == "newsSection") {
         sections.push(parseNewsSection(section));
+      }
+      if (section.sys.contentType.sys.id == "eventsSection") {
+        sections.push(parseEventsSection(section));
       }
     });
   } else sections = null;

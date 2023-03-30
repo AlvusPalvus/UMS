@@ -38,7 +38,7 @@ const parseColumn = (column): Column => {
 };
 
 export const parseNewsSection = (section): NewsSection => {
-  let { title, newsCards, featuredImage } = section.fields;
+  let { title, slug, newsCards, featuredImage } = section.fields;
   if (newsCards !== undefined) {
     newsCards = newsCards.map((card) => parseNewsCard(card));
   } else newsCards = null;
@@ -46,6 +46,7 @@ export const parseNewsSection = (section): NewsSection => {
 
   return {
     type: "newsSection",
+    slug: slug || null,
     heading: title,
     news: newsCards,
     image: image,
@@ -62,23 +63,25 @@ export const parseNewsCard = (card): NewsCard => {
     slug: slug,
     heading: heading,
     date: date,
-    body: bodyText,
+    body: bodyText || null,
     image: featuredImage || null,
   };
 };
 
 export const parseEventsSection = (section): EventsSection => {
-  let { title, eventCards, body, featuredImage } = section.fields;
-  if (eventCards !== undefined) {
-    eventCards = eventCards.map((card) => parseEventCard(card));
-  } else eventCards = null;
-  let image = parseImage(featuredImage);
+  console.log(section.fields);
+  let { slug, heading, events, bodyText, featuredImage } = section.fields;
+  if (events !== undefined) {
+    events = events.map((card) => parseEventCard(card));
+  } else events = null;
+  let image = featuredImage ? parseImage(featuredImage) : null;
 
   return {
     type: "eventsSection",
-    heading: title,
-    body: body || null,
-    events: eventCards,
+    slug,
+    heading: heading || null,
+    body: bodyText || null,
+    events: events,
     image: image,
   };
 };
@@ -94,7 +97,7 @@ export const parseEventCard = (card): EventCard => {
     heading: heading,
     date: dateAndTime,
     time: dateAndTime,
-    body: bodyText,
+    body: bodyText || null,
     image: featuredImage,
   };
 };

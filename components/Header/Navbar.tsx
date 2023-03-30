@@ -6,6 +6,8 @@ import { NavLink } from "../../types/Pages";
 import { FiMenu, FiX, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Navbar as NavbarType } from "../../types/Pages";
 import DropdownItem from "./DropdownItem";
+import { useCurrentNav, useNavScrollStyling } from '../../hooks/nav';
+import DesktopNavItem from "./DesktopNavItem";
 
 type Props = {
   navbar: NavbarType;
@@ -13,38 +15,20 @@ type Props = {
 
 const Navbar = ({ navbar }: Props) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const { backgroundColor, textColor, dropDownBgColor, hoverColor, margin, scrolled } = useNavScrollStyling();
+
 
   const handleNav = () => {
     setShowMobileNav(!showMobileNav);
   };
 
-  useEffect(() => {
-    const colorChange = () => {
-      if (window.scrollY >= 90) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    colorChange();
-    window.addEventListener("scroll", colorChange);
-  }, []);
 
-  // Scrollbased styling
-  let backgroundColor = scrolled ? "bg-white" : "bg-transparent";
-  let textColor = scrolled ? "text-black" : "text-white";
-  let dropDownBgColor = scrolled ? " bg-white" : " bg-black bg-opacity-30 ";
-  let hoverColor = scrolled
-    ? " hover:bg-primaryGreen hover:text-white "
-    : " hover:bg-black hover:bg-opacity-30 ";
-  let margin = scrolled ? "" : "m-4";
 
   return (
     <div
       className={
         backgroundColor +
-        " fixed left-0 top-0 w-full max-h-fit z-10 ease-in duration-300"
+        " fixed left-0 top-0 w-full max-h-fit z-10  ease-in duration-300"
       }
     >
       <nav
@@ -88,7 +72,7 @@ const Navbar = ({ navbar }: Props) => {
           aria-label="Primary"
         >
           {navbar.navigationItems.map((link, i) =>
-            getDesktopNavItems(link, i, textColor, dropDownBgColor, hoverColor)
+            (<DesktopNavItem key={i} link={link} />)
           )}
         </ul>
 
@@ -126,8 +110,7 @@ const Navbar = ({ navbar }: Props) => {
           >
             {navbar.navigationItems.map((link, i) => (
               <li
-                className="flex flex-col group hover:bg-opacity-20 hover:bg-white"
-                onClick={() => handleNav()}
+                className={" border-b-2 border-white" + "flex flex-col group hover:bg-opacity-20 hover:bg-white"}
                 key={i}
               >
                 {link.sublinks ? (
@@ -150,51 +133,6 @@ const Navbar = ({ navbar }: Props) => {
         </div>
       </nav>
     </div>
-  );
-};
-
-const getDesktopNavItems = (
-  link,
-  i,
-  textColor,
-  dropDownBgColor,
-  hoverColor
-) => {
-  return (
-    <li className={textColor + hoverColor + " group relative pr-2 "} key={i}>
-      <div className="flex items-center group">
-        <Link className="w-full pl-4 pr-1 py-2 block" href={link.link}>
-          {link.title}
-        </Link>
-        {link.sublinks && (
-          <>
-            <FiChevronDown className="group-hover:hidden cursor-pointer" />
-            <FiChevronUp className="hidden group-hover:block cursor-pointer" />
-          </>
-        )}
-      </div>
-
-      {link.sublinks && (
-        <ul
-          className={
-            dropDownBgColor +
-            " hidden absolute left-0 group-hover:flex flex-col"
-          }
-          role="list"
-        >
-          {link.sublinks.map((sublink, i) => (
-            <li className={hoverColor + " fw-regular z-[4]"} key={i}>
-              <Link
-                className={textColor + hoverColor + " block px-4 py-2"}
-                href={link.link + "/#" + sublink.link}
-              >
-                {sublink.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </li>
   );
 };
 

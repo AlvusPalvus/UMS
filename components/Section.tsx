@@ -15,11 +15,13 @@ type Props = {
 const Section = ({ section }: Props) => {
   switch (section.type) {
     case "newsSection":
-      return <Slider section={section} />;
+      return <Slider section={section} key={section.slug} />;
     case "section":
       return getSection(section);
     case "eventsSection":
-      return <EventSection section={section as EventsSection} />;
+      return (
+        <EventSection section={section as EventsSection} key={section.slug} />
+      );
     default:
       console.error("unknown section type");
       break;
@@ -46,6 +48,7 @@ const getSection = (section: StandardSection) => {
       //style={{ backgroundColor: "#" + section.backgroundColor }}
       className="container section"
       id={section.slug}
+      key={section.slug}
     >
       {section.heading && <h2 className="h2">{section.heading}</h2>}
 

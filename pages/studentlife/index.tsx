@@ -26,8 +26,8 @@ export default function Home({ header, sections, footer }) {
         idFirstSection={sections[0].slug}
       />
       <main className="">
-        {sections.map((section) => (
-          <Section section={section} />
+        {sections.map((section, i) => (
+          <Section section={section} key={i} />
         ))}
       </main>
 

@@ -12,7 +12,7 @@ const EventSection = ({ section }: Props) => {
       <div className="container">
         <h2>{section.heading}</h2>
         {section.events ? (
-          section.events.map((event) => <EventCard event={event} />)
+          section.events.map((event, i) => <EventCard event={event} key={i} />)
         ) : (
           <p> Inga event att visa </p>
         )}

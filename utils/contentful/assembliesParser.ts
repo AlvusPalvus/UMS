@@ -87,6 +87,8 @@ export const parseEventsSection = (section): EventsSection => {
 
 export const parseEventCard = (card): EventCard => {
   let { heading, slug, dateAndTime, bodyText, featuredImage } = card.fields;
+  dateAndTime = dateAndTime.split("T");
+  console.log(dateAndTime);
   featuredImage !== "undefined"
     ? (featuredImage = parseImage(featuredImage))
     : (featuredImage = null);
@@ -94,8 +96,8 @@ export const parseEventCard = (card): EventCard => {
   return {
     slug: slug,
     heading: heading,
-    date: dateAndTime,
-    time: dateAndTime,
+    date: dateAndTime[0],
+    time: dateAndTime[1],
     body: bodyText || null,
     image: featuredImage,
   };

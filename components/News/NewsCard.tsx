@@ -4,6 +4,7 @@ import { relative } from "path";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { NewsCard } from "../../types/Topics";
+import Gallery from "../Gallery";
 
 type Props = {
   card: NewsCard;
@@ -25,14 +26,13 @@ const NewsCard = ({ card, width }: Props) => {
       <div className=" p-2">
         <p className="text-gray-500 text-sm ">{card.date}</p>
         <h3 className="h3">{card.heading}</h3>
-        <div className="relative">
-          <Image
-            className="object-cover self-center"
-            src={"https:" + card.image.url}
-            alt={card.image.filename}
-            fill
-          />
-        </div>
+        <Gallery
+          gallery={{
+            heading: "",
+            images: [card.image],
+          }}
+        />
+
         <div className="link">
           <ReactMarkdown className={"fw-regular  "}>{card.body}</ReactMarkdown>
         </div>

@@ -9,7 +9,7 @@ type Props = {
 
 const Slider = ({ section }: Props) => {
   return (
-    <section className=" section ">
+    <section className="section" id={section.slug}>
       {section.image ? (
         <div className="relative w-full 2xl:container m-auto">
           <Image

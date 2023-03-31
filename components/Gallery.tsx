@@ -18,7 +18,10 @@ const Gallery = ({ gallery }: Props) => {
 
       <div className={"h-full flex flex-row md:flex-col md:align-center "}>
         {gallery.images.map((logo, i) => (
-          <div key={i} className={" relative w-full min-h-[20vh] " + height}>
+          <div
+            key={i}
+            className={" relative w-full min-h-[20vh] min-w-[20vw] " + height}
+          >
             <Image
               className="object-cover p-0.5 md:p-2 "
               src={"https:" + logo.url}

@@ -8,9 +8,9 @@ type Props = {
 
 const EventSection = ({ section }: Props) => {
   return (
-    <section className="section">
-      <div className="container">
-        <h2>{section.heading}</h2>
+    <section className="section" id={section.slug}>
+      <div className="container flex flex-col">
+        {section.heading && <h2 className="h2">{section.heading}</h2>}
         {section.events ? (
           section.events.map((event, i) => <EventCard event={event} key={i} />)
         ) : (

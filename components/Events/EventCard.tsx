@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { EventCard } from "../../types/Topics";
+import Gallery from "../Gallery";
 
 type Props = {
   event: EventCard;
@@ -16,22 +17,22 @@ const EventCard = ({ event }: Props) => {
 
   return (
     <div
-      className="card cursor-pointer h-fit md:max-w-[25%] my-12 m-8"
+      className="card flex flex-row cursor-pointer h-2/4 md:max-w-[50%] my-12 m-8"
       onClick={handleClick}
     >
-      <p className="text-gray-500 text-sm ">{event.date}</p>
-      <h3 className="h3">{event.heading}</h3>
-      <div className="relative w-64 h-32">
-        <Image
-          className="object-cover self-center"
-          src={"https:" + event.image.url}
-          alt={event.image.filename}
-          fill
-        />
-      </div>
+      <Gallery
+        gallery={{
+          heading: "",
+          images: [event.image],
+        }}
+      />
+      <div>
+        <p className=" text-sm ">{event.date + " kl. " + event.time}</p>
+        <h3 className="h3">{event.heading}</h3>
 
-      <div className="link">
-        <ReactMarkdown className={"fw-regular  "}>{event.body}</ReactMarkdown>
+        <div className="link">
+          <ReactMarkdown className={"fw-regular  "}>{event.body}</ReactMarkdown>
+        </div>
       </div>
     </div>
   );

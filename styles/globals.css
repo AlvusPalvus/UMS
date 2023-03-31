@@ -228,12 +228,6 @@ h3 {
   margin-inline: auto;
 }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  justify-content: baseline;
-}
-
 .field table {
   display: table;
   table-layout: auto;

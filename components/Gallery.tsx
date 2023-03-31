@@ -7,20 +7,20 @@ type Props = {
 };
 
 const Gallery = ({ gallery }: Props) => {
+  const nrImages = gallery.images.length;
+  const height = "h-[" + Math.round((1 / nrImages) * 100) + "%] ";
+
   return (
     <>
       {gallery.heading && (
         <h2 className="fs-secondary-heading">{gallery.heading}</h2>
       )}
 
-      <div className="field flex flex-row h-96 md:flex-col justify-center align-center items-center md:h-full ">
+      <div className={"h-full flex flex-row md:flex-col md:align-center "}>
         {gallery.images.map((logo, i) => (
-          <div
-            key={i}
-            className=" relative flex-grow items-stretch min-h-[200px] w-full md:h-full "
-          >
+          <div key={i} className={" relative w-full min-h-[20vh] " + height}>
             <Image
-              className="object-cover lg:p-2"
+              className="object-cover p-0.5 md:p-2 "
               src={"https:" + logo.url}
               fill
               alt={logo.filename}

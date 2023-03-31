@@ -4,6 +4,8 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { Field } from "../types/Topics";
 
+/** Styling for rich text rendering */
+
 const options = {
   renderNode: {
     [BLOCKS.PARAGRAPH]: (node, children) => (
@@ -26,22 +28,28 @@ type Props = {
 
 export const PlainText = ({ component }: Props) => {
   return (
-    <div className={"field"}>
+    <div className={"field p-2"}>
       {component.heading && <h3 className="h3">{component.heading}</h3>}
       <div className=" link">
         {documentToReactComponents(component.body, options)}
       </div>
-      <div>
-        {component.buttons &&
-          component.buttons.map((button, i) => (
+
+      {component.buttons && (
+        <div>
+          {component.buttons.map((button, i) => (
             <Link href={button.link} className="button" key={i}>
               {button.text}
             </Link>
           ))}
-      </div>
-      <div>
-        {component.assets && component.assets.map((doc) => <p>{doc}</p>)}
-      </div>
+        </div>
+      )}
+      {component.assets && (
+        <div>
+          {component.assets.map((doc) => (
+            <p>{doc}</p>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

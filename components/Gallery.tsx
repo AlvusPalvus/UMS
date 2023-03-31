@@ -15,13 +15,15 @@ const Gallery = ({ gallery }: Props) => {
 
       <div className="field flex flex-row h-96 md:flex-col justify-center align-center items-center md:h-full ">
         {gallery.images.map((logo, i) => (
-          <div className=" relative flex-grow items-stretch min-h-[200px] w-full md:h-full ">
+          <div
+            key={i}
+            className=" relative flex-grow items-stretch min-h-[200px] w-full md:h-full "
+          >
             <Image
               className="object-cover lg:p-2"
               src={"https:" + logo.url}
               fill
               alt={logo.filename}
-              key={i}
             ></Image>
           </div>
         ))}

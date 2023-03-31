@@ -3,6 +3,7 @@ import { CfImage, CfLink } from "./Elements";
 
 export type Field = {
   displayType: Card | PlainText | Accordion;
+  slug: string;
   heading?: string;
   body: Document;
   buttons?: CfLink[];

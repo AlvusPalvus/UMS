@@ -19,11 +19,11 @@ type Props = {
 const getField = (component: FieldType) => {
   switch (component.displayType) {
     case "Accordion":
-      return <Accordion component={component} />;
+      return <Accordion key={component.slug} component={component} />;
     case "Card":
-      return <Card component={component} />;
+      return <Card key={component.slug} component={component} />;
     case "Plain Text":
-      return <PlainText component={component} />;
+      return <PlainText key={component.slug} component={component} />;
 
     default:
       console.log("error in field");
@@ -39,7 +39,7 @@ const Column = ({ column }: Props) => {
       id={column.slug}
     >
       {column.components &&
-        column.components.map((component) => {
+        column.components.map((component, i) => {
           let element = <></>;
 
           let field = component.type;
@@ -51,24 +51,27 @@ const Column = ({ column }: Props) => {
               break;
             case "Person":
               element = (
-                <Person person={component.parsedComponent as PersonType} />
+                <Person
+                  key={i}
+                  person={component.parsedComponent as PersonType}
+                />
               );
               break;
             case "Gallery":
               element = (
-                <Gallery gallery={component.parsedComponent as GalleryType} />
+                <Gallery
+                  key={i}
+                  gallery={component.parsedComponent as GalleryType}
+                />
               );
               break;
             case "Contact":
               element = (
                 <ContactTable
+                  key={i}
                   contactInfo={component.parsedComponent as ContactItem}
                 />
               );
-              break;
-
-            default:
-              console.log("error in column");
               break;
           }
           return element;

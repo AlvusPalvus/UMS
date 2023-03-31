@@ -14,7 +14,7 @@ const Slider = ({ section }: Props) => {
         <div className="relative w-full 2xl:container m-auto">
           <Image
             style={{ objectFit: "cover", zIndex: -1 }}
-            src={"https://" + section.image.url}
+            src={"https:" + section.image.url}
             alt={""}
             fill
           />

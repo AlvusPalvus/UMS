@@ -89,6 +89,7 @@ html,
 body {
   height: 100%;
   width: auto;
+  scroll-padding-top: 64px;
 }
 
 /* Set core body defaults */

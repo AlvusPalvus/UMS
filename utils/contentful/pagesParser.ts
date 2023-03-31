@@ -40,7 +40,11 @@ export const getMainPage = async (id: string) => {
 
 const parseHeader = (res): Header => {
   const { logo, navigationItems } = res.fields.header.fields;
-  const heroImage = res.fields.heroImage;
+  let heroImage = res.fields.heroImage;
+  if (heroImage !== undefined) {
+    heroImage = parseImage(heroImage);
+  }
+
   const heroContent = res.fields.heroText;
   const navLinks = getLinks(navigationItems);
 
@@ -50,7 +54,7 @@ const parseHeader = (res): Header => {
       navigationItems: navLinks,
     },
     hero: {
-      heroImage: parseImage(heroImage),
+      heroImage: heroImage || null,
       heroContent: heroContent || "",
     },
   };

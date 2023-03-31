@@ -69,7 +69,6 @@ export const parseNewsCard = (card): NewsCard => {
 };
 
 export const parseEventsSection = (section): EventsSection => {
-  console.log(section.fields);
   let { slug, heading, events, bodyText, featuredImage } = section.fields;
   if (events !== undefined) {
     events = events.map((card) => parseEventCard(card));

@@ -89,7 +89,7 @@ const renderContactInfo = (contactItem: ContactItem) => {
 
 const tableRow = (item: ContactRow, i: number) => {
   return item.link != undefined ? (
-    <div className="grid grid-cols-7 gap-2 p-3">
+    <div className="grid grid-cols-7 gap-2 p-3" key={i}>
       <div className="col-span-1">
         <a
           className="text-neutral-900 fs-iconsFooter"
@@ -101,16 +101,16 @@ const tableRow = (item: ContactRow, i: number) => {
       </div>
       <div className="col-span-6">
         {item.text.map((textRow, i) => {
-          return <p>{textRow}</p>;
+          return <p key={i}>{textRow}</p>;
         })}
       </div>
     </div>
   ) : (
-    <div className="grid grid-cols-7 gap-2 p-3">
+    <div className="grid grid-cols-7 gap-2 p-3" key={i}>
       <div className="col-span-1 fs-iconsFooter">{item.icon}</div>
       <div className="col-span-6">
         {item.text.map((textRow, i) => {
-          return <p>{textRow}</p>;
+          return <p key={i}>{textRow}</p>;
         })}
       </div>
     </div>

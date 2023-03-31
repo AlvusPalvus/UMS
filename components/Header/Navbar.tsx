@@ -1,11 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { CfImage } from "../../types/Elements";
-import { NavLink } from "../../types/Pages";
 import { FiMenu, FiX, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Navbar as NavbarType } from "../../types/Pages";
 import MobileDropdownItem from "./MobileDropdownItem";
+import { useRouter } from "next/router";
 
 type Props = {
   navbar: NavbarType;
@@ -14,6 +13,7 @@ type Props = {
 const Navbar = ({ navbar }: Props) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
 
   const handleNav = () => {
     setShowMobileNav(!showMobileNav);
@@ -141,6 +141,7 @@ const Navbar = ({ navbar }: Props) => {
                     <Link
                       className="pl-4 py-2 hover:font-bold "
                       href={link.link}
+                      replace
                     >
                       {link.title}
                     </Link>

@@ -1,22 +1,22 @@
 import React from "react";
 import Hero from "../../components/Header/Hero";
 import Navbar from "../../components/Header/Navbar";
-import { Navbar as NavbarType } from "../../types/Pages";
+import { Navbar as NavbarType, Page } from "../../types/Pages";
 import { parseNewsCard } from "../../utils/contentful/assembliesParser";
 import { getContentfulClient } from "../../utils/client";
-import { parseNavbar } from "../../utils/contentful/pagesParser";
+import { getMainPage, parseNavbar } from "../../utils/contentful/pagesParser";
 import Image from "next/image";
 import { NewsCard } from "../../types/Topics";
 import ReactMarkdown from "react-markdown";
+import Section from "../../components/Section";
 import { FiArrowLeft } from "react-icons/fi";
 import router, { useRouter } from "next/router";
 
 const client = getContentfulClient();
-const headerId = "P9esTtWGWhuwPzLPePJ0X";
 
 export const getStaticPaths = async () => {
   const res = await client.getEntries({
-    content_type: "newsCard",
+    content_type: "subPage",
   });
 
   const paths = res.items.map((item) => {
@@ -33,24 +33,24 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const { items } = await client.getEntries({
-    content_type: "newsCard",
+    content_type: "subPage",
     "fields.slug": params.slug,
   });
-
-  const news = parseNewsCard(items[0]);
-  const navbar = await parseNavbar();
+  console.log(items[0].sys.id);
+  const page = await getMainPage(items[0].sys.id);
+  console.log(page);
 
   return {
-    props: { news, navbar },
+    props: { page, navbar: page.header.navbar },
   };
 };
 
 type Props = {
-  news: NewsCard;
+  page: Page;
   navbar: NavbarType;
 };
 
-function Nyhet({ news, navbar }: Props) {
+const Organ = ({ page, navbar }: Props) => {
   const router = useRouter();
   const hero = {
     heroImage: null,
@@ -60,35 +60,23 @@ function Nyhet({ news, navbar }: Props) {
   return (
     <>
       <Hero hero={hero} navbar={navbar} idFirstSection="noId" />
-      <button
-        className="button flex flex-row justify-center items-center gap-3"
-        type="button"
-        onClick={() => router.back()}
-      >
-        <FiArrowLeft />
-        Tillbaka
-      </button>
       <div className="container even-columns card m-4 lg:min-h-[70vh]">
-        <div className="relative">
-          <Image
-            className="object-cover self-center"
-            src={"https:" + news.image.url}
-            alt={news.image.filename}
-            fill
-          />
-        </div>
-        <div className="p-8">
-          <h1 className="fs-primary-heading">{news.heading}</h1>
-          <p className="text-sm">{news.date}</p>
-          <div className="field link">
-            <ReactMarkdown className={"fw-regular  "}>
-              {news.body}
-            </ReactMarkdown>
-          </div>
-        </div>
+        <main className="">
+          <button
+            className="button flex flex-row justify-center items-center gap-3"
+            type="button"
+            onClick={() => router.back()}
+          >
+            <FiArrowLeft />
+            Tillbaka
+          </button>
+          {page.sections.map((section, i) => (
+            <Section section={section} key={i} />
+          ))}
+        </main>
       </div>
     </>
   );
-}
+};
 
-export default Nyhet;
+export default Organ;

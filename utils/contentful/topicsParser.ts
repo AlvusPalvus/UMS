@@ -36,7 +36,7 @@ export const parseComponent = (component): Component => {
 };
 
 const parseField = (field): Field => {
-  let { heading, bodyText, buttons, assets, backgroundColor, displayAs } =
+  let { heading, slug, bodyText, buttons, assets, backgroundColor, displayAs } =
     field.fields;
   if (buttons !== undefined) {
     buttons = buttons.map((button) => {
@@ -48,6 +48,7 @@ const parseField = (field): Field => {
 
   return {
     displayType: displayAs,
+    slug: slug,
     heading: heading || null,
     body: bodyText || null,
     buttons,
@@ -70,8 +71,8 @@ export const parsePerson = (person): Person => {
   return {
     name: person.fields.name || null,
     role: person.fields.role || null,
-    profileImage: parseImage(person.fields.image) || null,
-    contact: parseContact(person.fields.contact) || null,
+    profileImage: person.fields.image ? parseImage(person.fields.image) : null,
+    contact: person.fields.contact ? parseContact(person.fields.contact) : null,
   };
 };
 

@@ -8,8 +8,9 @@ type Props = {
 
 const Gallery = ({ gallery }: Props) => {
   const nrImages = gallery.images.length;
-  const height = "h-[" + Math.round((1 / nrImages) * 100) + "%] ";
-
+  const height = "h-[" + Math.round((1 / nrImages) * 100).toString() + "%] ";
+  const height2 = Math.round((1 / nrImages) * 100) + "%";
+  console.log(height);
   return (
     <>
       {gallery.heading && (

@@ -16,6 +16,7 @@ export async function getStaticProps() {
       sections: page.sections,
       footer: page.footer,
     },
+    revalidate: 60,
   };
 }
 

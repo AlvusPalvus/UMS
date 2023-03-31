@@ -42,6 +42,7 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: { news, navbar },
+    revalidate: 60,
   };
 };
 

@@ -42,7 +42,7 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: { page, navbar: page.header.navbar },
-    revalidate: 60,
+    revalidate: 10,
   };
 };
 

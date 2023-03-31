@@ -45,7 +45,7 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: { event, navbar },
-    revalidate: 60,
+    revalidate: 10,
   };
 };
 

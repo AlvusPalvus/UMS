@@ -5,10 +5,7 @@ import {
   FiFacebook,
   FiInstagram,
 } from "react-icons/fi";
-import { ContactItem } from "../types/Topics";
-import styles from "../styles/Components.module.css";
-import reactMarkdown from "react-markdown";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import { ContactItem, Contact } from "../types/Topics";
 
 type ContactRow = {
   icon: JSX.Element;
@@ -91,11 +88,7 @@ const tableRow = (item: ContactRow, i: number) => {
   return item.link != undefined ? (
     <div className="grid grid-cols-7 gap-2 p-3" key={i}>
       <div className="col-span-1">
-        <a
-          className="text-neutral-900 fs-iconsFooter"
-          href={item.link}
-          target="_blank"
-        >
+        <a className="fs-iconsFooter" href={item.link} target="_blank">
           {item.icon}
         </a>
       </div>
@@ -121,11 +114,13 @@ type Props = {
   contactInfo: ContactItem;
 };
 
-const ContactTable = ({ contactInfo }: Props) => {
-  let contactItems = renderContactInfo(contactInfo) as ContactRow[];
+const ContactTable = ({ contactInfo: contactItems }: Props) => {
+  let contactRow = renderContactInfo(contactItems) as ContactRow[];
   return (
-    <div className={"flex flex-col align-baseline justify-between"}>
-      {contactItems.map((item, i) => tableRow(item, i))}
+    <div className={"flex flex-col align-baseline justify-between "}>
+      {contactRow.map((item, i) => {
+        return tableRow(item, i);
+      })}
     </div>
   );
 };

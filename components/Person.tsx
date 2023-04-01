@@ -11,7 +11,7 @@ const Person = ({ person }: Props) => {
     <div>
       <h1>{person.name}</h1>
       {person.contact && (
-        <ContactTable contactInfo={person.contact.contactItem} />
+        <ContactTable contactInfo={person.contact.contactItems} />
       )}
     </div>
   );

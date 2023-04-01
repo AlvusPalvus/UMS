@@ -23,7 +23,7 @@ export type Accordion = "Accordion";
 export type Contact = {
   heading?: string;
   text?: string;
-  contactItem: ContactItem;
+  contactItems: ContactItem;
 };
 
 export type Person = {

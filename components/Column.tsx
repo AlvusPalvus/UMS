@@ -1,16 +1,16 @@
 import React from "react";
 import {
-  ContactItem,
   Field as FieldType,
   Person as PersonType,
   Gallery as GalleryType,
+  Contact as ContactType,
 } from "../types/Topics";
 import { Column as ColumnType } from "../types/Assemblies";
 
 import { Card, PlainText, Accordion } from "./Field";
-import ContactTable from "./ContactTable";
 import Gallery from "./Gallery";
 import Person from "./Person";
+import Contact from "./Contact";
 
 type Props = {
   column: ColumnType;
@@ -65,14 +65,15 @@ const Column = ({ column }: Props) => {
                 />
               );
               break;
-            case "Contact":
+            case "Contact": {
               element = (
-                <ContactTable
+                <Contact
                   key={i}
-                  contactInfo={component.parsedComponent as ContactItem}
+                  contact={component.parsedComponent as ContactType}
                 />
               );
               break;
+            }
           }
           return element;
         })}

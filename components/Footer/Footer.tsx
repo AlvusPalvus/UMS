@@ -35,7 +35,7 @@ function Footer({ sponsors, contact, logo, socials, backgroundImage }: Footer) {
         <div className={styles.bottomSection}>
           <div style={{ order: 1 }} className={styles.contactChild}>
             <h2>{contact.heading}</h2>
-            <ContactTable contactInfo={contact.contactItem} />
+            <ContactTable contactInfo={contact.contactItems} />
           </div>
           <div className={styles.logoChild}>
             <Image
@@ -48,7 +48,7 @@ function Footer({ sponsors, contact, logo, socials, backgroundImage }: Footer) {
           </div>
           <div className={styles.socialsChild}>
             <h2>{socials.heading}</h2>
-            <ContactTable contactInfo={socials.contactItem} />
+            <ContactTable contactInfo={socials.contactItems} />
           </div>
         </div>
       </div>

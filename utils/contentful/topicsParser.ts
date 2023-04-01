@@ -11,6 +11,7 @@ import { parseImage } from "./elementsParser";
 export const parseComponent = (component): Component => {
   const type = component.sys.contentType.sys.id;
   // console.log(type);
+  console.log(type);
   let parsedComponent = null;
   let componentType;
   if (type == "card") {
@@ -80,11 +81,12 @@ export const parseContact = (contact): Contact => {
   return {
     heading: contact.fields.heading || null,
     text: contact.fields.text || null,
-    contactItem: parseContactItem(contact.fields),
+    contactItems: parseContactItems(contact.fields),
   };
 };
 
-const parseContactItem = (contactFields): ContactItem => {
+const parseContactItems = (contactFields): ContactItem => {
+  console.log(contactFields);
   const email = contactFields.eMail || null;
   const phone = contactFields.phone || null;
   const adress = contactFields.adress || null;

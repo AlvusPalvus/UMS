@@ -56,7 +56,7 @@ export const PlainText = ({ component }: Props) => {
 
 export const Accordion = ({ component }: Props) => {
   return (
-    <div className={"field accordion"}>
+    <div className={"field accordion"} id={component.slug}>
       {component.heading && <h3 className="h3">{component.heading}</h3>}
       <div className="link">
         {documentToReactComponents(component.body, options)}
@@ -78,7 +78,7 @@ export const Accordion = ({ component }: Props) => {
 
 export const Card = ({ component }: Props) => {
   return (
-    <div className={"field card px-8 pb-8 pt-4"}>
+    <div className={"field card px-8 pb-8 pt-4"} id={component.slug}>
       {component.heading && <h3 className="h3">{component.heading}</h3>}
       <div className=" link ">
         {documentToReactComponents(component.body, options)}

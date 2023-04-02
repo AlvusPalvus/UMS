@@ -20,18 +20,22 @@ const EventCard = ({ event }: Props) => {
       className="card flex flex-row cursor-pointer h-2/4 md:max-w-[50%] my-12 m-8"
       onClick={handleClick}
     >
-      <Gallery
-        gallery={{
-          heading: "",
-          images: [event.image],
-        }}
-      />
+      <div className="relative min-w-[40%] lg:min-w-[30%] h-full">
+        <Gallery
+          gallery={{
+            heading: "",
+            images: [event.image],
+          }}
+        />
+      </div>
       <div>
         <p className=" text-sm ">{event.date + " kl. " + event.time}</p>
         <h3 className="h3">{event.heading}</h3>
 
         <div className="link">
-          <ReactMarkdown className={"fw-regular  "}>{event.body}</ReactMarkdown>
+          <ReactMarkdown className={"fw-regular  "} linkTarget="_blank">
+            {event.body}
+          </ReactMarkdown>
         </div>
       </div>
     </div>

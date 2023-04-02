@@ -91,7 +91,7 @@ function Event({ event, navbar }: Props) {
             <h1 className="fs-primary-heading">{event.heading}</h1>
             <p className="text-sm">{event.date}</p>
             <div className="field link">
-              <ReactMarkdown className={"fw-regular  "}>
+              <ReactMarkdown className={"fw-regular  "} linkTarget="_blank">
                 {event.body}
               </ReactMarkdown>
             </div>

@@ -129,7 +129,7 @@ h3 {
 
 .link a {
   color: var(--clr-secondary-400);
-  padding-top: var(--size-400);
+  /* padding-top: var(--size-400); */
   font-family: var(--ff-medium);
   line-height: 2rem;
 }
@@ -281,7 +281,7 @@ td {
   gap: 1rem;
 }
 
-p {
+.field p {
   margin-bottom: var(--fs-body);
 }
 

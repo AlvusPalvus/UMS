@@ -16,70 +16,40 @@ type ContactRow = {
 const renderContactInfo = (contactItem: ContactItem) => {
   let contactInfo: ContactRow[] = [];
 
-  if (contactItem.email != null) {
-    const text = [];
-    text.push(contactItem.email);
+  contactItem.email &&
     contactInfo.push({
       icon: <FiMail />,
-      text: text,
+      text: [contactItem.email],
     });
-  }
 
-  if (contactItem.phone != null) {
-    const text = [];
-    text.push(contactItem.phone);
+  contactItem.phone &&
     contactInfo.push({
       icon: <FiPhone />,
-      text: text,
+      text: [contactItem.phone],
+    });
+
+  if (contactItem.adress) {
+    const adressArray = contactItem.adress.split("\n");
+    contactInfo.push({
+      icon: <FiMapPin />,
+      text: adressArray,
+      link: contactItem.adressLink ?? null,
     });
   }
 
-  if (contactItem.adress != null) {
-    const adress = contactItem.adress;
-    const adressArray = adress.split("\n");
+  contactItem.facebook &&
+    contactInfo.push({
+      icon: <FiFacebook />,
+      text: [contactItem.facebook],
+      link: contactItem.facebookLink ?? null,
+    });
 
-    contactItem.adressLink != null
-      ? contactInfo.push({
-          icon: <FiMapPin />,
-          text: adressArray,
-          link: contactItem.adressLink,
-        })
-      : contactInfo.push({
-          icon: <FiMapPin />,
-          text: adressArray,
-        });
-  }
-
-  if (contactItem.facebook != null) {
-    const text = [];
-    text.push(contactItem.facebook);
-
-    contactItem.facebookLink != null
-      ? contactInfo.push({
-          icon: <FiFacebook />,
-          text: text,
-          link: contactItem.facebookLink,
-        })
-      : contactInfo.push({
-          icon: <FiFacebook />,
-          text: text,
-        });
-  }
-
-  if (contactItem.instagram != null) {
-    const text = [];
-    text.push(contactItem.instagram);
-    contactItem.instagramLink != null
-      ? contactInfo.push({
-          icon: <FiInstagram />,
-          text: text,
-          link: contactItem.instagramLink,
-        })
-      : contactInfo.push({
-          icon: <FiInstagram />,
-          text: text,
-        });
-  }
+  contactItem.instagram &&
+    contactInfo.push({
+      icon: <FiInstagram />,
+      text: [contactItem.instagram],
+      link: contactItem.instagramLink ?? null,
+    });
 
   return contactInfo;
 };

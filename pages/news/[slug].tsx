@@ -61,30 +61,32 @@ function Nyhet({ news, navbar }: Props) {
   return (
     <>
       <Hero hero={hero} navbar={navbar} idFirstSection="noId" />
-      <button
-        className="button flex flex-row justify-center items-center gap-3"
-        type="button"
-        onClick={() => router.back()}
-      >
-        <FiArrowLeft />
-        Tillbaka
-      </button>
-      <div className="container even-columns card m-4 lg:min-h-[70vh]">
-        <div className="relative">
-          <Image
-            className="object-cover self-center"
-            src={"https:" + news.image.url}
-            alt={news.image.filename}
-            fill
-          />
-        </div>
-        <div className="p-8">
-          <h1 className="fs-primary-heading">{news.heading}</h1>
-          <p className="text-sm">{news.date}</p>
-          <div className="field link">
-            <ReactMarkdown className={"fw-regular  "}>
-              {news.body}
-            </ReactMarkdown>
+      <div className="container">
+        <button
+          className="button flex flex-row justify-center items-center gap-3"
+          type="button"
+          onClick={() => router.back()}
+        >
+          <FiArrowLeft />
+          Tillbaka
+        </button>
+        <div className=" even-columns  m-4 lg:min-h-[70vh]">
+          <div className="relative">
+            <Image
+              className="object-cover self-center"
+              src={"https:" + news.image.url}
+              alt={news.image.filename}
+              fill
+            />
+          </div>
+          <div className="p-8">
+            <h1 className="fs-primary-heading">{news.heading}</h1>
+            <p className="text-sm">{news.date}</p>
+            <div className="field link">
+              <ReactMarkdown className={"fw-regular  "} linkTarget="_blank">
+                {news.body}
+              </ReactMarkdown>
+            </div>
           </div>
         </div>
       </div>

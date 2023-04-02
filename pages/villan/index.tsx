@@ -19,7 +19,6 @@ export async function getStaticProps() {
 }
 
 export default function Home({ header, sections, footer }) {
-  console.log(sections);
   return (
     <>
       <Hero

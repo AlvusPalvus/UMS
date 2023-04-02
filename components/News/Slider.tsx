@@ -30,11 +30,13 @@ const Slider = ({ section }: Props) => {
       )}
 
       <div className="bg-accent-100 ">
-        <div className="container flex flex-wrap bg-white bg-opacity-70">
-          {section.news.map((card) => (
-            <NewsCard card={card} width={300} key={card.slug} />
-          ))}
-        </div>{" "}
+        <div className="container  h-fit overflow-hidden bg-white bg-opacity-70">
+          <div className="h-fit bg-white flex p-2 gap-2 lg:p-8 lg:gap-8 overflow-x-scroll lg:my-12 lg:mx-8 ">
+            {section.news.map((card) => (
+              <NewsCard card={card} width={300} key={card.slug} />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

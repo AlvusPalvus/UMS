@@ -8,9 +8,8 @@ type Props = {
 
 const Gallery = ({ gallery }: Props) => {
   const nrImages = gallery.images.length;
-  const height = "h-[" + Math.round((1 / nrImages) * 100).toString() + "%] ";
+
   const height2 = Math.round((1 / nrImages) * 100) + "%";
-  console.log(height2);
   return (
     <>
       {gallery.heading && (
@@ -21,11 +20,11 @@ const Gallery = ({ gallery }: Props) => {
         {gallery.images.map((logo, i) => (
           <div
             key={i}
-            className={" relative w-full min-h-[20vh] min-w-[20vw] "}
+            className={" relative w-full min-h-[20vh] min-w-[20vw] md:min-w-0 "}
             style={{ height: height2 }}
           >
             <Image
-              className="object-cover p-0.5 md:p-2 "
+              className="object-cover "
               src={"https:" + logo.url}
               fill
               alt={logo.filename}

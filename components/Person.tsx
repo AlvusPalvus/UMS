@@ -13,7 +13,7 @@ const Person = ({ person }: Props) => {
         <div className={"flex "}>
             {person.profileImage ? (
                 <Image
-                    src={"https://" + person.profileImage.url}
+                    src={"https:" + person.profileImage.url}
                     width={45}
                     height={45}
                     alt={person.profileImage.filename}

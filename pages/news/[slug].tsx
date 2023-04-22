@@ -1,6 +1,5 @@
 import React from "react";
 import Hero from "../../components/Header/Hero";
-import Navbar from "../../components/Header/Navbar";
 import { Navbar as NavbarType } from "../../types/Pages";
 import { parseNewsCard } from "../../utils/contentful/assembliesParser";
 import { getContentfulClient } from "../../utils/client";

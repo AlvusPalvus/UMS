@@ -86,8 +86,6 @@ export const parseImageComponent = (imageComponent): ImageComponent => {
         console.error("image required error", imageComponent);
     }
 
-    console.log(displaySetting);
-
     return {
         image: parseCfImage(image),
         displaySettings: displaySetting,

@@ -15,69 +15,67 @@ import router, { useRouter } from "next/router";
 const client = getContentfulClient();
 
 export const getStaticPaths = async () => {
-  const res = await client.getEntries({
-    content_type: "subPage",
-  });
+    const res = await client.getEntries({
+        content_type: "subPage",
+    });
 
-  const paths = res.items.map((item) => {
+    const paths = res.items.map((item) => {
+        return {
+            params: { slug: item.fields.slug },
+        };
+    });
+
     return {
-      params: { slug: item.fields.slug },
+        paths,
+        fallback: false,
     };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
 };
 
 export const getStaticProps = async ({ params }) => {
-  const { items } = await client.getEntries({
-    content_type: "subPage",
-    "fields.slug": params.slug,
-  });
-  console.log(items[0].sys.id);
-  const page = await getMainPage(items[0].sys.id);
-  console.log(page);
+    const { items } = await client.getEntries({
+        content_type: "subPage",
+        "fields.slug": params.slug,
+    });
+    const page = await getMainPage(items[0].sys.id);
 
-  return {
-    props: { page, navbar: page.header.navbar },
-    revalidate: 10,
-  };
+    return {
+        props: { page, navbar: page.header.navbar },
+        revalidate: 10,
+    };
 };
 
 type Props = {
-  page: Page;
-  navbar: NavbarType;
+    page: Page;
+    navbar: NavbarType;
 };
 
 const Organ = ({ page, navbar }: Props) => {
-  const router = useRouter();
-  const hero = {
-    heroImage: null,
-    heroContent: null,
-  };
+    const router = useRouter();
+    const hero = {
+        heroImage: null,
+        heroContent: null,
+    };
 
-  return (
-    <>
-      <Hero hero={hero} navbar={navbar} idFirstSection="noId" />
-      <div className="container even-columns card m-4 lg:min-h-[70vh]">
-        <main className="">
-          <button
-            className="button flex flex-row justify-center items-center gap-3"
-            type="button"
-            onClick={() => router.back()}
-          >
-            <FiArrowLeft />
-            Tillbaka
-          </button>
-          {page.sections.map((section, i) => (
-            <Section section={section} key={i} />
-          ))}
-        </main>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <Hero hero={hero} navbar={navbar} idFirstSection="noId" />
+            <div className="container even-columns card m-4 lg:min-h-[70vh]">
+                <main className="">
+                    <button
+                        className="button flex flex-row justify-center items-center gap-3"
+                        type="button"
+                        onClick={() => router.back()}
+                    >
+                        <FiArrowLeft />
+                        Tillbaka
+                    </button>
+                    {page.sections.map((section, i) => (
+                        <Section section={section} key={i} />
+                    ))}
+                </main>
+            </div>
+        </>
+    );
 };
 
 export default Organ;

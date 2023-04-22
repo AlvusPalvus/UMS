@@ -85,7 +85,6 @@ const Column = ({ column }: Props) => {
                             break;
                         }
                         case "Image": {
-                            console.log(component.parsedComponent);
                             element = (
                                 <ImageComponent
                                     key={i}

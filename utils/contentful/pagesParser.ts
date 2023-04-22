@@ -84,7 +84,6 @@ export const parseNavbarWithClient = async (client) => {
     );
 
     const nav_res = await client.getEntry(res.items[0].sys.id, { include: 4 });
-    console.log(nav_res);
     const { logo, navigationItems } = nav_res.fields;
     const navLinks = getLinks(navigationItems);
 

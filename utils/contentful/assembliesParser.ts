@@ -1,104 +1,104 @@
 import {
-  Column,
-  EventsSection,
-  NewsSection,
-  StandardSection,
+    Column,
+    EventsSection,
+    NewsSection,
+    StandardSection,
 } from "../../types/Assemblies";
 import { NewsCard, EventCard } from "../../types/Topics";
-import { parseImage } from "./elementsParser";
+import { parseCfImage } from "./elementsParser";
 import { parseComponent } from "./topicsParser";
 
 export const parseSection = (section): StandardSection => {
-  let { slug, heading, columns, backgroundColor } = section.fields;
+    let { slug, heading, columns, backgroundColor } = section.fields;
 
-  if (columns !== undefined) {
-    columns = columns.map((column) => parseColumn(column));
-  } else columns = null;
+    if (columns !== undefined) {
+        columns = columns.map((column) => parseColumn(column));
+    } else columns = null;
 
-  return {
-    type: "section",
-    slug: slug || null,
-    heading: heading || null,
-    columns,
-    backgroundColor: backgroundColor || null,
-  };
+    return {
+        type: "section",
+        slug: slug || null,
+        heading: heading || null,
+        columns,
+        backgroundColor: backgroundColor || null,
+    };
 };
 
 const parseColumn = (column): Column => {
-  let { components, backgroundColor, slug } = column.fields;
-  if (components !== undefined) {
-    components = components.map((component) => parseComponent(component));
-  } else components = null;
+    let { components, backgroundColor, slug } = column.fields;
+    if (components !== undefined) {
+        components = components.map((component) => parseComponent(component));
+    } else components = null;
 
-  return {
-    components: components || null,
-    backgroundColor: backgroundColor || null,
-    slug: slug || null,
-  };
+    return {
+        components: components || null,
+        backgroundColor: backgroundColor || null,
+        slug: slug || null,
+    };
 };
 
 export const parseNewsSection = (section): NewsSection => {
-  let { title, slug, newsCards, featuredImage } = section.fields;
-  if (newsCards !== undefined) {
-    newsCards = newsCards.map((card) => parseNewsCard(card));
-  } else newsCards = null;
-  let image = parseImage(featuredImage);
+    let { title, slug, newsCards, featuredImage } = section.fields;
+    if (newsCards !== undefined) {
+        newsCards = newsCards.map((card) => parseNewsCard(card));
+    } else newsCards = null;
+    let image = parseCfImage(featuredImage);
 
-  return {
-    type: "newsSection",
-    slug: slug || null,
-    heading: title,
-    news: newsCards,
-    image: image,
-  };
+    return {
+        type: "newsSection",
+        slug: slug || null,
+        heading: title,
+        news: newsCards,
+        image: image,
+    };
 };
 
 export const parseNewsCard = (card): NewsCard => {
-  let { heading, slug, date, bodyText, featuredImage } = card.fields;
-  featuredImage !== "undefined"
-    ? (featuredImage = parseImage(featuredImage))
-    : (featuredImage = null);
+    let { heading, slug, date, bodyText, featuredImage } = card.fields;
+    featuredImage !== "undefined"
+        ? (featuredImage = parseCfImage(featuredImage))
+        : (featuredImage = null);
 
-  return {
-    slug: slug,
-    heading: heading,
-    date: date,
-    body: bodyText || null,
-    image: featuredImage || null,
-  };
+    return {
+        slug: slug,
+        heading: heading,
+        date: date,
+        body: bodyText || null,
+        image: featuredImage || null,
+    };
 };
 
 export const parseEventsSection = (section): EventsSection => {
-  let { slug, heading, events, bodyText, featuredImage } = section.fields;
-  if (events !== undefined) {
-    events = events.map((card) => parseEventCard(card));
-  } else events = null;
-  let image = featuredImage ? parseImage(featuredImage) : null;
+    let { slug, heading, events, bodyText, featuredImage } = section.fields;
+    if (events !== undefined) {
+        events = events.map((card) => parseEventCard(card));
+    } else events = null;
+    let image = featuredImage ? parseCfImage(featuredImage) : null;
 
-  return {
-    type: "eventsSection",
-    slug,
-    heading: heading || null,
-    body: bodyText || null,
-    events: events,
-    image: image,
-  };
+    return {
+        type: "eventsSection",
+        slug,
+        heading: heading || null,
+        body: bodyText || null,
+        events: events,
+        image: image,
+    };
 };
 
 export const parseEventCard = (card): EventCard => {
-  let { heading, slug, dateAndTime, bodyText, featuredImage } = card.fields;
-  dateAndTime = dateAndTime.split("T");
-  console.log(dateAndTime);
-  featuredImage !== "undefined"
-    ? (featuredImage = parseImage(featuredImage))
-    : (featuredImage = null);
+    let { heading, slug, dateAndTime, bodyText, featuredImage } = card.fields;
+    dateAndTime = dateAndTime.split("T");
+    console.log(dateAndTime);
+    featuredImage !== "undefined"
+        ? (featuredImage = parseCfImage(featuredImage))
+        : (featuredImage = null);
 
-  return {
-    slug: slug,
-    heading: heading,
-    date: dateAndTime[0],
-    time: dateAndTime[1],
-    body: bodyText || null,
-    image: featuredImage,
-  };
+    return {
+        slug: slug,
+        heading: heading,
+        date: dateAndTime[0],
+        time: dateAndTime[1],
+        body: bodyText || null,
+        image: featuredImage,
+    };
 };

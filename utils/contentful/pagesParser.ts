@@ -6,7 +6,7 @@ import {
     parseEventsSection,
 } from "./assembliesParser";
 import { getContentfulClient } from "../client";
-import { parseImage } from "./elementsParser";
+import { parseCfImage } from "./elementsParser";
 import { parseContact, parseGallery } from "./topicsParser";
 
 const client = getContentfulClient();
@@ -42,7 +42,7 @@ const parseHeader = (res): Header => {
     const { logo, navigationItems } = res.fields.header.fields;
     let heroImage = res.fields.heroImage;
     if (heroImage !== undefined) {
-        heroImage = parseImage(heroImage);
+        heroImage = parseCfImage(heroImage);
     }
 
     const heroContent = res.fields.heroText;
@@ -50,7 +50,7 @@ const parseHeader = (res): Header => {
 
     return {
         navbar: {
-            logo: parseImage(logo),
+            logo: parseCfImage(logo),
             navigationItems: navLinks,
         },
         hero: {
@@ -72,7 +72,7 @@ export const parseNavbar = async () => {
     const navLinks = getLinks(navigationItems);
 
     return {
-        logo: parseImage(logo),
+        logo: parseCfImage(logo),
         navigationItems: navLinks,
     };
 };
@@ -89,7 +89,7 @@ export const parseNavbarWithClient = async (client) => {
     const navLinks = getLinks(navigationItems);
 
     return {
-        logo: parseImage(logo),
+        logo: parseCfImage(logo),
         navigationItems: navLinks,
     };
 };
@@ -119,8 +119,8 @@ const parseFooter = (res): Footer => {
     return {
         sponsors: sponsors === undefined ? parseGallery(sponsors) : null,
         contact: parseContact(contact),
-        logo: parseImage(logo),
+        logo: parseCfImage(logo),
         socials: parseContact(socials),
-        backgroundImage: parseImage(backgroundImage),
+        backgroundImage: parseCfImage(backgroundImage),
     };
 };

@@ -1,17 +1,17 @@
 import { Component } from "../../types/Assemblies";
+import { CfImage } from "../../types/Elements";
 import {
     Contact,
     ContactItem,
     Field,
     Gallery,
+    ImageComponent,
     Person,
 } from "../../types/Topics";
-import { parseImage } from "./elementsParser";
+import { parseCfImage } from "./elementsParser";
 
 export const parseComponent = (component): Component => {
-    console.log(component);
     const type = component.sys.contentType.sys.id;
-    // console.log(type);
     let parsedComponent = null;
     let componentType;
     if (type == "card") {
@@ -26,8 +26,11 @@ export const parseComponent = (component): Component => {
     } else if (type == "person") {
         parsedComponent = parsePerson(component);
         componentType = "Person";
+    } else if (type == "image") {
+        parsedComponent = parseImageComponent(component);
+        componentType = "Image";
     } else {
-        console.log(type);
+        console.error(type);
     }
 
     return {
@@ -46,6 +49,7 @@ const parseField = (field): Field => {
         backgroundColor,
         displayAs,
     } = field.fields;
+
     if (buttons !== undefined) {
         buttons = buttons.map((button) => {
             const text = button.fields.buttonText;
@@ -67,7 +71,7 @@ const parseField = (field): Field => {
 
 export const parseGallery = (gallery): Gallery => {
     const images = gallery.fields.images.map((image) => {
-        return parseImage(image);
+        return parseCfImage(image);
     });
     return {
         heading: gallery.fields.heading || null,
@@ -75,13 +79,27 @@ export const parseGallery = (gallery): Gallery => {
     };
 };
 
+export const parseImageComponent = (imageComponent): ImageComponent => {
+    const { image, displaySetting } = imageComponent.fields;
+
+    if (image === undefined) {
+        console.error("image required error", imageComponent);
+    }
+
+    console.log(displaySetting);
+
+    return {
+        image: parseCfImage(image),
+        displaySettings: displaySetting,
+    };
+};
+
 export const parsePerson = (person): Person => {
-    console.log(person.fields);
     return {
         name: person.fields.name || null,
         role: person.fields.role || null,
         profileImage: person.fields.profilePicture
-            ? parseImage(person.fields.profilePicture)
+            ? parseCfImage(person.fields.profilePicture)
             : null,
         contact: person.fields.contact
             ? parseContact(person.fields.contact)
@@ -98,7 +116,6 @@ export const parseContact = (contact): Contact => {
 };
 
 const parseContactItems = (contactFields): ContactItem => {
-    console.log(contactFields);
     const email = contactFields.eMail || null;
     const phone = contactFields.phone || null;
     const adress = contactFields.adress || null;

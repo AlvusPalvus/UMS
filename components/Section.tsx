@@ -5,7 +5,7 @@ import {
   StandardSection,
 } from "../types/Assemblies";
 import { Section as SectionType } from "../types/Assemblies";
-import Slider from "./News/Slider";
+import NewsSection from "./News/NewsSection";
 import EventSection from "./Events/EventSection";
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 const Section = ({ section }: Props) => {
   switch (section.type) {
     case "newsSection":
-      return <Slider section={section} key={section.slug} />;
+      return <NewsSection section={section} key={section.slug} />;
     case "section":
       return getSection(section);
     case "eventsSection":

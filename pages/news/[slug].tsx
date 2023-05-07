@@ -9,6 +9,7 @@ import { NewsCard } from "../../types/Topics";
 import ReactMarkdown from "react-markdown";
 import { FiArrowLeft } from "react-icons/fi";
 import router, { useRouter } from "next/router";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 const client = getContentfulClient();
 
@@ -85,12 +86,7 @@ function Nyhet({ news, navbar }: Props) {
                         <h1 className="fs-primary-heading">{news.heading}</h1>
                         <p className="text-sm">{news.date}</p>
                         <div className="field link">
-                            <ReactMarkdown
-                                className={"fw-regular  "}
-                                linkTarget="_blank"
-                            >
-                                {news.body}
-                            </ReactMarkdown>
+                            {documentToReactComponents(news.body)}
                         </div>
                     </div>
                 </div>

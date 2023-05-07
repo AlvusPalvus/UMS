@@ -2,14 +2,15 @@ import React from "react";
 import { NewsSection } from "../../types/Assemblies";
 import NewsCard from "./NewsCard";
 import Image from "next/image";
+import Slider from "../Slider";
 
 type Props = {
   section: NewsSection;
 };
 
-const Slider = ({ section }: Props) => {
+const NewsSection = ({ section }: Props) => {
   return (
-    <section className="section" id={section.slug}>
+    <section className="section border" id={section.slug} >
       {section.image ? (
         <div className="relative w-full 2xl:container m-auto">
           <Image
@@ -28,18 +29,11 @@ const Slider = ({ section }: Props) => {
       ) : (
         <h2 className="fs-secondary-heading">{section.heading}</h2>
       )}
+      <Slider news={section.news} />
 
-      <div className="bg-accent-100 ">
-        <div className="container  h-fit overflow-hidden bg-white bg-opacity-70">
-          <div className="h-fit bg-white flex p-2 gap-2 lg:p-8 lg:gap-8 overflow-x-scroll lg:my-12 lg:mx-8 ">
-            {section.news.map((card) => (
-              <NewsCard card={card} width={300} key={card.slug} />
-            ))}
-          </div>
-        </div>
-      </div>
+
     </section>
   );
 };
 
-export default Slider;
+export default NewsSection;

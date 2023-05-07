@@ -29,7 +29,10 @@ const NewsSection = ({ section }: Props) => {
       ) : (
         <h2 className="fs-secondary-heading">{section.heading}</h2>
       )}
-      <Slider news={section.news} />
+      <div className="p-4 bg-white bg-opacity-70">
+
+        <Slider news={section.news} />
+      </div>
 
 
     </section>

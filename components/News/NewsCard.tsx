@@ -11,12 +11,9 @@ type Props = {
 };
 
 const NewsCard = ({ card, width, index }: Props) => {
-
-
     return (
-        <Link id={`news-index-${index}`} className="cursor-pointer shrink-0 lg:basis-2/6  md:basis-1/2 basis-full snap-start" href={"/news/" + card.slug}>
-            <div className="card bg-neutral-100 link p-4 flex flex-col gap-1.5 h-full">
-
+        <Link id={`news-index-${index}`} className="rounded-xl cursor-pointer box-border shrink-0 lg:basis-2/6   md:basis-1/2 basis-full snap-start " href={"/news/" + card.slug}>
+            <div className=" border-x-4 border-[color:var(--clr-secondary-100)] rounded-xl bg-neutral-100  link p-4 flex flex-col gap-1.5 h-full">
                 <span className="text-sm text-gray">{card.date}</span>
                 <h3 className="h3 whitespace-pre-wrap p-0 ">{card.heading}</h3>
                 <p>

@@ -47,7 +47,10 @@ export const parseNewsSection = (section): NewsSection => {
     if (newsCards !== undefined) {
         newsCards = newsCards.map((card) => parseNewsCard(card));
     } else newsCards = null;
-    let image = parseCfImage(featuredImage);
+    let image;
+    featuredImage !== undefined
+        ? (image = parseCfImage(featuredImage))
+        : (image = null);
 
     return {
         type: "newsSection",
@@ -59,7 +62,8 @@ export const parseNewsSection = (section): NewsSection => {
 };
 
 export const parseNewsCard = (card): NewsCard => {
-    let { heading, slug, date, bodyText, featuredImage } = card.fields;
+    let { heading, slug, date, bodyText, previewText, featuredImage } =
+        card.fields;
     featuredImage !== "undefined"
         ? (featuredImage = parseCfImage(featuredImage))
         : (featuredImage = null);
@@ -69,6 +73,7 @@ export const parseNewsCard = (card): NewsCard => {
         heading: heading,
         date: date,
         body: bodyText || null,
+        preview: previewText,
         image: featuredImage || null,
     };
 };

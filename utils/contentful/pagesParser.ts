@@ -67,7 +67,6 @@ export const parseNavbar = async () => {
     );
 
     const nav_res = await client.getEntry(res.items[0].sys.id, { include: 4 });
-    console.log(nav_res);
     const { logo, navigationItems } = nav_res.fields;
     const navLinks = getLinks(navigationItems);
 
@@ -111,6 +110,7 @@ const getLinks = (navigationItems): NavLink[] => {
     const links = navigationItems.map((navItem) => parseNavItem(navItem));
     return links;
 };
+
 const parseFooter = (res): Footer => {
     const { sponsors, contact, logo, socials, backgroundImage } =
         res.fields.footer.fields;

@@ -28,13 +28,12 @@ const getField = (component: FieldType) => {
             return <PlainText key={component.slug} component={component} />;
 
         default:
-            console.log("error in field");
+            console.error("error in field");
             break;
     }
 };
 
 const Column = ({ column }: Props) => {
-    console.log(column.displayType);
     let styling = "flex gap-4 flex-col ";
     if (column.displayType === "Accordion") {
         styling = "flex gap-4 flex-col ";

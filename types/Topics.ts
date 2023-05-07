@@ -54,7 +54,8 @@ export type NewsCard = {
     heading: string;
     date: string;
     body: string;
-    image: CfImage;
+    preview: string;
+    image?: CfImage;
 };
 export type EventCard = {
     slug: string;

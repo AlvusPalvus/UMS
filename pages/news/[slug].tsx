@@ -69,14 +69,18 @@ function Nyhet({ news, navbar }: Props) {
                     Tillbaka
                 </button>
                 <div className=" even-columns  m-4 lg:min-h-[70vh]">
-                    <div className="relative">
-                        <Image
-                            className="object-cover self-center"
-                            src={"https:" + news.image.url}
-                            alt={news.image.filename}
-                            fill
-                        />
-                    </div>
+                    {news.image && (
+                        <div className="relative">
+                            (
+                            <Image
+                                className="object-cover self-center"
+                                src={"https:" + news.image.url}
+                                alt={news.image.filename}
+                                fill
+                            />
+                            )
+                        </div>
+                    )}
                     <div className="p-8">
                         <h1 className="fs-primary-heading">{news.heading}</h1>
                         <p className="text-sm">{news.date}</p>

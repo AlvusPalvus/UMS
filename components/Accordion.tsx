@@ -13,9 +13,9 @@ const Accordion = ({ heading, content, id }: Props) => {
         setIsOpen(!isOpen);
     };
     return (
-        <div id={id}>
+        <div className="bg-white mx-12 rounded-xl " id={id}>
             <div
-                className="flex justify-between items-center py-4 px-6 cursor-pointer select-none"
+                className="flex justify-between items-center py-2 px-6 cursor-pointer select-none"
                 onClick={toggleAccordion}
             >
                 {heading && <h3 className="h3">{heading}</h3>}

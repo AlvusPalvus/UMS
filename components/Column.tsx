@@ -36,9 +36,9 @@ const getField = (component: FieldType) => {
 };
 
 const Column = ({ column }: Props) => {
-    let styling = "flex gap-4 flex-col ";
+    let styling = "flex gap-4 flex-col space-evenly ";
     if (column.displayType === "Accordion") {
-        styling = "flex gap-4 flex-col ";
+        styling = "flex gap-4 flex-col my-12";
     }
     if (column.displayType === "Card") {
         styling = "flex gap-4 flex-col card";
@@ -58,18 +58,9 @@ const Column = ({ column }: Props) => {
 
                     switch (field) {
                         case "Field":
-                            column.displayType === "Plain Text"
-                                ? (element = getField(
-                                      component.parsedComponent as FieldType
-                                  ))
-                                : (element = (
-                                      <PlainText
-                                          key={i}
-                                          component={
-                                              component.parsedComponent as FieldType
-                                          }
-                                      />
-                                  ));
+                            element = getField(
+                                component.parsedComponent as FieldType
+                            );
                             break;
 
                         case "Person":

@@ -25,15 +25,20 @@ export const parseSection = (section): StandardSection => {
 };
 
 const parseColumn = (column): Column => {
-    let { components, backgroundColor, slug } = column.fields;
+    let { components, backgroundColor, slug, displayType } = column.fields;
     if (components !== undefined) {
         components = components.map((component) => parseComponent(component));
     } else components = null;
+
+    if (displayType !== "Accordion" && displayType !== "Card") {
+        displayType = "Plain Text";
+    }
 
     return {
         components: components || null,
         backgroundColor: backgroundColor || null,
         slug: slug || null,
+        displayType,
     };
 };
 

@@ -34,9 +34,18 @@ const getField = (component: FieldType) => {
 };
 
 const Column = ({ column }: Props) => {
+    console.log(column.displayType);
+    let styling = "flex gap-4 flex-col ";
+    if (column.displayType === "Accordion") {
+        styling = "flex gap-4 flex-col ";
+    }
+    if (column.displayType === "Card") {
+        styling = "flex gap-4 flex-col card";
+    }
+
     return (
         <div
-            className="flex gap-4 flex-col "
+            className={styling}
             style={{ backgroundColor: column.backgroundColor }}
             id={column.slug}
         >
@@ -48,11 +57,20 @@ const Column = ({ column }: Props) => {
 
                     switch (field) {
                         case "Field":
-                            element = getField(
-                                component.parsedComponent as FieldType
-                            );
-
+                            column.displayType === "Plain Text"
+                                ? (element = getField(
+                                      component.parsedComponent as FieldType
+                                  ))
+                                : (element = (
+                                      <PlainText
+                                          key={i}
+                                          component={
+                                              component.parsedComponent as FieldType
+                                          }
+                                      />
+                                  ));
                             break;
+
                         case "Person":
                             element = (
                                 <Person

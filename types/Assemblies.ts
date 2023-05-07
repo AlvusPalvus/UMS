@@ -41,6 +41,7 @@ export type Column = {
     slug: string;
     components: Component[];
     backgroundColor?: string;
+    displayType: "Accordion" | "Card" | "Plain Text";
 };
 
 export type Component = {

@@ -4,6 +4,8 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { Field } from "../types/Topics";
 import { FiExternalLink, FiDatabase, FiFileText } from "react-icons/fi";
+import { useState } from "react";
+import Accordion from "./Accordion";
 
 /** Styling for rich text rendering */
 
@@ -36,7 +38,6 @@ type Props = {
 const getContent = (component) => {
     return (
         <>
-            {component.heading && <h3 className="h3">{component.heading}</h3>}
             <div className=" link">
                 {documentToReactComponents(component.body, options)}
             </div>
@@ -99,22 +100,28 @@ const getContent = (component) => {
 export const PlainText = ({ component }: Props) => {
     return (
         <div className={"field p-2"} id={component.slug}>
+            {component.heading && <h3 className="h3">{component.heading}</h3>}
             {getContent(component)}
         </div>
     );
 };
 
-export const Accordion = ({ component }: Props) => {
+export const AccordionField = ({ component }: Props) => {
     return (
-        <div className={"field accordion"} id={component.slug}>
-            {getContent(component)}
-        </div>
+        <Accordion
+            heading={
+                component.heading ? (component.heading as string) : "No heading"
+            }
+            content={getContent(component)}
+            id={component.slug}
+        />
     );
 };
 
 export const Card = ({ component }: Props) => {
     return (
         <div className={"field card px-8 pb-8 pt-4"} id={component.slug}>
+            {component.heading && <h3 className="h3">{component.heading}</h3>}
             {getContent(component)}
         </div>
     );

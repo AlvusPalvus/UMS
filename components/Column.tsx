@@ -8,7 +8,7 @@ import {
 } from "../types/Topics";
 import { Column as ColumnType } from "../types/Assemblies";
 
-import { Card, PlainText, Accordion } from "./Field";
+import { Card, PlainText, AccordionField } from "./Field";
 import Gallery from "./Gallery";
 import Person from "./Person";
 import Contact from "./Contact";
@@ -21,7 +21,9 @@ type Props = {
 const getField = (component: FieldType) => {
     switch (component.displayType) {
         case "Accordion":
-            return <Accordion key={component.slug} component={component} />;
+            return (
+                <AccordionField key={component.slug} component={component} />
+            );
         case "Card":
             return <Card key={component.slug} component={component} />;
         case "Plain Text":

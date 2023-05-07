@@ -3,6 +3,7 @@ import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { Field } from "../types/Topics";
+import { FiExternalLink, FiDatabase, FiFileText } from "react-icons/fi";
 
 /** Styling for rich text rendering */
 
@@ -42,16 +43,48 @@ const getContent = (component) => {
 
             {component.buttons && (
                 <div>
-                    {component.buttons.map((button, i) => (
-                        <Link
-                            href={button.link}
-                            className="button"
-                            target="_blank"
-                            key={i}
-                        >
-                            {button.text}
-                        </Link>
-                    ))}
+                    {component.buttons.map((button, i) => {
+                        console.log(button.linkType);
+
+                        switch (button.linkType) {
+                            case "External link":
+                                return (
+                                    <Link
+                                        href={button.link}
+                                        className="button flex flex-row gap-4"
+                                        target="_blank"
+                                        key={i}
+                                    >
+                                        {button.text}
+                                        <FiExternalLink className="text-xl" />
+                                    </Link>
+                                );
+
+                            case "Form":
+                                return (
+                                    <Link
+                                        href={button.link}
+                                        className="button flex flex-row gap-4"
+                                        target="_blank"
+                                        key={i}
+                                    >
+                                        {button.text}
+                                        <FiFileText className="text-xl" />
+                                    </Link>
+                                );
+
+                            default:
+                                return (
+                                    <Link
+                                        href={button.link}
+                                        className="button"
+                                        key={i}
+                                    >
+                                        {button.text}
+                                    </Link>
+                                );
+                        }
+                    })}
                 </div>
             )}
             {component.assets && (

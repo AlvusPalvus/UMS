@@ -1,5 +1,5 @@
 import { Component } from "../../types/Assemblies";
-import { CfImage } from "../../types/Elements";
+import { CfImage, CfLink } from "../../types/Elements";
 import {
     Contact,
     ContactItem,
@@ -51,10 +51,15 @@ const parseField = (field): Field => {
     } = field.fields;
 
     if (buttons !== undefined) {
-        buttons = buttons.map((button) => {
-            const text = button.fields.buttonText;
-            const link = button.fields.link;
-            return { text, link };
+        buttons = buttons.map((button): CfLink => {
+            if (button.fields === undefined) {
+                console.log(bodyText);
+            }
+            console.log(button);
+            let { buttonText, link, linkType } = button.fields;
+
+            linkType = linkType === undefined ? "Internal" : linkType;
+            return { text: buttonText, link, linkType };
         });
     } else buttons = null;
 

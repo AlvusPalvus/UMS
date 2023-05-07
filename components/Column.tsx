@@ -38,7 +38,7 @@ const getField = (component: FieldType) => {
 const Column = ({ column }: Props) => {
     let styling = "flex gap-4 flex-col space-evenly ";
     if (column.displayType === "Accordion") {
-        styling = "flex gap-4 flex-col my-12";
+        styling = "flex gap-4 flex-col py-12 bg-lightBlue";
     }
     if (column.displayType === "Card") {
         styling = "flex gap-4 flex-col card";

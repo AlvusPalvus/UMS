@@ -3,6 +3,7 @@ import type { NewsCard as NewsCardType } from '../types/Topics'
 import NewsCard from './News/NewsCard'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
+
 type Props = { news: NewsCardType[] }
 
 const Slider = ({ news }: Props) => {
@@ -23,15 +24,20 @@ const Slider = ({ news }: Props) => {
 
     }, []);
 
+
+
     const goToNextSlide = () => {
         const container = containerRef.current
         container.scrollLeft += container.clientWidth
+
     };
 
     const goToPrevSlide = () => {
         const container = containerRef.current
+
         container.scrollLeft -= container.clientWidth
-    };
+    }
+
 
     return (
         <div className="relative overflow-hidden bg-accent-100 py-2 px-5">

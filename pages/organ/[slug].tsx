@@ -59,7 +59,7 @@ const Organ = ({ page, navbar }: Props) => {
     return (
         <>
             <Hero hero={hero} navbar={navbar} idFirstSection="noId" />
-            <div className="container even-columns card m-4 lg:min-h-[70vh]">
+            <div className="container even-columns m-4 lg:min-h-[70vh]">
                 <main className="">
                     <button
                         className="button flex flex-row justify-center items-center gap-3"

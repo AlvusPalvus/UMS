@@ -55,7 +55,6 @@ const parseField = (field): Field => {
             if (button.fields === undefined) {
                 console.log(bodyText);
             }
-            console.log(button);
             let { buttonText, link, linkType } = button.fields;
 
             linkType = linkType === undefined ? "Internal" : linkType;

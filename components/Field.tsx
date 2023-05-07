@@ -44,8 +44,6 @@ const getContent = (component) => {
             {component.buttons && (
                 <div>
                     {component.buttons.map((button, i) => {
-                        console.log(button.linkType);
-
                         switch (button.linkType) {
                             case "External link":
                                 return (

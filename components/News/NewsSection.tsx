@@ -22,14 +22,16 @@ const NewsSection = ({ section }: Props) => {
           <div className="z-[1] pt-36 lg:pt-72">
             <br />
           </div>
-          <h2 className="z-10 container pt-12 px-12 pb-4 fs-secondary-heading text-neutral-900 bg-white bg-opacity-70">
+          <h2 className="z-10 container pt-12 px-12 pb-4 fs-secondary-heading text-neutral-900 bg-accent-100 ">
             {section.heading}
           </h2>
         </div>
       ) : (
         <h2 className="fs-secondary-heading">{section.heading}</h2>
       )}
-      <Slider news={section.news} />
+      <div className="container">
+        <Slider news={section.news} />
+      </div>
 
 
     </section>

@@ -12,10 +12,12 @@ const options = {
             <p className="fs-body">{children}</p>
         ),
         [BLOCKS.HEADING_1]: (node, children) => (
-            <h1 className="fs-primary-heading">{children}</h1>
+            // <h1 className="fs-primary-heading">{children}</h1>
+            <h3 className="h3">{children}</h3>
         ),
         [BLOCKS.HEADING_2]: (node, children) => (
-            <h2 className="fs-primary-heading">{children}</h2>
+            // <h2 className="fs-primary-heading">{children}</h2>
+            <h4 className="h4">{children}</h4>
         ),
         [BLOCKS.HEADING_3]: (node, children) => (
             <h3 className="h3">{children}</h3>

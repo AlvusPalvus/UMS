@@ -13,7 +13,7 @@ const client = getContentfulClient();
 
 /**  Fetching a main page by entry ID from the contentful client */
 export const getMainPage = async (id: string) => {
-    const res = await client.getEntry(id, { include: 4 });
+    const res = await client.getEntry(id, { include: 5 });
 
     let sectionsUnparsed = res.fields.sections;
     let sections = [];

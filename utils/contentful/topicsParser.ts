@@ -56,13 +56,17 @@ const parseField = (field): Field => {
 
     if (buttons !== undefined) {
         buttons = buttons.map((button): CfLink => {
-            if (button.fields === undefined) {
-                console.log(bodyText);
+            try {
+                let { buttonText, link, linkType } = button.fields;
+                linkType = linkType === undefined ? "Internal" : linkType;
+                return { text: buttonText, link, linkType };
+            } catch (error) {
+                // Handle the error if the buttonText property is undefined
+                console.error("Error:", error);
+                console.log("id of button: " + button.sys.id);
+                // let buttonText = "Default Button Text";
+                return { text: "no text", link: "", linkType: null };
             }
-            let { buttonText, link, linkType } = button.fields;
-
-            linkType = linkType === undefined ? "Internal" : linkType;
-            return { text: buttonText, link, linkType };
         });
     } else buttons = null;
 

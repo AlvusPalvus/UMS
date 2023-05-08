@@ -41,7 +41,7 @@ const Column = ({ column }: Props) => {
         styling = "flex gap-4 flex-col py-12 bg-lightBlue";
     }
     if (column.displayType === "Card") {
-        styling = "flex gap-4 flex-col card";
+        styling = "flex gap-4 flex-col card bg-white";
     }
 
     return (
@@ -61,6 +61,16 @@ const Column = ({ column }: Props) => {
                             element = getField(
                                 component.parsedComponent as FieldType
                             );
+                            break;
+                        case "Column":
+                            element = (
+                                <Column
+                                    column={
+                                        component.parsedComponent as ColumnType
+                                    }
+                                />
+                            );
+
                             break;
 
                         case "Person":

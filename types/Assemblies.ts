@@ -45,6 +45,12 @@ export type Column = {
 };
 
 export type Component = {
-    type: "Field" | "Gallery" | "Person" | "Contact" | "Image";
-    parsedComponent: Field | Gallery | Person | Contact | ImageComponent;
+    type: "Column" | "Field" | "Gallery" | "Person" | "Contact" | "Image";
+    parsedComponent:
+        | Column
+        | Field
+        | Gallery
+        | Person
+        | Contact
+        | ImageComponent;
 };

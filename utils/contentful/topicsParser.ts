@@ -8,6 +8,7 @@ import {
     ImageComponent,
     Person,
 } from "../../types/Topics";
+import { parseColumn } from "./assembliesParser";
 import { parseCfImage } from "./elementsParser";
 
 export const parseComponent = (component): Component => {
@@ -29,6 +30,9 @@ export const parseComponent = (component): Component => {
     } else if (type == "image") {
         parsedComponent = parseImageComponent(component);
         componentType = "Image";
+    } else if (type == "column") {
+        parsedComponent = parseColumn(component);
+        componentType = "Column";
     } else {
         console.error(type);
     }

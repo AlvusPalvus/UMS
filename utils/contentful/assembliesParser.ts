@@ -24,7 +24,7 @@ export const parseSection = (section): StandardSection => {
     };
 };
 
-const parseColumn = (column): Column => {
+export const parseColumn = (column): Column => {
     let { components, backgroundColor, slug, displayType } = column.fields;
     if (components !== undefined) {
         components = components.map((component) => parseComponent(component));

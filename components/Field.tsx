@@ -99,7 +99,7 @@ const getContent = (component) => {
 
 export const PlainText = ({ component }: Props) => {
     return (
-        <div className={"field p-2"} id={component.slug}>
+        <div className={"field p-2 bg-white"} id={component.slug}>
             {component.heading && <h3 className="h3">{component.heading}</h3>}
             {getContent(component)}
         </div>

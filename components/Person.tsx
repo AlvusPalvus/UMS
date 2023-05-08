@@ -9,7 +9,6 @@ type Props = {
 };
 
 const Person = ({ person }: Props) => {
-    console.log(person.contact);
     return (
         <div
             className={

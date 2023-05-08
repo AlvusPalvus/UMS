@@ -88,7 +88,7 @@ type Props = {
 const ContactTable = ({ contactInfo: contactItems }: Props) => {
     let contactRow = renderContactInfo(contactItems) as ContactRow[];
     return (
-        <div className={"flex flex-col align-baseline justify-between "}>
+        <div className={"flex flex-col align-baseline justify-between  "}>
             {contactRow.map((item, i) => {
                 return tableRow(item, i);
             })}

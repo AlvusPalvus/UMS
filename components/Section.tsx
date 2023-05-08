@@ -71,9 +71,10 @@ const setUpColumns = (columns: ColumnType[]) => {
     } else
         return (
             <>
-                {columns.map((column, i) => (
-                    <Column column={column} key={i} />
-                ))}
+                {columns.map((column, i) => {
+                    console.log(column.slug);
+                    return <Column column={column} key={i} />;
+                })}
             </>
         );
 };

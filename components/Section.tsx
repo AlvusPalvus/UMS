@@ -72,7 +72,6 @@ const setUpColumns = (columns: ColumnType[]) => {
         return (
             <>
                 {columns.map((column, i) => {
-                    console.log(column.slug);
                     return <Column column={column} key={i} />;
                 })}
             </>

@@ -63,7 +63,6 @@ const parseField = (field): Field => {
             } catch (error) {
                 // Handle the error if the buttonText property is undefined
                 console.error("Error:", error);
-                console.log("id of button: " + button.sys.id);
                 // let buttonText = "Default Button Text";
                 return { text: "no text", link: "", linkType: null };
             }
